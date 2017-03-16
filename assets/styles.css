@@ -1,0 +1,19 @@
+a,p,h1,h2,h3,h4,h5,h6,th,td{font-family:verdana;}
+div#mainWrapper{
+	position: relative;
+	margin:0px auto;
+	padding:0px;
+	border:0px;	
+	width: 1000px;
+}
+
+div#centreContentBodyInDiv{
+	position: relative;
+	margin:0px auto;
+	width: 1000px;
+	background-color: lightgray;
+	text-align: center;
+}
+.centreTable{
+	margin:auto;
+}

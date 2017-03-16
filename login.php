@@ -1,6 +1,6 @@
 <?php
 $page_title='Login';
-include('header.inc');
+include('/assets/header.inc');
 ?>
 <!--Body Start-->
 <h1>Login</h1>
@@ -24,5 +24,5 @@ include('header.inc');
 </form>
 <!--Body End-->
 <?php
-include('footer.inc');
+include('assets/footer.inc');
 ?>
