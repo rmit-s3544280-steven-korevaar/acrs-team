@@ -18,14 +18,14 @@ name text not null,
 ownerName text not null,
 address text not null,
 phoneNo varchar(11) not null,
-ABN integer(11) primary key
+ABN varchar(11) primary key
 );
 
 create table employee(
 employeeName text,
 jobTitle text,
-businessID integer(11) not null,
-employeeID integer(3) primary key,
+businessID varchar(11) not null,
+employeeID varchar(3) primary key,
 CONSTRAINT fk_employee_business
 	foreign key (businessID) REFERENCES business (ABN)
 	ON DELETE CASCADE
@@ -45,7 +45,7 @@ create table workPeriod(
 workingDate date not null,
 startTime integer(4) not null,
 endTime integer(4) not null,
-employeeID integer(3) not null,
+employeeID varchar(3) not null,
 CONSTRAINT fk_workPeriod_employee
 	foreign key (employeeID) REFERENCES employee (employeeID)
 	ON DELETE CASCADE
@@ -66,7 +66,7 @@ username varchar(255) not null,
 bookingDate date not null,
 startTime integer(4) not null,
 endTime integer(4) not null,
-businessID integer(11) not null,
+businessID varchar(11) not null,
 otherDetails text,
 CONSTRAINT pk_booking PRIMARY KEY (bookingID,username),
 CONSTRAINT fk_booking_business FOREIGN KEY (businessID)
@@ -77,6 +77,6 @@ REFERENCES business(ABN)
 
 create table userBusiness(
 username varchar(255) not null,
-ABN integer(11) not null,
+ABN varchar(11) not null,
 CONSTRAINT pk_userBusiness PRIMARY KEY (username,ABN)
 );
