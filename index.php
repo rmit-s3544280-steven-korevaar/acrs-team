@@ -3,8 +3,8 @@ $page_title='Login';
 include('/assets/header.inc');
 ?>
 <!--Body Start--> 
-<!--Login Portion of index.php-->
 <div class='centreContentBodyInDiv'>
+<!--Login Portion of index.php-->
 <div id='loginForm'>
 <div class='formBorder'>
 <h1>Login</h1>

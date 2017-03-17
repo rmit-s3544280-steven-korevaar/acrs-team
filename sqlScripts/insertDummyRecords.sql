@@ -11,14 +11,14 @@ insert into workPeriod values("2017-03-21",720,840,"001");
 
 --Insert record into user
 --Business Owner
-insert into user values("groomer","Mr Groomer","1 DogGrooming st Victora","0398765432",SHA("password"));
+insert into user values("owner","Mr Groomer","1 DogGrooming st Victora","0398765432",SHA("owner"));
 
 --Customer
-insert into user values("dummy","Dummy User","2 DogGrooming st Victora","0398765431",SHA("password"));
+insert into user values("customer","Dummy User","2 DogGrooming st Victora","0398765431",SHA("customer"));
 
 --Insert record into booking
-insert into booking values(null,"dummy","2017-03-21",660,840,
+insert into booking values(null,"customer","2017-03-21",660,840,
 "00000000001","Some other details to fill in.");
 
 --Insert record into userBusiness
-insert into userBusiness values("groomer","00000000001");
+insert into userBusiness values("owner","00000000001");

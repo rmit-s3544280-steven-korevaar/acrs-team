@@ -1,4 +1,6 @@
 a,p,h1,h2,h3,h4,h5,h6,th,td{font-family:verdana;}
+th{text-align:right;}
+/*Centre the wrapper div in the center of screen */
 div#mainWrapper{
 	position: relative;
 	margin:0px auto;
@@ -6,14 +8,37 @@ div#mainWrapper{
 	border:0px;	
 	width: 1000px;
 }
-
-div#centreContentBodyInDiv{
+/*Generic Centre body in wrapper*/
+div.centreContentBodyInDiv{
 	position: relative;
 	margin:0px auto;
 	width: 1000px;
-	background-color: lightgray;
 	text-align: center;
 }
+/*Generic Centre table in the center of parent div*/
 .centreTable{
 	margin:auto;
 }
+
+/*index.php css*/
+div#loginForm{
+	position:absolute;
+	left:0px;
+	height:100%;
+	width:calc(50% - 2.5px);
+	text-align:center;
+}
+div#registerForm{
+	position:absolute;
+	left:calc(50% + 2.5px);
+	height:100%;
+	width:calc(50% - 2.5px);
+	text-align:center;
+}
+div.formBorder{
+	margin:20px;
+	padding-bottom:20px;
+	border-radius:5px;
+	border:2px solid #B8B8B8;
+}
+
