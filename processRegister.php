@@ -19,12 +19,17 @@ $query = "insert into user values('$username','$fullname','$address','$phone',SH
 
 
 if(mysqli_query($connect,$query)){
-	//If successful register.
+	//If successful register, send back to index.php with success message.
+	session_unset();
+	session_start();
+	$_SESSION['registerSuccess'] = "Register successful, Please login.";
 	header("location:index.php");
 }
-else{//If username already exists.
-print("Error");
-	//header("location:index.php");
+else{//If username already exists, send back to index.php with a error message.
+	session_unset();
+	session_start();
+	$_SESSION['registerError'] = "! That username is unavailable, Please try another.";
+	header("location:index.php");
 }
 exit(0);
 ?>

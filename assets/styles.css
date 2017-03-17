@@ -41,4 +41,12 @@ div.formBorder{
 	border-radius:5px;
 	border:2px solid #B8B8B8;
 }
+.errorMessage{
+	color:red;
+	font-size:12px;
+}
+.successMessage{
+	color:green;
+	font-size:12px;
+}
 

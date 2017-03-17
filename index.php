@@ -21,6 +21,15 @@ include('/assets/header.inc');
 </table>
 <table class="centreTable">
 <tr><td><input type="submit" value="Login"/></td></tr>
+
+<?php
+if(isset($_SESSION['loginError']) && !empty($_SESSION['loginError'])){
+	print("<tr><td class='errorMessage'>\n");
+	print("<p> {$_SESSION['loginError']} </p>\n");
+	print("</td></tr>\n");
+	unset($_SESSION['loginError']);
+}
+?>
 </table>
 </form>
 </div>
@@ -56,6 +65,20 @@ include('/assets/header.inc');
 </table>
 <table class="centreTable">
 <tr><td><input type="submit" value="Register"/></td></tr>
+<?php
+if(isset($_SESSION['registerError']) && !empty($_SESSION['registerError'])){
+	print("<tr><td class='errorMessage'>\n");
+	print("<p> {$_SESSION['registerError']} </p>\n");
+	print("</td></tr>\n");
+	unset($_SESSION['registerError']);
+}
+elseif(isset($_SESSION['registerSuccess']) && !empty($_SESSION['registerSuccess'])){
+	print("<tr><td class='successMessage'>\n");
+	print("<p> {$_SESSION['registerSuccess']} </p>\n");
+	print("</td></tr>\n");
+	unset($_SESSION['registerSuccess']);
+}
+?>
 </table>
 </form>
 </div>

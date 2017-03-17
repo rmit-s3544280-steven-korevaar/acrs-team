@@ -31,7 +31,10 @@ if(mysqli_num_rows($results) > 0){
 	}
 }
 else{
-	//If incorrect username or password, send back to index.php
+	//If incorrect username or password, send back to index.php with a error message.
+	session_unset();
+	session_start();
+	$_SESSION['loginError'] = "! Incorrect username or password, Please try again.";
 	header("location:index.php");
 }
 exit(0);
