@@ -21,6 +21,10 @@ if(mysqli_num_rows($results) > 0){
 	$queryOwner= "select * from userbusiness where username like '$username';";
 	$checkResult = mysqli_query($connect,$queryOwner) or die(mysqli_error($connect));
 	
+	//Store username in the global array under the username variable, for future use.
+	session_start();
+	$_SESSION['username'] = "$username";
+	
 	//If a result is found, the user is a owner
 	if(mysqli_num_rows($checkResult) > 0){
 		header("location:ownerPage.php");	//If is a owner, send to owner management page
