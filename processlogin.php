@@ -25,12 +25,12 @@ if(mysqli_num_rows($results) > 0){
 	session_start();
 	$_SESSION['username'] = "$username";
 	
-	//If a result is found, the user is a owner
-	if(mysqli_num_rows($checkResult) > 0){
-		header("location:ownerPage.php");	//If is a owner, send to owner management page
+	
+	if(mysqli_num_rows($checkResult) > 0){	//If a result is found, check to see if the user is a owner.
+		header("location:businessPage.php");	//If is a owner, send to owner management page
 	}
-	//If nothing is found in the userbusiness table, the user is not a owner, but is just a regular customer
-	else{
+	
+	else{	//If nothing is found in the userbusiness table, the user is not a owner, but is just a regular customer
 		header("location:customerPage.php");	//If is a customer, send to customer page
 	}
 }
