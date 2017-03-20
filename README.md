@@ -62,7 +62,7 @@ Create tables and insert dummy records into mysql
 	user. 
 	Enter in command below-
 	
-	mysql.exe -l root
+	mysql.exe -u root
 	
 4.	Run the sql scripts located inside the sqlScripts directory 
 	there are the createTables.sql and insertDummyRecords.sql 
