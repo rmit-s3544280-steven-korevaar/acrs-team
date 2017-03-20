@@ -4,6 +4,13 @@ include('/assets/header.inc');
 ?>
 <!--Body Start--> 
 <div class='centreContentBodyInDiv'>
+<div class='headingBannerDiv'>
+<h1>Booking Website</h1>
+</div><div class='instructionsIndexDiv'>
+<p>Customers - Login' to see booking status and to make new bookings.</p>
+<p>If you do not have an account, please 'Register' and then login.</p>
+<p>Owners - 'Login' to see more functionalities.</p>
+</div>
 <!--Login Portion of index.php-->
 <div id='loginForm'>
 <div class='formBorder'>
@@ -11,11 +18,11 @@ include('/assets/header.inc');
 <form method='post' action='processlogin.php'>
 <table class="centreTable">
 <tr>
-<th>Username: </td>
+<th>Username: </th>
 <td><input type="text" name="username"/></td>
 </tr>
 <tr>
-<th>Password: </td>
+<th>Password: </th>
 <td><input type="password" name="password"/></td>
 </tr>
 </table>
@@ -43,23 +50,23 @@ if(isset($_SESSION['loginError']) && !empty($_SESSION['loginError'])){
 <form method="post" action="processRegister.php">
 <table class="centreTable">
 <tr>
-<th>Username: </td>
+<th>Username: </th>
 <td><input type="text" name="username"/></td>
 </tr>
 <tr>
-<th>Password: </td>
+<th>Password: </th>
 <td><input type="password" name="password"/></td>
 </tr>
 <tr>
-<th>Full name: </td>
+<th>Full name: </th>
 <td><input type="text" name="fullname"/></td>
 </tr>
 <tr>
-<th>Address: </td>
+<th>Address: </th>
 <td><input type="text" name="address"/></td>
 </tr>
 <tr>
-<th>Phone Number: </td>
+<th>Phone Number: </th>
 <td><input type="text" name="phone"/></td>
 </tr>
 </table>

@@ -21,6 +21,12 @@ div.centreContentBodyInDiv{
 }
 
 /*index.php css*/
+div.headingBannerDiv{
+	
+}
+div.instructionsIndexDiv{
+	text-align:left;
+}
 div#loginForm{
 	position:absolute;
 	left:0px;
