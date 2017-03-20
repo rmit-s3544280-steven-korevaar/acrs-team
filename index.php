@@ -6,7 +6,8 @@ include('/assets/header.inc');
 <div class='centreContentBodyInDiv'>
 <div class='headingBannerDiv'>
 <h1>Booking Website</h1>
-</div><div class='instructionsIndexDiv'>
+</div>
+<div class='instructionsIndexDiv'>
 <p>Customers - Login' to see booking status and to make new bookings.</p>
 <p>If you do not have an account, please 'Register' and then login.</p>
 <p>Owners - 'Login' to see more functionalities.</p>

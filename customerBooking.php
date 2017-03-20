@@ -1,5 +1,5 @@
 <?php
-$page_title='Customer Booking Summaries';
+$page_title='Customer New Booking';
 include('/assets/header.inc');
 ?>
 <!--Body Start--> 
@@ -7,7 +7,7 @@ include('/assets/header.inc');
 include('assets/customerBannerAndNav.inc');
 ?>
 <div class='contentHereDiv'>
-<p>Some Content of Customer Summary</p>
+<p>Some Content of Customer Booking</p>
 </div>
 <!--Body End-->
 <?php

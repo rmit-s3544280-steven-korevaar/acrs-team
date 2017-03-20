@@ -1,5 +1,5 @@
 <?php
-$page_title='Business Page';
+$page_title='Business Employee Add Shift';
 include('/assets/header.inc');
 ?>
 <!--Body Start--> 
@@ -8,7 +8,7 @@ include('assets/ownerChecker.inc');
 include('assets/businessBannerAndNav.inc');
 ?>
 <div class='contentHereDiv'>
-<p>Some Content business Booking summaries</p>
+<p>Some Content of Employee Adding Shift</p>
 </div>
 <!--Body End-->
 <?php

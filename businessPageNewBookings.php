@@ -1,13 +1,14 @@
 <?php
-$page_title='Customer Booking Summaries';
+$page_title='Business New Bookings';
 include('/assets/header.inc');
 ?>
 <!--Body Start--> 
 <?php
-include('assets/customerBannerAndNav.inc');
+include('assets/ownerChecker.inc');
+include('assets/businessBannerAndNav.inc');
 ?>
 <div class='contentHereDiv'>
-<p>Some Content of Customer Summary</p>
+<p>Some Content showing new bookings</p>
 </div>
 <!--Body End-->
 <?php
