@@ -37,7 +37,7 @@
 					center: 'title',
 					right: 'month,agendaWeek,agendaDay'
 				},
-				defaultView: 'agendaWeek',
+				defaultView: 'basicDay',
 				editable: true,
 			
 				events: [

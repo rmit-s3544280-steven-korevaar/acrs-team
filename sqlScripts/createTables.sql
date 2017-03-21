@@ -63,9 +63,8 @@ password char(40) not null
 create table booking(
 bookingID integer not null auto_increment,
 username varchar(255) not null,
-bookingDate date not null,
-startTime integer(4) not null,
-endTime integer(4) not null,
+startTime datetime not null,
+endTime datetime not null,
 businessID varchar(11) not null,
 otherDetails text,
 CONSTRAINT pk_booking PRIMARY KEY (bookingID,username),
