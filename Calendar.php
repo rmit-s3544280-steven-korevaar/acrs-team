@@ -58,9 +58,9 @@
 								");
 							print_r("title: '".$row['username']."',
 							");
-							print_r("start: '".$row['startTime']."',
+							print_r("start: '".$row['startDateTime']."',
 							");
-							print_r("end: '".$row['endTime']."'
+							print_r("end: '".$row['endDateTime']."'
 							");
 							print_r("},
 							");

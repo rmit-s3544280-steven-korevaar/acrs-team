@@ -42,9 +42,8 @@ CONSTRAINT fk_employee_business
  * as 24 hours * 60 minutes = 1440 minutes, 4 characters.
  */
 create table workPeriod(
-workingDate date not null,
-startTime integer(4) not null,
-endTime integer(4) not null,
+startDateTime datetime not null,
+endDateTime datetime not null,
 employeeID varchar(3) not null,
 CONSTRAINT fk_workPeriod_employee
 	foreign key (employeeID) REFERENCES employee (employeeID)
@@ -63,8 +62,8 @@ password char(40) not null
 create table booking(
 bookingID integer not null auto_increment,
 username varchar(255) not null,
-startTime datetime not null,
-endTime datetime not null,
+startDateTime datetime not null,
+endDateTime datetime not null,
 businessID varchar(11) not null,
 otherDetails text,
 CONSTRAINT pk_booking PRIMARY KEY (bookingID,username),
