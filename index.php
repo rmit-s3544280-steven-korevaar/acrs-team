@@ -1,6 +1,6 @@
 <?php
 $page_title='Login';
-include('/assets/header.inc');
+include('assets/header.inc');
 ?>
 <!--Body Start--> 
 <div class='centreContentBodyInDiv'>
