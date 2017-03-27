@@ -5,7 +5,7 @@ include('assets/header.inc');
 <!--Body Start--> 
 <div class='centreContentBodyInDiv'>
 <div class='headingBannerDiv'>
-<h1>Booking Website</h1>
+<h1><img src="https://s-media-cache-ak0.pinimg.com/originals/5b/92/41/5b92414b99b103faf46490d3f8234a20.png" width="100" height="65" alt="bear" />Appointment Booking System</h1>
 </div>
 <div class='instructionsIndexDiv'>
 <p>Customers - 'Login' to see booking status and to make new bookings.</p>
