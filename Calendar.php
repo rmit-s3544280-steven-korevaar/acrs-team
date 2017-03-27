@@ -41,11 +41,11 @@
 				editable: true,
 			
 				events: [
-					{
+					/*{
 						title: 'Meeting',
 						start: '2017-03-20T10:30:00',
 						end: '2017-03-20T12:30:00'
-					},
+					},*/
 					
 					<?php
 						$connect = mysqli_connect("localhost","root","","sept_assignment_part_1") or die(mysqli_error($connect));
@@ -69,8 +69,8 @@
 				],
 				
 				dayClick: function() {
-					alert('a day has been clicked!');
-					$('#calendar').fullCalendar('next');
+					//alert('a day has been clicked!');
+					//$('#calendar').fullCalendar('next');
 				}
 				
 			})
