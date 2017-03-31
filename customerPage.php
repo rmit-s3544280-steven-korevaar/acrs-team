@@ -7,7 +7,7 @@ include('/assets/header.inc');
 include('assets/customerBannerAndNav.inc');
 ?>
 <div class='contentHereDiv'>
-<p>Your Booking Summaries</p>
+<h1>Your Booking Summaries</h1>
 <?php
     $servername = "localhost";
     $username = "root";
@@ -20,15 +20,15 @@ include('assets/customerBannerAndNav.inc');
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    $sql = "SELECT startDateTime, endDateTime, otherDetails, username FROM booking WHERE username = '".$_SESSION['username']."'";
+    $sql = "SELECT startDateTime, endDateTime, otherDetails, username FROM booking WHERE username = '".$_SESSION['username']."' order by startDateTime desc;";
     $result = $conn->query($sql);
     $num = 1;
 
     if ($result->num_rows > 0) {
-        echo "<table border = '1'><tr><th>No.</th><th>Start Time</th><th>End Time</th><th>Details</th></tr>";
+        echo "<table class='centreTable'  border = '1'><tr><th>Start Time</th><th>End Time</th><th>Details</th></tr>";
         // output data of each row
         while($row = $result->fetch_assoc()) {
-            echo "<tr><td>".$num."</td><td>".$row["startDateTime"]."</td><td>".$row["endDateTime"]."</td><td>".$row["otherDetails"]."</td></tr>";
+            echo "<tr><td>".$row["startDateTime"]."</td><td>".$row["endDateTime"]."</td><td>".$row["otherDetails"]."</td></tr>";
             $num += 1;
         }
         echo "</table>";
@@ -37,7 +37,6 @@ include('assets/customerBannerAndNav.inc');
         }
     $conn->close();
 ?>
-<a href="customerBooking.php"><button>View Calender</button></a>
 </div>
 <!--Body End-->
 <?php

@@ -19,4 +19,6 @@
 <option class='businessNavigationDropDown' value='businessPageEmployeeAddEmployee.php'>Add New Employee</option>
 </select>
 <!--END PHP Drop down box -->
+
+<a href='processLogout.php'>Sign Out</a>
 </div>

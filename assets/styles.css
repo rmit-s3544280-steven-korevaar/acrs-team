@@ -11,18 +11,35 @@ div#mainWrapper{
 	margin:0px auto;
 	padding:0px;
 	border:0px;	
-	width: 1000px;
+	width: 800px;
 }
 /*Generic Centre body in wrapper*/
 div.centreContentBodyInDiv{
 	position: relative;
 	margin:0px auto;
-	width: 1000px;
+	width: inherit;
 	text-align: center;
 }
 /*Generic Centre table in the center of parent div*/
 .centreTable{
 	margin:auto;
+}
+th,td{
+	text-align:center;
+}
+/* Style for tabled results from mysql queries for businessPageNewBookings.php */
+.tableStyle{
+	border-top:1px solid black;
+	text-align:left;
+}
+/* Styles for hyperlinks */
+a{
+	text-decoration:none;
+	color:inherit;
+	margin-left:15px;
+}
+a:hover{
+	color:Blue;
 }
 
 /*index.php css*/
@@ -65,49 +82,49 @@ div.formBorder{
 div.businessNavigationDiv{
 	width:100%;
 	background-color:#B8B8B8;
-	
+	font-family:"Trebuchet MS";
+	font-size:20px;
 }
 div.businessNavigationDiv span{
-	font-family:"Trebuchet MS";
+	font-family:inherit;
 	color:black;
-	font-size:24px;
-	line-height:50px;
-	margin:0px 50px;
+	font-size:inherit;
+	line-height:40px;
+	margin:0px 15px;
 }
 select#businessNavigationBooking{
-	font-family:"Trebuchet MS";
+	font-family:inherit;
 	color:black;
 	background-color: #B8B8B8;
-	font-size:24px;
-	margin-left:19px;
+	font-size:inherit;
+	margin-left:15px;
 }
 select#businessNavigationEmployee{
-	font-family:"Trebuchet MS";
+	font-family:inherit;
 	color:black;
 	background-color: #B8B8B8;
-	font-size:24px;
-	margin-left:19px;
+	font-size:inherit;
+	margin-left:15px;
 }
 option.noDisplay{
 	display:none;
-	font-family:"Trebuchet MS";
+	font-family:inherit;
 	color:black;
 	background-color: #B8B8B8;
-	font-size:24px;
-	margin-left:19px;
+	font-size:inherit;
+	margin-left:15px;
 }
 option.businessNavigationDropDown{
-	font-family:"Trebuchet MS";
+	font-family:inherit;
 	color:black;
 	background-color: #B8B8B8;
-	font-size:24px;
-	margin-left:19px;
+	font-size:inherit;
+	margin-left:15px;
 }
 
 div.contentHereDiv{
 	position:relative;
-	width:998px;
-	height:300px;
+	width:798px;
 	border:1px solid black;
 }
 
@@ -115,20 +132,23 @@ div.contentHereDiv{
 div.customerNavigationDiv{
 	width:100%;
 	background-color:#B8B8B8;
-	
+	font-size:20px;
 }
 div.customerNavigationDiv span{
 	font-family:"Trebuchet MS";
 	color:black;
-	font-size:24px;
-	line-height:50px;
-	margin:0px 50px;
+	font-size:inherit;
+	line-height:40px;
+	margin:0px 15px;
 }
 div.customerNavigationDiv a{
 	text-decoration:none;
 	font-family:"Trebuchet MS";
 	color:black;
-	font-size:24px;
-	line-height:50px;
-	margin:0px 50px;
+	font-size:inherit;
+	line-height:40px;
+	margin:0px 15px;
+}
+div.customerNavigationDiv a:hover{
+	color:Blue;
 }

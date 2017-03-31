@@ -9,7 +9,7 @@
 ?>
 
 <div class='contentHereDiv'>
-<p>Booking Summaries</p>
+<h1>Booking Summaries</h1>
 <?php
     $servername = "localhost";
     $username = "root";
@@ -21,15 +21,15 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    $sql = "SELECT username, startDateTime, endDateTime FROM booking";
+    $sql = "select fullname, startDateTime, endDateTime, otherDetails from user as a inner join booking as b on a.username=b.username order by startDateTime desc;";
     $result = $conn->query($sql);
     $num = 1;
 
     if ($result->num_rows > 0) {
-        echo "<table border = '1'><tr><th>No.</th><th>Customer</th><th>Start Time</th><th>End Time</th></tr>";
+        echo "<table class='centreTable' border = '1'><tr><th>Customer Name</th><th>Start Date/Time</th><th>End Date/Time</th><th>Extra Details</th></tr>";
         // output data of each row
         while($row = $result->fetch_assoc()) {
-            echo "<tr><td>".$num."</td><td>".$row["username"]."</td><td>".$row["startDateTime"]."</td><td>".$row["endDateTime"]."</td></tr>";
+            echo "<tr><td>".$row["fullname"]."</td><td>".$row["startDateTime"]."</td><td>".$row["endDateTime"]."</td><td>".$row["otherDetails"]."</td></tr>";
             $num += 1;
         }
         echo "</table>";
@@ -38,7 +38,6 @@
         }
     $conn->close();
 ?>
-<a href="calenderPage.php"><button>View Calender</button></a>
 </div>
 <!--Body End-->
 <?php
