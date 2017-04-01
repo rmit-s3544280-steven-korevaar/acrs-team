@@ -5,7 +5,8 @@ include('assets/header.inc');
 <!--Body Start--> 
 <div class='centreContentBodyInDiv'>
 <div class='headingBannerDiv'>
-<h1><img src="https://s-media-cache-ak0.pinimg.com/originals/5b/92/41/5b92414b99b103faf46490d3f8234a20.png" width="100" height="65" alt="bear" />Appointment Booking System</h1>
+<h1>Appointment Booking System</h1>
+<br/>
 </div>
 <div class='instructionsIndexDiv'>
 <p>Customers - 'Login' to see booking status and to make new bookings.</p>
@@ -15,7 +16,7 @@ include('assets/header.inc');
 <!--Login Portion of index.php-->
 <div id='loginForm'>
 <div class='formBorder'>
-<h1>Login</h1>
+<h2>Login</h2>
 <form method='post' action='processlogin.php'>
 <table class="centreTable">
 <tr>
@@ -46,7 +47,7 @@ if(isset($_SESSION['loginError']) && !empty($_SESSION['loginError'])){
 <!--Register Portion of index.php-->
 <div id='registerForm'>
 <div class='formBorder'>
-<h1>Customer Register</h1>
+<h2>Customer Register</h2>
 <form method="post" action="processRegister.php">
 <table class="centreTable">
 <tr>

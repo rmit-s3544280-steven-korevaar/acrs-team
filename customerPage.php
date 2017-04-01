@@ -1,6 +1,6 @@
 <?php
 $page_title='Customer Booking Summaries';
-include('/assets/header.inc');
+include('assets/header.inc');
 ?>
 <!--Body Start--> 
 <?php

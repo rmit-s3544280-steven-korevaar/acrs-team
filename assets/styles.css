@@ -1,12 +1,13 @@
 body {
-	/*background-image: url("images/pug.jpg");*/
-
+	background-image: url("images/background.jpg");
+	background-attachment: fixed;
 }
 
 a,p,h1,h2,h3,h4,h5,h6,th,td{font-family:verdana;}
 th{text-align:right;}
 /*Centre the wrapper div in the center of screen */
 div#mainWrapper{
+	color: white;
 	position: relative;
 	margin:0px auto;
 	padding:0px;
@@ -39,17 +40,19 @@ a{
 	margin-left:15px;
 }
 a:hover{
-	color:Blue;
+	color:LightCoral;
 }
 
 /*index.php css*/
 div.headingBannerDiv{
-	
+	color:white;
 }
 
 div.instructionsIndexDiv{
-	text-align:left;
+	text-align:center;
 }
+
+
 div#loginForm{
 	position:absolute;
 	left:0px;
@@ -68,7 +71,7 @@ div.formBorder{
 	margin:20px;
 	padding-bottom:20px;
 	border-radius:5px;
-	border:2px solid #B8B8B8;
+	border:2px solid white;
 }
 .errorMessage{
 	color:red;
@@ -131,7 +134,7 @@ div.contentHereDiv{
 /*customerPage.php css*/
 div.customerNavigationDiv{
 	width:100%;
-	background-color:#B8B8B8;
+	
 	font-size:20px;
 }
 div.customerNavigationDiv span{
@@ -150,5 +153,5 @@ div.customerNavigationDiv a{
 	margin:0px 15px;
 }
 div.customerNavigationDiv a:hover{
-	color:Blue;
+	color:LightCoral;
 }
