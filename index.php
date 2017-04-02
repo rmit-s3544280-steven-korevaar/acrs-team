@@ -16,7 +16,7 @@ include('assets/header.inc');
 <div id='loginForm'>
 <div class='formBorder'>
 <h1>Login</h1>
-<form method='post' action='processlogin.php'>
+<form method='post' action="./assets/processForms/processlogin.php">
 <table class="centreTable">
 <tr>
 <th>Username: </th>
@@ -47,7 +47,7 @@ if(isset($_SESSION['loginError']) && !empty($_SESSION['loginError'])){
 <div id='registerForm'>
 <div class='formBorder'>
 <h1>Customer Register</h1>
-<form method="post" action="processRegister.php">
+<form method="post" action="./assets/processForms/processRegister.php">
 <table class="centreTable">
 <tr>
 <th>Username: </th>

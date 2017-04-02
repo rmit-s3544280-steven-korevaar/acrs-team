@@ -20,5 +20,5 @@
 </select>
 <!--END PHP Drop down box -->
 
-<a href='processLogout.php'>Sign Out</a>
+<a href='assets/processForms/processLogout.php'>Sign Out</a>
 </div>

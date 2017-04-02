@@ -24,12 +24,10 @@ div.centreContentBodyInDiv{
 	margin:auto;
 }
 table,th,td{
-	border: 1px solid black;
 	text-align:left;
 }
 /* Style for tabled results from mysql queries for businessPageNewBookings.php */
 .tableStyle{
-	border-top:1px solid black;
 	text-align:left;
 }
 /* Styles for hyperlinks */
@@ -151,4 +149,23 @@ div.customerNavigationDiv a{
 }
 div.customerNavigationDiv a:hover{
 	color:Blue;
+}
+
+/* customerBooking.php css */
+.CustomerBookingCalendarDiv{
+	position:absolute;
+	left:0px;
+	width:calc(70% - 0.5px);
+	border-right:1px solid black;
+}
+.CustomerBookingMakeABookingDiv{
+	position:absolute;
+	left:calc(70% - 0.5px);
+	width:calc(30% - 0.5px);
+	padding-left:10px;
+	text-align:left;
+
+}
+.CustomerBookingMakeABookingDiv p{
+	font-size:12px;
 }
