@@ -4,7 +4,6 @@ body {
 }
 
 a,p,h1,h2,h3,h4,h5,h6,th,td{font-family:verdana;}
-th{text-align:right;}
 /*Centre the wrapper div in the center of screen */
 div#mainWrapper{
 	position: relative;
@@ -24,8 +23,9 @@ div.centreContentBodyInDiv{
 .centreTable{
 	margin:auto;
 }
-th,td{
-	text-align:center;
+table,th,td{
+	border: 1px solid black;
+	text-align:left;
 }
 /* Style for tabled results from mysql queries for businessPageNewBookings.php */
 .tableStyle{
