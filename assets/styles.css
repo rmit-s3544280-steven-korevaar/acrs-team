@@ -25,7 +25,6 @@ div.centreContentBodyInDiv{
 	margin:auto;
 }
 table,th,td{
-	border: 1px solid black;
 	text-align:left;
 }
 /* Style for tabled results from mysql queries for businessPageNewBookings.php */
