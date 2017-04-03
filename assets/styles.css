@@ -4,7 +4,6 @@ body {
 }
 
 a,p,h1,h2,h3,h4,h5,h6,th,td{font-family:verdana;}
-th{text-align:right;}
 /*Centre the wrapper div in the center of screen */
 div#mainWrapper{
 	color: white;
@@ -25,8 +24,9 @@ div.centreContentBodyInDiv{
 .centreTable{
 	margin:auto;
 }
-th,td{
-	text-align:center;
+table,th,td{
+	border: 1px solid black;
+	text-align:left;
 }
 /* Style for tabled results from mysql queries for businessPageNewBookings.php */
 .tableStyle{
@@ -67,11 +67,15 @@ div#registerForm{
 	width:calc(50% - 2.5px);
 	text-align:center;
 }
+
 div.formBorder{
 	margin:20px;
 	padding-bottom:20px;
 	border-radius:5px;
 	border:2px solid white;
+}
+table {
+   border-spacing: 0px;
 }
 .errorMessage{
 	color:red;
