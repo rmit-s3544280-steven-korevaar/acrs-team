@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<!-- Default header elements -->
 <meta charset='UTF-8' />
-<link rel='stylesheet' type='text/css' href='assets/styles.css' />
-<script src='assets/externalNavigationScript.js'></script>
+<link rel='stylesheet' type='text/css' href='./assets/styles.css' />
+<script src='./assets/externalNavigationScript.js'></script>
 <title>
 	<?php print($page_title); ?>
 </title>
+
+<!-- Header elements for fullCalendar embedded component -->
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+<link rel='stylesheet' href='assets/calendar/fullcalendar/fullcalendar.css' />
+<script src='./assets/calendar/lib/jquery.min.js'></script>
+<script src='./assets/calendar/lib/moment.min.js'></script>
+<script src='./assets/calendar/fullcalendar/fullcalendar.js'></script>
+
 </head>
 <body>
 

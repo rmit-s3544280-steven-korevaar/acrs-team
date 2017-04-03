@@ -1,37 +1,79 @@
 <?php
 $page_title='Customer New Booking';
+<<<<<<< HEAD
 include('assets/header.inc');
+=======
+include('./assets/header.inc');
+>>>>>>> e80d16953a163b25af08f7d1b25f71f8c25e3407
 ?>
 <!--Body Start--> 
 <?php
-include('assets/customerBannerAndNav.inc');
+include('./assets/customerBannerAndNav.inc');
 ?>
+<div class='CustomerBookingCalendarDiv'>
+<div id='calendar'></div>
+</div>
+<div class='CustomerBookingMakeABookingDiv'>
+<h2>Make a booking</h2>
+<p>1. Select a date in the calendar and view available slots.</p>
+<p>2. Enter in booking time below.</p>
+<p>3. Enter in extra requests.</p>
+<p>4. Book appointment.</p>
+<form method='post' action='./assets/processForms/processBooking.php'>
+<table>
+<tr><th>Date: </th></tr>
+<tr><td><input type="text" name="date" id="getDateFromCalendar" readonly/></td></tr>
+<tr><th>Start Time: </th></tr>
+<tr><td><input type="time" name="startTime"/></td></tr>
+<tr><th>End Time: </th></tr>
+<tr><td><input type="time" name="endTime"/></td></tr>
+<tr><th>Extra notes: </th></tr>
+<tr><td><textarea name="otherDetails" placeholder="Enter any other special requests..."></textarea></td></tr>
+<tr><td><input type="submit" value="Book Appointment"/></td></tr>
+<?php
+if(isset($_SESSION['bookingError']) && !empty($_SESSION['bookingError'])){
+	print("<tr><td class='errorMessage'>\n");
+	print("<p> {$_SESSION['bookingError']} </p>\n");
+	print("</td></tr>\n");
+	unset($_SESSION['bookingError']);
+}
+?>
+</table>
+</form>
+</div>
+<?php
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-	<title>Calendar</title>
-    <p>Booking Calender</p>
-	<link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
-	<script src='lib/jquery.min.js'></script>
-	<script src='lib/moment.min.js'></script>
-	<script src='fullcalendar/fullcalendar.js'></script>
-</head>
+/***************************************************************************************
+*    Title: FullCalendar open source code
+*    Author: Adam Shaw
+*    Date: 2017
+*    Code version: v3.3.1
+*    Availability: https://fullcalendar.io/docs/
+*
+***************************************************************************************/
 
-<body>
-	<div id='calendar'></div>
-</body>
-
+/* Script used to initialise the fullCalendar component from https://fullcalendar.io/ 
+ * And retrieve data from sql database
+ */
+?>
 <script>
-	$(document).ready(function() {		
+	$(document).ready(function() {
 		$('#calendar').fullCalendar({
 		header: {
-			left: 'prev,next today',
+			left: 'today,next',
 			center: 'title',
-			right: 'month,agendaWeek,agendaDay'
+			right: 'month,agendaDay'
 		},
-		defaultView: 'basicDay',
-		editable: true,
+		
+		
+		dayOfMonthFormat: 'ddd DD/MM',
+		minTime: "09:00:00",
+      maxTime: "18:00:00",
+		allDaySlot:false,	
+		defaultView: 'month',
+		editable: false, 
+		height:'auto',
+		
 			
 		events: [{
 			title: 'Meeting',
@@ -51,26 +93,34 @@ include('assets/customerBannerAndNav.inc');
                 die("Connection failed: " . $conn->connect_error);
             }
 
-			$query = "SELECT * FROM booking WHERE username = '".$_SESSION['username']."'";
+			$query = "SELECT * FROM booking;";
 			$results = mysqli_query($conn,$query);
 
 			while($row = mysqli_fetch_array($results)) {							
 				print_r("{");
-				print_r("title: '".$row['username']."',");
-	            print_r("start: '".$row['startDateTime']."',");
+				print_r("title: 'Booking filled',");
+	         print_r("start: '".$row['startDateTime']."',");
 				print_r("end: '".$row['endDateTime']."'");
 				print_r("},");
 			}
 		?>
 		],
-		dayClick: function() {
-		alert('a day has been clicked!');
-		$('#calendar').fullCalendar('next');
-		}})});
+		
+		dayClick: function(date, jsEvent, view) {
+				var today = new Date();
+				today.setDate(today.getDate() - 1);
+
+            console.log(view.name);
+            if ( view.name === "month" && date >= today ) {
+                $('#calendar').fullCalendar('gotoDate', date);
+                $('#calendar').fullCalendar('changeView', 'agendaDay');
+            }
+				
+				document.getElementById('getDateFromCalendar').value = moment(date).format("DD/MM/YYYY");
+        }})});
 	</script>
-<a href="customerPage.php"><button>View Summary</button></a>
 
 <!--Body End-->
 <?php
-include('assets/footer.inc');
+include('./assets/footer.inc');
 ?>

@@ -1,10 +1,14 @@
 <?php
 $page_title='Customer Booking Summaries';
+<<<<<<< HEAD
 include('assets/header.inc');
+=======
+include('./assets/header.inc');
+>>>>>>> e80d16953a163b25af08f7d1b25f71f8c25e3407
 ?>
 <!--Body Start--> 
 <?php
-include('assets/customerBannerAndNav.inc');
+include('./assets/customerBannerAndNav.inc');
 ?>
 <div class='contentHereDiv'>
 <h1>Your Booking Summaries</h1>
@@ -48,6 +52,6 @@ include('assets/customerBannerAndNav.inc');
 </div>
 <!--Body End-->
 <?php
-include('assets/footer.inc');
+include('./assets/footer.inc');
 ?>
 

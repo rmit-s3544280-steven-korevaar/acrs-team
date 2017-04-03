@@ -10,4 +10,5 @@
 		session_destroy();		//Destroy all session variables in _SESSION[] global array.
 		header("location:index.php");	//Send unwanted user back to index.php
 	}
+	else{}
 ?>

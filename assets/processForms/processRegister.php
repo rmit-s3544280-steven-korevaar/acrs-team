@@ -29,13 +29,13 @@ if($checkFlag == true){
 		session_unset();
 		session_start();
 		$_SESSION['registerSuccess'] = "Register successful, Please login.";
-		header("location:index.php");
+		header("location: ../../index.php");
 	}
 	else{//If username already exists, send back to index.php with a error message.
 		session_unset();
 		session_start();
 		$_SESSION['registerError'] = "! That username is unavailable, Please try another.";
-		header("location:index.php");
+		header("location: ../../index.php");
 	}
 }
 else{
@@ -43,7 +43,7 @@ else{
 	session_start();
 	$_SESSION['returnData'] = array($_POST['username'],$_POST['password'],$_POST['fullname'],$_POST['address'],$_POST['phone']);
 	$_SESSION['registerError'] = "! All fields are required.";
-	header("location:index.php");
+	header("location: ../../index.php");
 }
 
 exit(0);
