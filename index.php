@@ -1,6 +1,6 @@
 <?php
 $page_title='Login';
-include('assets/header.inc');
+include('./assets/header.inc');
 ?>
 <!--Body Start--> 
 <div class='centreContentBodyInDiv'>
@@ -103,5 +103,5 @@ elseif(isset($_SESSION['registerSuccess']) && !empty($_SESSION['registerSuccess'
 </div>
 <!--Body End-->
 <?php
-include('assets/footer.inc');
+include('./assets/footer.inc');
 ?>

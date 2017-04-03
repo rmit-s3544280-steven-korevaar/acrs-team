@@ -1,10 +1,10 @@
 <?php
 $page_title='Customer New Booking';
-include('/assets/header.inc');
+include('./assets/header.inc');
 ?>
 <!--Body Start--> 
 <?php
-include('assets/customerBannerAndNav.inc');
+include('./assets/customerBannerAndNav.inc');
 ?>
 <div class='CustomerBookingCalendarDiv'>
 <div id='calendar'></div>
@@ -118,5 +118,5 @@ if(isset($_SESSION['bookingError']) && !empty($_SESSION['bookingError'])){
 
 <!--Body End-->
 <?php
-include('assets/footer.inc');
+include('./assets/footer.inc');
 ?>

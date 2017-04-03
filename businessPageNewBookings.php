@@ -1,11 +1,11 @@
 <?php
 $page_title='Business New Bookings';
-include('/assets/header.inc');
+include('./assets/header.inc');
 ?>
 <!--Body Start--> 
 <?php
-include('assets/ownerChecker.inc');
-include('assets/businessBannerAndNav.inc');
+include('./assets/ownerChecker.inc');
+include('./assets/businessBannerAndNav.inc');
 ?>
 <div class='contentHereDiv'>
 <h1>All bookings for the next 7 days</h1>
@@ -42,5 +42,5 @@ else
 </div>
 <!--Body End-->
 <?php
-include('assets/footer.inc');
+include('./assets/footer.inc');
 ?>
