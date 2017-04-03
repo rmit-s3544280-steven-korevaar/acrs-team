@@ -6,7 +6,7 @@ body {
 a,p,h1,h2,h3,h4,h5,h6,th,td{font-family:verdana;}
 /*Centre the wrapper div in the center of screen */
 div#mainWrapper{
-	color: white;
+	color: white; /* This will cause all inherited text to change to the specified color */
 	position: relative;
 	margin:0px auto;
 	padding:0px;
@@ -44,7 +44,7 @@ a:hover{
 
 /*index.php css*/
 div.headingBannerDiv{
-	color:white;
+	color:inherit;
 }
 
 div.instructionsIndexDiv{
@@ -87,43 +87,43 @@ table {
 /*businessPage.php css*/
 div.businessNavigationDiv{
 	width:100%;
-	background-color:#B8B8B8;
+	background-color:inherit;
 	font-family:"Trebuchet MS";
 	font-size:20px;
 }
 div.businessNavigationDiv span{
 	font-family:inherit;
-	color:black;
+	color:inherit;
 	font-size:inherit;
 	line-height:40px;
 	margin:0px 15px;
 }
 select#businessNavigationBooking{
 	font-family:inherit;
-	color:black;
-	background-color: #B8B8B8;
+	color:inherit;
+	background-color:#79caf9; /* If banner background color changes, this needs to change manually, as it won't inherit */
 	font-size:inherit;
 	margin-left:15px;
 }
 select#businessNavigationEmployee{
 	font-family:inherit;
-	color:black;
-	background-color: #B8B8B8;
+	color:inherit;
+	background-color:#79caf9; /* If banner background color changes, this needs to change manually, as it won't inherit */
 	font-size:inherit;
 	margin-left:15px;
 }
 option.noDisplay{
 	display:none;
 	font-family:inherit;
-	color:black;
-	background-color: #B8B8B8;
+	color:inherit;
+	background-color:inherit;
 	font-size:inherit;
 	margin-left:15px;
 }
 option.businessNavigationDropDown{
 	font-family:inherit;
-	color:black;
-	background-color: #B8B8B8;
+	color:inherit;
+	background-color:inherit;
 	font-size:inherit;
 	margin-left:15px;
 }
@@ -132,17 +132,19 @@ div.contentHereDiv{
 	position:relative;
 	width:798px;
 	border:1px solid black;
+	padding-bottom:20px;
 }
 
 /*customerPage.php css*/
 div.customerNavigationDiv{
 	width:100%;
-	
+	background-color:inherit;
+	font-family:"Trebuchet MS";
 	font-size:20px;
 }
 div.customerNavigationDiv span{
 	font-family:"Trebuchet MS";
-	color:black;
+	color:inherit;
 	font-size:inherit;
 	line-height:40px;
 	margin:0px 15px;
@@ -150,11 +152,30 @@ div.customerNavigationDiv span{
 div.customerNavigationDiv a{
 	text-decoration:none;
 	font-family:"Trebuchet MS";
-	color:black;
+	color:inherit;
 	font-size:inherit;
 	line-height:40px;
 	margin:0px 15px;
 }
 div.customerNavigationDiv a:hover{
 	color:LightCoral;
+}
+
+/* customerBooking.php css */
+.CustomerBookingCalendarDiv{
+	position:absolute;
+	left:0px;
+	width:calc(70% - 0.5px);
+	border-right:1px solid black;
+}
+.CustomerBookingMakeABookingDiv{
+	position:absolute;
+	left:calc(70% - 0.5px);
+	width:calc(30% - 0.5px);
+	padding-left:10px;
+	text-align:left;
+
+}
+.CustomerBookingMakeABookingDiv p{
+	font-size:12px;
 }

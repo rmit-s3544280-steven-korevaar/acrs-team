@@ -108,11 +108,12 @@ if(isset($_SESSION['bookingError']) && !empty($_SESSION['bookingError'])){
 
             console.log(view.name);
             if ( view.name === "month" && date >= today ) {
-                $('#calendar').fullCalendar('gotoDate', date);
-                $('#calendar').fullCalendar('changeView', 'agendaDay');
+					document.getElementById('getDateFromCalendar').value = moment(date).format("DD/MM/YYYY");
+               $('#calendar').fullCalendar('gotoDate', date);
+               $('#calendar').fullCalendar('changeView', 'agendaDay');
             }
 				
-				document.getElementById('getDateFromCalendar').value = moment(date).format("DD/MM/YYYY");
+				
         }})});
 	</script>
 

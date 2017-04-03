@@ -1,6 +1,6 @@
 <?php
 $page_title='Login';
-include('assets/header.inc');
+include('./assets/header.inc');
 ?>
 <!--Body Start--> 
 <div class='centreContentBodyInDiv'>
@@ -17,7 +17,7 @@ include('assets/header.inc');
 <div id='loginForm'>
 <div class='formBorder'>
 <h2>Login</h2>
-<form method='post' action='processlogin.php'>
+<form method='post' action='./assets/processForms/processlogin.php'>
 <table class="centreTable">
 <tr>
 <th>Username: </th>
@@ -48,7 +48,7 @@ if(isset($_SESSION['loginError']) && !empty($_SESSION['loginError'])){
 <div id='registerForm'>
 <div class='formBorder'>
 <h2>Customer Register</h2>
-<form method="post" action="processRegister.php">
+<form method="post" action="./assets/processForms/processRegister.php">
 <table class="centreTable">
 <tr>
 <th>Username: </th>
