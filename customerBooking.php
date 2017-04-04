@@ -11,10 +11,12 @@ include('./assets/customerBannerAndNav.inc');
 </div>
 <div class='CustomerBookingMakeABookingDiv'>
 <h2>Make a booking</h2>
-<p>1. Select a date in the calendar and view available slots.</p>
-<p>2. Enter in booking time below.</p>
-<p>3. Enter in extra requests.</p>
-<p>4. Book appointment.</p>
+<ol>
+<li>Select a date in the calendar and view available slots.</li>
+<li>Enter in booking time below.</li>
+<li>Enter in extra requests.</li>
+<li>Book appointment.</li>
+</ol>
 <form method='post' action='./assets/processForms/processBooking.php'>
 <table>
 <tr><th>Date: </th></tr>

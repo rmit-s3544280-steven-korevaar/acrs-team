@@ -7,13 +7,13 @@ body {
 	background-attachment: fixed;
 }
 
-a,p,h1,h2,h3,h4,h5,h6{
+h1,h2,h3,h4,h5,h6{
 	font-family: 'Prata';
-	font-size: 36px;
 }
-a,p,th,td {
+
+a,p,th,td,li {
 	font-family: 'Fenix';
-	font-size: 20px;
+
 }
 /*Centre the wrapper div in the center of screen */
 div#mainWrapper{
@@ -190,6 +190,7 @@ div.customerNavigationDiv a:hover{
 	text-align:left;
 
 }
-.CustomerBookingMakeABookingDiv p{
-	font-size:12px;
+.CustomerBookingMakeABookingDiv ol{
+	font-size:16px;
+	padding-left:15px;
 }
