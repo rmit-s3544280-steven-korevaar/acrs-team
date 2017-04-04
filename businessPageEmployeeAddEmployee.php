@@ -1,11 +1,11 @@
 <?php
 $page_title='Business Employee Add new Employee';
-//include('assets/header.inc');
+include('./assets/header.inc');
 ?>
 <!--Body Start--> 
 <?php
-//include('assets/ownerChecker.inc');
-//include('assets/businessBannerAndNav.inc');
+include('./assets/ownerChecker.inc');
+include('./assets/businessBannerAndNav.inc');
 ?>
 <div class='contentHereDiv'>
 <p>Some Content of Employee adding new Employee</p>
@@ -13,7 +13,7 @@ $page_title='Business Employee Add new Employee';
 
 <h2>PHP Form Validation Example</h2>
 <p><span class="error">* required field.</span></p>
-<form method="post" action="/processForms/processAddEmployee.php">  
+<form method="post" action="./assets/processForms/processAddEmployee.php">  
   Name: <input type="text" name="name" value="">
   <br><br>
   employeeNum: <input type="text" name="employeeNum" value="">
@@ -30,5 +30,5 @@ $page_title='Business Employee Add new Employee';
 </div>
 <!--Body End-->
 <?php
-include('assets/footer.inc');
+include('./assets/footer.inc');
 ?>
