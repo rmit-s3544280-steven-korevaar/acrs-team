@@ -5,6 +5,8 @@
 <!-- Default header elements -->
 <meta charset='UTF-8' />
 <link rel='stylesheet' type='text/css' href='./assets/styles.css' />
+<link href='//fonts.googleapis.com/css?family=Prata' rel='stylesheet'>
+<link href='//fonts.googleapis.com/css?family=Fenix' rel='stylesheet'>
 <script src='./assets/externalNavigationScript.js'></script>
 <title>
 	<?php print($page_title); ?>

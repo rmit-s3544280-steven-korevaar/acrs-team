@@ -1,12 +1,23 @@
 body {
-	background-image: url("images/background.jpg");
+	background-image: url("images/background.jpg"); /*images/wallpaper.jpg*/
+	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
 	background-attachment: fixed;
 }
 
-a,p,h1,h2,h3,h4,h5,h6,th,td{font-family:verdana;}
+a,p,h1,h2,h3,h4,h5,h6{
+	font-family: 'Prata';
+	font-size: 36px;
+}
+a,p,th,td {
+	font-family: 'Fenix';
+	font-size: 20px;
+}
 /*Centre the wrapper div in the center of screen */
 div#mainWrapper{
-	color: white; /* This will cause all inherited text to change to the specified color */
+	color: gray; /* This will cause all inherited text to change to the specified color */
 	position: relative;
 	margin:0px auto;
 	padding:0px;
@@ -26,7 +37,10 @@ div.centreContentBodyInDiv{
 }
 table,th,td{
 	text-align:left;
+	padding: 5px;
+	background-color:rgba(255,255,255,0.3);
 }
+
 /* Style for tabled results from mysql queries for businessPageNewBookings.php */
 .tableStyle{
 	border-top:1px solid black;
@@ -39,7 +53,7 @@ a{
 	margin-left:15px;
 }
 a:hover{
-	color:LightCoral;
+	color:lightyellow;
 }
 
 /*index.php css*/
@@ -71,7 +85,7 @@ div.formBorder{
 	margin:20px;
 	padding-bottom:20px;
 	border-radius:5px;
-	border:2px solid white;
+	border:2px solid gray;
 }
 table {
    border-spacing: 0px;
@@ -88,8 +102,8 @@ table {
 div.businessNavigationDiv{
 	width:100%;
 	background-color:inherit;
-	font-family:"Trebuchet MS";
-	font-size:20px;
+	font-family: 'Fenix';
+	font-size:22px;
 }
 div.businessNavigationDiv span{
 	font-family:inherit;
@@ -139,11 +153,11 @@ div.contentHereDiv{
 div.customerNavigationDiv{
 	width:100%;
 	background-color:inherit;
-	font-family:"Trebuchet MS";
-	font-size:20px;
+	font-family: 'Fenix';
+	font-size:22px;
 }
 div.customerNavigationDiv span{
-	font-family:"Trebuchet MS";
+	font-family: 'Fenix';
 	color:inherit;
 	font-size:inherit;
 	line-height:40px;
@@ -151,14 +165,14 @@ div.customerNavigationDiv span{
 }
 div.customerNavigationDiv a{
 	text-decoration:none;
-	font-family:"Trebuchet MS";
+	font-family: 'Fenix';
 	color:inherit;
 	font-size:inherit;
 	line-height:40px;
 	margin:0px 15px;
 }
 div.customerNavigationDiv a:hover{
-	color:LightCoral;
+	color: lightyellow;
 }
 
 /* customerBooking.php css */

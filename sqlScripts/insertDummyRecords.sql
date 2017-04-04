@@ -53,6 +53,8 @@ insert into workPeriod values("2017-04-09 09:00:00","2017-04-09 18:00:00","003")
 insert into user values("admin","Chloe Jane Smith","98 Maine St, Victora 3000","0398765432",SHA("admin"));
 
 --Customer: (username, full-name, address, ph-number, password)
+--DELETE FROM customer WHERE username like lower('dummy%');
+
 insert into user values("customer","Alica Michaels","2 Portia St, VIC 3652","0398765431",SHA("customer"));
 insert into user values("customer2","Bernard Campbell","14 Wattson Rd, VIC 3190","0398765432",SHA("customer2"));
 insert into user values("customer3","Chris Hunter","8 Harrison Crt, VIC 3061","0398765433",SHA("customer3"));
@@ -182,3 +184,4 @@ insert into booking values(null,"customer","2017-04-09 16:30:00","2017-04-09 17:
 
 --Insert record into userBusiness: (username, business-abn)
 insert into userBusiness values("admin","56497978719");
+
