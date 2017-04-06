@@ -1,3 +1,96 @@
+/* Script used to initialise database for Software Engineering-
+ * Process and Tools assignment part 1.
+ *
+ * Script will create the database and all the
+ * necessary tables needed for the website to interface with
+ * mariadb/mysql.
+ *
+ * Second part is to insert Dummy records for testing and allow 
+ * the presentation of the website with relevant data. 
+ *
+ * Dummy bookings and employee work hours are only up to 28/04/2017.
+ */
+ 
+/* Create database, used to store assignment tables */
+drop database SEPT_Assignment_Part_1;
+create database SEPT_Assignment_Part_1;
+
+/* Selecting the created database. */
+use SEPT_Assignment_Part_1;
+
+/* Create tables. */
+create table business(
+name text not null,
+ownerName text not null,
+address text not null,
+phoneNo varchar(11) not null,
+ABN varchar(11) primary key
+);
+
+create table employee(
+employeeName text,
+jobTitle text,
+businessID varchar(11) not null,
+employeeID varchar(3) primary key,
+CONSTRAINT fk_employee_business
+	foreign key (businessID) REFERENCES business (ABN)
+	ON DELETE CASCADE
+	ON UPDATE RESTRICT
+);
+
+/* Creating table to store the starting and ending work time
+ * for an individual employee, the tricky part is when storing time,
+ * it is easier to store it in minutes than in hours, as minutes
+ * is easier to work with because you can always divide it by 60, to
+ * get hours.
+ *
+ * This is why I am storing the time as an integer,
+ * as 24 hours * 60 minutes = 1440 minutes, 4 characters.
+ */
+create table workPeriod(
+startDateTime datetime not null,
+endDateTime datetime not null,
+employeeID varchar(3) not null,
+CONSTRAINT fk_workPeriod_employee
+	foreign key (employeeID) REFERENCES employee (employeeID)
+	ON DELETE CASCADE
+	ON UPDATE RESTRICT
+);
+
+create table user(
+username varchar(255) primary key,
+fullname text,
+address text,
+phoneNo varchar(11),
+password char(40) not null
+);
+
+create table booking(
+bookingID integer not null auto_increment,
+username varchar(255) not null,
+startDateTime datetime not null,
+endDateTime datetime not null,
+businessID varchar(11) not null,
+otherDetails text,
+CONSTRAINT pk_booking PRIMARY KEY (bookingID,username),
+CONSTRAINT fk_booking_business FOREIGN KEY (businessID)
+REFERENCES business(ABN)
+	ON DELETE CASCADE
+	ON UPDATE RESTRICT
+);
+
+create table userBusiness(
+username varchar(255) not null,
+ABN varchar(11) not null,
+CONSTRAINT pk_userBusiness PRIMARY KEY (username,ABN)
+);
+
+
+/* *********************************************************************
+ * 
+ * Insert dummy data into database;
+ *
+ ******************************************************************** */
 /* Script used to insert dummy records for testing purposes.
  */
 --Insert record into business: business-name, owner-name, address, ph-num, business-abn
@@ -47,6 +140,30 @@ insert into workPeriod values("2017-04-08 09:00:00","2017-04-08 18:00:00","003")
 insert into workPeriod values("2017-04-09 09:00:00","2017-04-09 18:00:00","001"); --(emp-001, sun 09/04, 9am-6pm)
 insert into workPeriod values("2017-04-09 09:00:00","2017-04-09 18:00:00","002"); --(emp-002, sun 09/04, 9am-6pm)
 insert into workPeriod values("2017-04-09 09:00:00","2017-04-09 18:00:00","003"); --(emp-003, sun 09/04, 9am-6pm)
+
+insert into workPeriod values("2017-04-10 09:00:00","2017-04-10 18:00:00","001"); --(emp-001, mon 10/04, 9am-6pm)
+insert into workPeriod values("2017-04-11 09:00:00","2017-04-11 18:00:00","001"); --(emp-001, tue 11/04, 9am-6pm)
+insert into workPeriod values("2017-04-12 09:00:00","2017-04-12 15:00:00","002"); --(emp-002, wed 12/04, 9am-3pm)
+insert into workPeriod values("2017-04-13 12:00:00","2017-04-13 18:00:00","002"); --(emp-002, thur 13/04, 12pm-6pm)
+insert into workPeriod values("2017-04-14 09:00:00","2017-04-14 18:00:00","001"); --(emp-001, fri 14/04, 9am-6pm)
+insert into workPeriod values("2017-04-14 11:00:00","2017-04-14 15:00:00","002"); --(emp-002, fri 14/04, 11am-3pm)
+insert into workPeriod values("2017-04-14 11:00:00","2017-04-14 18:00:00","003"); --(emp-003, fri 14/04, 11am-6pm)
+
+insert into workPeriod values("2017-04-17 09:00:00","2017-04-17 18:00:00","001"); --(emp-001, mon 17/04, 9am-6pm)
+insert into workPeriod values("2017-04-18 09:00:00","2017-04-18 18:00:00","001"); --(emp-001, tue 18/04, 9am-6pm)
+insert into workPeriod values("2017-04-19 09:00:00","2017-04-19 15:00:00","002"); --(emp-002, wed 19/04, 9am-3pm)
+insert into workPeriod values("2017-04-20 12:00:00","2017-04-20 18:00:00","002"); --(emp-002, thur 20/04, 12pm-6pm)
+insert into workPeriod values("2017-04-21 09:00:00","2017-04-21 18:00:00","001"); --(emp-001, fri 21/04, 9am-6pm)
+insert into workPeriod values("2017-04-21 11:00:00","2017-04-21 15:00:00","002"); --(emp-002, fri 21/04, 11am-3pm)
+insert into workPeriod values("2017-04-21 11:00:00","2017-04-21 18:00:00","003"); --(emp-003, fri 14/04, 11am-6pm)
+
+insert into workPeriod values("2017-04-24 09:00:00","2017-04-24 18:00:00","001"); --(emp-001, mon 24/04, 9am-6pm)
+insert into workPeriod values("2017-04-25 09:00:00","2017-04-25 18:00:00","001"); --(emp-001, tue 25/04, 9am-6pm)
+insert into workPeriod values("2017-04-26 09:00:00","2017-04-26 15:00:00","002"); --(emp-002, wed 26/04, 9am-3pm)
+insert into workPeriod values("2017-04-27 12:00:00","2017-04-27 18:00:00","002"); --(emp-002, thur 27/04, 12pm-6pm)
+insert into workPeriod values("2017-04-28 09:00:00","2017-04-28 18:00:00","001"); --(emp-001, fri 28/04, 9am-6pm)
+insert into workPeriod values("2017-04-28 11:00:00","2017-04-28 15:00:00","002"); --(emp-002, fri 28/04, 11am-3pm)
+insert into workPeriod values("2017-04-28 11:00:00","2017-04-28 18:00:00","003"); --(emp-003, fri 28/04, 11am-6pm)
 
 --Insert record into user: (username, full-name, address, ph-num, password)
 --Business Owner
@@ -181,6 +298,27 @@ insert into booking values(null,"customer5","2017-04-09 11:30:00","2017-04-09 12
 insert into booking values(null,"customer2","2017-04-09 13:00:00","2017-04-09 13:45:00","56497978719","Clip, Wash & Dry"); --(cust2, sun 04/09)
 insert into booking values(null,"customer6","2017-04-09 14:45:00","2017-04-09 15:30:00","56497978719","Wash & Dry"); --(cust6, sun 04/09)
 insert into booking values(null,"customer","2017-04-09 16:30:00","2017-04-09 17:00:00","56497978719","Clip"); --(cust, sun 04/09)
+
+insert into booking values(null,"customer3","2017-04-10 09:00:00","2017-04-10 10:00:00","56497978719","Wash & Dry"); --(cust3, mon 04/10)
+insert into booking values(null,"customer4","2017-04-10 11:00:00","2017-04-10 12:00:00","56497978719","Clip, Wash & Dry"); --(cust4, mon 04/10)
+insert into booking values(null,"customer5","2017-04-11 11:30:00","2017-04-11 12:30:00","56497978719","Clip & Style"); --(cust5, tue 04/11)
+insert into booking values(null,"customer2","2017-04-12 13:00:00","2017-04-12 14:00:00","56497978719","Clip, Wash & Dry"); --(cust2, wed 04/12)
+insert into booking values(null,"customer6","2017-04-14 10:45:00","2017-04-14 11:45:00","56497978719","Wash & Dry"); --(cust6, fri 04/14)
+insert into booking values(null,"customer","2017-04-14 13:30:00","2017-04-14 14:30:00","56497978719","Clip"); --(cust, fri 04/14)
+
+insert into booking values(null,"customer3","2017-04-17 09:00:00","2017-04-17 10:00:00","56497978719","Wash & Dry"); --(cust3, mon 04/17)
+insert into booking values(null,"customer4","2017-04-17 11:00:00","2017-04-17 12:00:00","56497978719","Clip, Wash & Dry"); --(cust4, mon 04/17)
+insert into booking values(null,"customer5","2017-04-18 11:30:00","2017-04-18 12:30:00","56497978719","Clip & Style"); --(cust5, tue 04/18)
+insert into booking values(null,"customer2","2017-04-19 13:00:00","2017-04-19 14:00:00","56497978719","Clip, Wash & Dry"); --(cust2, wed 04/19)
+insert into booking values(null,"customer6","2017-04-21 10:45:00","2017-04-21 11:45:00","56497978719","Wash & Dry"); --(cust6, fri 04/21)
+insert into booking values(null,"customer","2017-04-21 13:30:00","2017-04-21 14:30:00","56497978719","Clip"); --(cust, fri 04/21)
+
+insert into booking values(null,"customer3","2017-04-24 09:00:00","2017-04-24 10:00:00","56497978719","Wash & Dry"); --(cust3, mon 04/24)
+insert into booking values(null,"customer4","2017-04-24 11:00:00","2017-04-24 12:00:00","56497978719","Clip, Wash & Dry"); --(cust4, mon 04/24)
+insert into booking values(null,"customer5","2017-04-25 11:30:00","2017-04-25 12:30:00","56497978719","Clip & Style"); --(cust5, tue 04/25)
+insert into booking values(null,"customer2","2017-04-26 13:00:00","2017-04-26 14:00:00","56497978719","Clip, Wash & Dry"); --(cust2, wed 04/26)
+insert into booking values(null,"customer6","2017-04-28 10:45:00","2017-04-28 11:45:00","56497978719","Wash & Dry"); --(cust6, fri 04/28)
+insert into booking values(null,"customer","2017-04-28 13:30:00","2017-04-28 14:30:00","56497978719","Clip"); --(cust, fri 04/28)
 
 --Insert record into userBusiness: (username, business-abn)
 insert into userBusiness values("admin","56497978719");

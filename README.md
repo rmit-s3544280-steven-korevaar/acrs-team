@@ -64,13 +64,9 @@ Create tables and insert dummy records into mysql
 	
 	mysql.exe -u root
 	
-4.	Run the sql scripts located inside the sqlScripts directory 
-	there are the createTables.sql and insertDummyRecords.sql 
-	scripts.
+4.	Run the sql script located inside the sqlScripts directory 
 	Enter in command below-
 	
 	source <Full_File_Path>
 	i.e.
-	source C:\xampp\htdocs\Education\SEPTGitHub\sqlScripts\createTables.sql
-	and 
-	source C:\xampp\htdocs\Education\SEPTGitHub\sqlScripts\insertDummyRecords.sql
+	source C:\xampp\htdocs\Education\SEPTGitHub\sqlScripts\createTablesAndInsertDummyRecords.sql
