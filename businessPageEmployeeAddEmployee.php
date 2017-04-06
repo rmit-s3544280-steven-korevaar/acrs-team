@@ -38,7 +38,7 @@ if(isset($_SESSION['returnErrorAddEmployeeMessage']) && !empty($_SESSION['return
 	print("</table>\n");
 	unset($_SESSION['returnErrorAddEmployeeMessage']);
 }
-else if(isset($_SESSION['returnSuccessAddEmployeeMessage']) && !empty($_SESSION['returnSuccessAddEmployeeMessage'])){
+elseif(isset($_SESSION['returnSuccessAddEmployeeMessage']) && !empty($_SESSION['returnSuccessAddEmployeeMessage'])){
 	print("<table class='centreTable'>\n");
 	print("<tr><td class='successMessage'>\n");
 	print("<p> {$_SESSION['returnSuccessAddEmployeeMessage']} </p>\n");

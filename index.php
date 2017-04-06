@@ -30,17 +30,18 @@ include('./assets/header.inc');
 </table>
 <table class="centreTable">
 <tr><td><input type="submit" value="Login"/></td></tr>
-
+</table>
+</form>
 <?php
 if(isset($_SESSION['loginError']) && !empty($_SESSION['loginError'])){
+	print("<table class='centreTable'>\n");
 	print("<tr><td class='errorMessage'>\n");
 	print("<p> {$_SESSION['loginError']} </p>\n");
 	print("</td></tr>\n");
+	print("</table>\n");
 	unset($_SESSION['loginError']);
 }
 ?>
-</table>
-</form>
 </div>
 </div>
 
@@ -73,34 +74,40 @@ if(isset($_SESSION['loginError']) && !empty($_SESSION['loginError'])){
 </table>
 <table class="centreTable">
 <tr><td><input type="submit" value="Register"/></td></tr>
+</table>
+</form>
 <?php
 /*Check if return data from processRegister.php is set, unset after use.*/
 if(isset($_SESSION['returnData']) && !empty($_SESSION['returnData'])){
+	print("<table class='centreTable'>\n");
 	print("<tr><td class='errorMessage'>\n");
 	print("<p> {$_SESSION['registerError']} </p>\n");
 	print("</td></tr>\n");
+	print("</table>\n");
 	unset($_SESSION['returnData']);
 	unset($_SESSION['registerError']);
 }
 /*Prints out error message if set*/
 if(isset($_SESSION['registerError']) && !empty($_SESSION['registerError'])){
+	print("<table class='centreTable'>\n");
 	print("<tr><td class='errorMessage'>\n");
 	print("<p> {$_SESSION['registerError']} </p>\n");
 	print("</td></tr>\n");
+	print("</table>\n");
 	unset($_SESSION['registerError']);
 }
 elseif(isset($_SESSION['registerSuccess']) && !empty($_SESSION['registerSuccess'])){
+	print("<table class='centreTable'>\n");
 	print("<tr><td class='successMessage'>\n");
 	print("<p> {$_SESSION['registerSuccess']} </p>\n");
 	print("</td></tr>\n");
+	print("</table>\n");
 	unset($_SESSION['registerSuccess']);
 }
 ?>
-</table>
-</form>
-</div>
-</div>
 
+</div>
+</div>
 </div>
 <!--Body End-->
 <?php
