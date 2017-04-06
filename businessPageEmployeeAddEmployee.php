@@ -8,25 +8,46 @@ include('./assets/ownerChecker.inc');
 include('./assets/businessBannerAndNav.inc');
 ?>
 <div class='contentHereDiv'>
-<p>Some Content of Employee adding new Employee</p>
+<h1>Add new Employee to system</h1>
+<p><span class="errorMessage">* required field.</span></p>
+<form method='post' action='./assets/processForms/processAddEmployee.php'>
+<table class="centreTable">
+<tr>
+<th>Full name: </th>
+<td><input type="text" name="employeeName"/></td>
+</tr>
+<tr>
+<th>Job title: </th>
+<td><input type="text" name="jobTitle"/></td>
+</tr>
+<tr>
+<th>Employee Number: </th>
+<td><input type="text" name="employeeID"/></td>
+</tr>
+</table>
+<table class="centreTable">
+<tr><td><input type="submit" value="Add Employee"/></td></tr>
+</table>
 
-
-<h2>PHP Form Validation Example</h2>
-<p><span class="error">* required field.</span></p>
-<form method="post" action="./assets/processForms/processAddEmployee.php">  
-  Name: <input type="text" name="name" value="">
-  <br><br>
-  employeeNum: <input type="text" name="employeeNum" value="">
-  <br><br>
-  businessID: <input type="text" name="businessID" value="">
-  <br><br>
-  Title: <input type="text" name="title" value="">
-  <br><br>
-
-  <input type="submit" name="submit" value="Submit">  
+<?php
+if(isset($_SESSION['returnErrorAddEmployeeMessage']) && !empty($_SESSION['returnErrorAddEmployeeMessage'])){
+	print("<table class='centreTable'>\n");
+	print("<tr><td class='errorMessage'>\n");
+	print("<p> {$_SESSION['returnErrorAddEmployeeMessage']} </p>\n");
+	print("</td></tr>\n");
+	print("</table>\n");
+	unset($_SESSION['returnErrorAddEmployeeMessage']);
+}
+else if(isset($_SESSION['returnSuccessAddEmployeeMessage']) && !empty($_SESSION['returnSuccessAddEmployeeMessage'])){
+	print("<table class='centreTable'>\n");
+	print("<tr><td class='successMessage'>\n");
+	print("<p> {$_SESSION['returnSuccessAddEmployeeMessage']} </p>\n");
+	print("</td></tr>\n");
+	print("</table>\n");
+	unset($_SESSION['returnSuccessAddEmployeeMessage']);
+}
+?>
 </form>
-
-
 </div>
 <!--Body End-->
 <?php
