@@ -20,8 +20,8 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 		$connect = mysqli_connect("localhost","root","","sept_assignment_part_1") or die(mysqli_error($connect));
 		$query = "insert into workPeriod values('$startDateTime','$endDateTime','$employeeID');";
 		$results = mysqli_query($connect,$query) or die(mysqli_error($connect));
-		
-		header("location: ../../businessPageEmployeeAvailability.php");
+		$_SESSION['shiftAdded'] = "Successfully added working time.";
+		header("location: ../../businessPageEmployeeAddShift.php");
 	}
 	else {
 		$_SESSION['shiftError'] = "The end time must be after the start time.";

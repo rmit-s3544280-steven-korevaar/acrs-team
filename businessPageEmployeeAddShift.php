@@ -14,20 +14,12 @@ include('./assets/businessBannerAndNav.inc');
 <h2>Set a Shift</h2>
 <ol>
 <li>Select a date in the calendar</li>
-<li>Enter in booking time below.</li>
+<li>Enter in shift time below.</li>
 <li>Set shift.</li>
 </ol>
 <form method='post' action='./assets/processForms/processAddShift.php'>
 <table>
-<tr><th>Date: </th></tr>
-<tr><td><input type="text" name="date" id="getDateFromCalendar" readonly/></td></tr>
-<tr><th>Start Time: </th></tr>
-<tr><td><input type="time" name="startTime"/></td></tr>
-<tr><th>End Time: </th></tr>
-<tr><td><input type="time" name="endTime"/></td></tr>
-
-<tr><th>Employee ID: </th></tr>
-<!--<tr><td><input type="text" name="employeeID" id="employeeID" /></td></tr>-->
+<tr><th>Employee Name: </th></tr>
 <tr><th>
 <select name="employeeID" id="employeeID">
   <?php
@@ -46,15 +38,27 @@ include('./assets/businessBannerAndNav.inc');
 		$results = mysqli_query($conn,$query);
 
 		while($row = mysqli_fetch_array($results)) {							
-			print_r("<option value= \"".$row['employeeID']."\">".$row['employeeID']."</option>");
+			print_r("<option value= \"".$row['employeeID']."\">".$row['employeeName']."</option>");
 		}
   ?>
 </select>
 </th></tr>
-
+<tr><th>Date: </th></tr>
+<tr><td><input type="text" name="date" id="getDateFromCalendar" readonly/></td></tr>
+<tr><th>Start Time: </th></tr>
+<tr><td><input type="time" name="startTime"/></td></tr>
+<tr><th>End Time: </th></tr>
+<tr><td><input type="time" name="endTime"/></td></tr>
 <tr><td><input type="submit" value="Set Shift"/></td></tr>
 <?php
-if(isset($_SESSION['shiftError']) && !empty($_SESSION['shiftError'])){
+
+if(isset($_SESSION['shiftAdded']) && !empty($_SESSION['shiftAdded'])){
+	print("<tr><td class='successMessage'>\n");
+	print("<p> {$_SESSION['shiftAdded']} </p>\n");
+	print("</td></tr>\n");
+	unset($_SESSION['shiftAdded']);
+}
+else if(isset($_SESSION['shiftError']) && !empty($_SESSION['shiftError'])){
 	print("<tr><td class='errorMessage'>\n");
 	print("<p> {$_SESSION['shiftError']} </p>\n");
 	print("</td></tr>\n");
@@ -83,9 +87,9 @@ if(isset($_SESSION['shiftError']) && !empty($_SESSION['shiftError'])){
 	$(document).ready(function() {
 		$('#calendar').fullCalendar({
 		header: {
-			left: 'today,next',
+			left: 'prev,today,next',
 			center: 'title',
-			right: 'month,agendaDay'
+			right: 'month,agendaWeek,agendaDay'
 		},
 		
 		
@@ -98,7 +102,11 @@ if(isset($_SESSION['shiftError']) && !empty($_SESSION['shiftError'])){
 		height:'auto',
 		
 			
-		events: [
+		events: [{
+			title: 'Meeting',
+			start: '2017-03-20T10:30:00',
+			end: '2017-03-20T12:30:00'
+		},
 					
 		<?php
             $servername = "localhost";
@@ -112,12 +120,12 @@ if(isset($_SESSION['shiftError']) && !empty($_SESSION['shiftError'])){
                 die("Connection failed: " . $conn->connect_error);
             }
 
-			$query = "SELECT * FROM booking;";
+			$query = "SELECT employeeName, startDateTime, endDateTime FROM workperiod AS wp INNER JOIN employee AS e ON wp.employeeID=e.employeeID;";
 			$results = mysqli_query($conn,$query);
 
 			while($row = mysqli_fetch_array($results)) {							
 				print_r("{");
-				print_r("title: 'Booking filled',");
+				print_r("title: '".$row['employeeName']."',");
 	         print_r("start: '".$row['startDateTime']."',");
 				print_r("end: '".$row['endDateTime']."'");
 				print_r("},");
@@ -126,14 +134,19 @@ if(isset($_SESSION['shiftError']) && !empty($_SESSION['shiftError'])){
 		],
 		
 		dayClick: function(date, jsEvent, view) {
-				var today = new Date();
-				today.setDate(today.getDate() - 1);
-				
-				if ( view.name === "month" && date >= today ) {
+
+            console.log(view.name);
+            if ( view.name === "month" ) {
 					document.getElementById('getDateFromCalendar').value = moment(date).format("DD/MM/YYYY");
-               //$('#calendar').fullCalendar('gotoDate', date);
-               //$('#calendar').fullCalendar('changeView', 'agendaDay');
+               $('#calendar').fullCalendar('gotoDate', date);
+               $('#calendar').fullCalendar('changeView', 'agendaDay');
             }
+				if ( view.name === "agendaWeek" ) {
+					document.getElementById('getDateFromCalendar').value = moment(date).format("DD/MM/YYYY");
+               $('#calendar').fullCalendar('gotoDate', date);
+               $('#calendar').fullCalendar('changeView', 'agendaDay');
+            }
+				
 				
         }})});
 	</script>
