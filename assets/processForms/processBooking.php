@@ -18,11 +18,17 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 	$startDateTime = date("Y-m-d H:i:s", strtotime($combinestartDateTime));
 	$endDateTime = date("Y-m-d H:i:s", strtotime($combineendDateTime));
 	
+	if( $endDateTime > $startDateTime ){	
 	$connect = mysqli_connect("localhost","root","","sept_assignment_part_1") or die(mysqli_error($connect));
 	$query = "insert into booking values(null,'$username','$startDateTime','$endDateTime','$ABN','$otherDetails');";
 	$results = mysqli_query($connect,$query) or die(mysqli_error($connect));
-	
 	header("location: ../../customerPage.php");
+	}
+	else
+	{
+		$_SESSION['bookingError'] = "End Time must be after Start Time.";
+		header("location: ../../customerBooking.php");
+	}
 }
 else
 {
