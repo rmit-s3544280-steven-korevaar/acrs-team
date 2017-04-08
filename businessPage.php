@@ -41,7 +41,7 @@
 	 }
 	 else
 	 {
-		print "<table><tr>No new bookings found</tr></table>";
+		print "<table><tr><h2>No bookings found.<h2></tr></table>";
 	 }
     $conn->close();
 ?>
