@@ -17,7 +17,7 @@ a,p,th,td,li {
 }
 /*Centre the wrapper div in the center of screen */
 div#mainWrapper{
-	color: gray; /* This will cause all inherited text to change to the specified color */
+	color: black; /* This will cause all inherited text to change to the specified color */
 	position: relative;
 	margin:0px auto;
 	padding:0px;
