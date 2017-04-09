@@ -4,10 +4,10 @@ Assignment - Part 1 -
 
 Group Members:
 -----------------------------------------------------------------------
-Steven Korevaar	s3544280
-Asli Yoruk	s3503519
-Ryan Tran	s3201690
-Christine Huynh	s3438653
+- Steven Korevaar	s3544280
+- Asli Yoruk	s3503519
+- Ryan Tran	s3201690
+- Christine Huynh	s3438653
 
 Tutor:
 -----------------------------------------------------------------------
@@ -16,6 +16,11 @@ Lawrence Cavedon
 Tutorial/Lab Day and time:
 -----------------------------------------------------------------------
 Tuesday 9:30am - 11:30am
+
+Installation of web server stack
+-----------------------------------------------------------------------
+Document located in Part_A_submission\06-SEPT-PartA-UserDocumentation.pdf
+under Installation and Setup Guide of XAMPP and Database.
 
 Directory - Part_1_submission
 -----------------------------------------------------------------------
@@ -33,7 +38,9 @@ GitHub -
 https://github.com/rmit-s3544280-steven-korevaar/acrs-team
 
 
-
+XAMPP Component versions
+-----------------------------------------------------------------------
+https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/7.1.1/xampp-portable-win32-7.1.1-0-VC14.zip/download
 - PHP version: PHP 7.1.1
 - Database version:	MariaDB 10.1.21
 - MariaDB is compatible with MySQL version 5.6
