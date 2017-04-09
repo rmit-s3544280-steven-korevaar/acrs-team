@@ -1,4 +1,11 @@
 <?php
+/* *******************************************************************
+ * Author: 	Ryan Tran			s3201690
+ *				Asli Yoruk 			s3503519
+ * PHP script to generate the page for business owner to add a new
+ * employee into the system.
+ * 
+ ********************************************************************/
 $page_title='Business Employee Add new Employee';
 include('./assets/header.inc');
 ?>

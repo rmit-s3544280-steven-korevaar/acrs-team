@@ -1,4 +1,11 @@
 <?php
+/* *******************************************************************
+ * Author: 	Ryan Tran			s3201690
+ * PHP script to generate the page for business owner display employee
+ * work period.
+ * Uses a plugin from FullCalendar.io.
+ * 
+ ********************************************************************/
 $page_title='Business Employee Availability';
 include('./assets/header.inc');
 ?>
@@ -22,7 +29,7 @@ include('./assets/businessBannerAndNav.inc');
 *
 ***************************************************************************************/
 
-/* Script used to initialise the fullCalendar component from https://fullcalendar.io/ 
+/* Script used to initialise the fullCalendar plugin from https://fullcalendar.io/ 
  * And retrieve data from sql database
  */
 ?>

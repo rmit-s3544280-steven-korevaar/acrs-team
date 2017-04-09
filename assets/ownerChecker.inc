@@ -1,4 +1,12 @@
 <?php
+/* *******************************************************************
+ * Author: 	Ryan Tran			s3201690
+ *
+ * Include file used to recheck the business section of the website, to
+ * make sure it is a valid business owner.
+ *
+ * 
+ ********************************************************************/
 	/*Recheck if user is a owner*/
 	$username = $_SESSION['username'];
 	

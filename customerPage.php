@@ -1,4 +1,12 @@
 <?php
+/* *******************************************************************
+ * Author: 	Ryan Tran			s3201690
+ * 			Christine Huynh	s3438653
+ *
+ * PHP script to generate the landing page after customer logs
+ * in. Displays the customer booking summaries.
+ * 
+ ********************************************************************/
 $page_title='Customer Booking Summaries';
 include('./assets/header.inc');
 ?>

@@ -1,3 +1,11 @@
+<?php
+/* *******************************************************************
+ * Author: 	Ryan Tran			s3201690
+ *
+ * Include file for generating customer navigation bar.
+ * 
+ ********************************************************************/
+?>
 <div class='headingBannerDiv'>
 <h1>Booking Website</h1>
 </div>

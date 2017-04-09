@@ -1,3 +1,11 @@
+/* *******************************************************************
+ * Author: 	Ryan Tran			s3201690
+ *				Christine Huynh	s3438653
+ *				Asli Yoruk			s3503519
+ *
+ * CSS used throughout the Booking web site
+ ********************************************************************/
+
 body {
 	background-image: url("images/background.jpg"); /*images/wallpaper.jpg*/
 	-webkit-background-size: cover;

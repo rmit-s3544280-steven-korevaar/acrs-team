@@ -1,4 +1,16 @@
 <?php
+/* *******************************************************************
+ * Author: 	Ryan Tran			s3201690
+ *
+ * PHP script used to process customer booking.
+ *
+ * The script will check if all data fields are filled in.
+ * If not return back to the booking page with error message.
+ *
+ * If true it will check whether the date times are valid and insert 
+ * booking into table.
+ * 
+ ********************************************************************/
 /* Php script to process new Bookings */
 session_start();
 if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTime']))
@@ -11,6 +23,7 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 	$endTime = $_POST['endTime'];
 	$otherDetails = $_POST['otherDetails'];
 	
+	/* Rearrange date time into format which PHP and MySQL can manipulate */
 	$datePieces = explode("/", $date);
 	$combinestartDateTime = "$datePieces[2]-$datePieces[1]-$datePieces[0] $startTime:00";
 	$combineendDateTime = "$datePieces[2]-$datePieces[1]-$datePieces[0] $endTime:00";
@@ -18,6 +31,7 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 	$startDateTime = date("Y-m-d H:i:s", strtotime($combinestartDateTime));
 	$endDateTime = date("Y-m-d H:i:s", strtotime($combineendDateTime));
 	
+	/* Check whether the set End Date Time is after the Start Date Time */
 	if( $endDateTime > $startDateTime ){	
 	$connect = mysqli_connect("localhost","root","","sept_assignment_part_1") or die(mysqli_error($connect));
 	$query = "insert into booking values(null,'$username','$startDateTime','$endDateTime','$ABN','$otherDetails');";

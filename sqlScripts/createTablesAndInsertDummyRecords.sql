@@ -1,4 +1,8 @@
-/* Script used to initialise database for Software Engineering-
+/* *******************************************************************
+ * Author: 	Ryan Tran			s3201690
+ *				Christine Huynh	s3438653
+ *
+ * Script used to initialise database for Software Engineering-
  * Process and Tools assignment part 1.
  *
  * Script will create the database and all the
@@ -9,10 +13,10 @@
  * the presentation of the website with relevant data. 
  *
  * Dummy bookings and employee work hours are only up to 28/04/2017.
- */
+ ********************************************************************/
  
 /* Create database, used to store assignment tables */
-drop database SEPT_Assignment_Part_1;
+drop database if exists SEPT_Assignment_Part_1;
 create database SEPT_Assignment_Part_1;
 
 /* Selecting the created database. */
@@ -38,15 +42,7 @@ CONSTRAINT fk_employee_business
 	ON UPDATE RESTRICT
 );
 
-/* Creating table to store the starting and ending work time
- * for an individual employee, the tricky part is when storing time,
- * it is easier to store it in minutes than in hours, as minutes
- * is easier to work with because you can always divide it by 60, to
- * get hours.
- *
- * This is why I am storing the time as an integer,
- * as 24 hours * 60 minutes = 1440 minutes, 4 characters.
- */
+
 create table workPeriod(
 startDateTime datetime not null,
 endDateTime datetime not null,

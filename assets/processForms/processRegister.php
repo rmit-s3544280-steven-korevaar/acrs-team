@@ -1,4 +1,17 @@
 <?php
+/* *******************************************************************
+ * Author: 	Ryan Tran			s3201690
+ *
+ * PHP script used to process customer registration after Register
+ * button is clicked on.
+ *
+ * The script will validate whether the input data is valid for MySQL
+ * query/insertion, insert into the database and return a success
+ * message. 
+ * 
+ * If it is not valid it will return a error message to the user.
+ ********************************************************************/
+ 
 /*Script to process customer registration.
  *Script will initialise variables for easier manipulation firstly,
  *then insert customer into user table.

@@ -1,4 +1,10 @@
 <?php
+/* *******************************************************************
+ * Author: 	Ryan Tran			s3201690
+ *
+ * PHP script to generate the html login page.
+ * 
+ ********************************************************************/
 $page_title='Login';
 include('./assets/header.inc');
 ?>
@@ -87,7 +93,7 @@ if(isset($_SESSION['returnData']) && !empty($_SESSION['returnData'])){
 	unset($_SESSION['returnData']);
 	unset($_SESSION['registerError']);
 }
-/*Prints out error message if set*/
+/*Prints out error message if set, unset after use*/
 if(isset($_SESSION['registerError']) && !empty($_SESSION['registerError'])){
 	print("<table class='centreTable'>\n");
 	print("<tr><td class='errorMessage'>\n");

@@ -1,4 +1,18 @@
 <?php
+/* *******************************************************************
+ * Author: 	Ryan Tran			s3201690
+ *				Asli Yoruk			s3503519
+ *
+ * PHP script used to process add new employee into the system.
+ *
+ * The script will check if all data fields are filled in.
+ * If not return back to the Add new employee with error message.
+ *
+ * If true it will add the new employee into the database.
+ * The query will return a message if the employeeID is not unique,
+ * and return a error message.
+ * 
+ ********************************************************************/
 /*Script to process adding new employee.
  *Script will initialise variables for easier manipulation firstly,
  *then insert the new employee into table.

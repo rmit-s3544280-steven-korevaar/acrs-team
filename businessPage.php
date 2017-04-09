@@ -1,4 +1,12 @@
 <?php
+/* *******************************************************************
+ * Author: 	Ryan Tran			s3201690
+ * 			Christine Huynh	s3438653
+ *
+ * PHP script to generate the landing page after business owner logs
+ * in.
+ * 
+ ********************************************************************/
     $page_title='Business Page';
     include('./assets/header.inc');
 ?>

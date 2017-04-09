@@ -1,4 +1,10 @@
 <?php
+/* *******************************************************************
+ * Author: 	Ryan Tran			s3201690
+ * PHP script to generate the page for business owner to display any
+ * future bookings for the next 7 days.
+ * 
+ ********************************************************************/
 $page_title='Business New Bookings';
 include('./assets/header.inc');
 ?>

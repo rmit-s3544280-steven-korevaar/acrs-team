@@ -1,4 +1,12 @@
 <?php
+/* *******************************************************************
+ * Author: 	Ryan Tran			s3201690
+ *				Steven Korevaar	s3544280
+ * PHP script to generate the page for business owner to add a new
+ * shift/work period for an employee.
+ * Uses a plugin from FullCalendar.io.
+ * 
+ ********************************************************************/
 $page_title='Business Employee Add Shift';
 include('./assets/header.inc');
 ?>

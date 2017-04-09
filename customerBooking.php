@@ -1,4 +1,11 @@
 <?php
+/* *******************************************************************
+ * Author: 	Ryan Tran			s3201690
+ * 			Christine Huynh	s3438653
+ * PHP script to generate the page for customer booking.
+ * Uses a plugin from FullCalendar.io.
+ * 
+ ********************************************************************/
 $page_title='Customer New Booking';
 include('./assets/header.inc');
 ?>
