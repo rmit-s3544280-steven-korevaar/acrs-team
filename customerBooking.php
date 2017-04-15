@@ -34,6 +34,31 @@ include('./assets/customerBannerAndNav.inc');
 <tr><td><input type="time" name="endTime"/></td></tr>
 <tr><th>Extra notes: </th></tr>
 <tr><td><textarea name="otherDetails" placeholder="Enter any other special requests..."></textarea></td></tr>
+<th><tr>Select Employee</th></tr>
+<tr><td>
+<select name="employeeID" id="employeeID">
+<option value="any">Any Available</option>
+  <?php
+		$servername = "localhost";
+		$username = "root";
+		$password = "";
+		$dbname = "SEPT_Assignment_Part_1";
+		//Create connection
+		$conn = new mysqli($servername, $username, $password, $dbname);
+		//Check connection
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+		}
+
+		$query = "SELECT * FROM employee;";
+		$results = mysqli_query($conn,$query);
+
+		while($row = mysqli_fetch_array($results)) {							
+			print_r("<option value= \"".$row['employeeID']."\">".$row['employeeName']."</option>");
+		}
+  ?>
+</select>
+</tr></td>
 <tr><td><input type="submit" value="Book Appointment"/></td></tr>
 <?php
 if(isset($_SESSION['bookingError']) && !empty($_SESSION['bookingError'])){
@@ -64,66 +89,74 @@ if(isset($_SESSION['bookingError']) && !empty($_SESSION['bookingError'])){
 <script>
 	$(document).ready(function() {
 		$('#calendar').fullCalendar({
-		header: {
-			left: 'today,next',
-			center: 'title',
-			right: 'month,agendaDay'
-		},
-		
-		
-		dayOfMonthFormat: 'ddd DD/MM',
-		minTime: "09:00:00",
-      maxTime: "18:00:00",
-		allDaySlot:false,	
-		defaultView: 'month',
-		editable: false, 
-		height:'auto',
-		
+			header: {
+				left: 'prev,today,next',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
 			
-		events: [{
-			title: 'Meeting',
-			start: '2017-03-20T10:30:00',
-			end: '2017-03-20T12:30:00'
-		},
+			
+			dayOfMonthFormat: 'ddd DD/MM',
+			minTime: "09:00:00",
+			maxTime: "18:00:00",
+			allDaySlot:false,	
+			defaultView: 'month',
+			editable: false, 
+			height:'auto',
+			
+				
+			events: [
+						
+			<?php
+				$servername = "localhost";
+				$username = "root";
+				$password = "";
+				$dbname = "SEPT_Assignment_Part_1";
+				//Create connection
+				$conn = new mysqli($servername, $username, $password, $dbname);
+				//Check connection
+				if ($conn->connect_error) {
+					die("Connection failed: " . $conn->connect_error);
+				}
+
+				$query = "SELECT employeeName, startDateTime, endDateTime FROM workperiod AS wp INNER JOIN employee AS e ON wp.employeeID=e.employeeID;";
+				$results = mysqli_query($conn,$query);
+
+				while($row = mysqli_fetch_array($results)) {							
+					print_r("{");
+					print_r("title: '".$row['employeeName']."',");
+					print_r("start: '".$row['startDateTime']."',");
+					print_r("end: '".$row['endDateTime']."'");
+					print_r("},");
+				}
+				
+			?>
+			],
+			
+			dayClick: function(date, jsEvent, view) {
+					var today = new Date();
+					today.setDate(today.getDate() - 1);
 					
-		<?php
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            $dbname = "SEPT_Assignment_Part_1";
-            //Create connection
-            $conn = new mysqli($servername, $username, $password, $dbname);
-            //Check connection
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
+					console.log(today);
 
-			$query = "SELECT * FROM booking;";
-			$results = mysqli_query($conn,$query);
-
-			while($row = mysqli_fetch_array($results)) {							
-				print_r("{");
-				print_r("title: 'Booking filled',");
-	         print_r("start: '".$row['startDateTime']."',");
-				print_r("end: '".$row['endDateTime']."'");
-				print_r("},");
-			}
-		?>
-		],
-		
-		dayClick: function(date, jsEvent, view) {
-				var today = new Date();
-				today.setDate(today.getDate() - 1);
-
-            console.log(view.name);
-            if ( view.name === "month" && date >= today ) {
-					document.getElementById('getDateFromCalendar').value = moment(date).format("DD/MM/YYYY");
-               $('#calendar').fullCalendar('gotoDate', date);
-               $('#calendar').fullCalendar('changeView', 'agendaDay');
-            }
+					if ( view.name === "month" && date >= today ) {
+						document.getElementById('getDateFromCalendar').value = moment(date).format("DD/MM/YYYY");
+						$('#calendar').fullCalendar('gotoDate', date);
+						$('#calendar').fullCalendar('changeView', 'agendaDay');
+					}
+					
+					if ( view.name === "agendaWeek" ) {
+						document.getElementById('getDateFromCalendar').value = moment(date).format("DD/MM/YYYY");
+						$('#calendar').fullCalendar('gotoDate', date);
+						$('#calendar').fullCalendar('changeView', 'agendaDay');
+					}
+				
+				}
 				
 				
-        }})});
+				
+				
+        })});
 	</script>
 
 <!--Body End-->
