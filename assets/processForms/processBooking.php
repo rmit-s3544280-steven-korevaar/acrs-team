@@ -22,6 +22,8 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 	$startTime = $_POST['startTime'];
 	$endTime = $_POST['endTime'];
 	$otherDetails = $_POST['otherDetails'];
+	$employee = $_POST['employeeID'];
+	echo $employee.'</br>';
 	
 	/* Rearrange date time into format which PHP and MySQL can manipulate */
 	$datePieces = explode("/", $date);
@@ -33,10 +35,68 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 	
 	/* Check whether the set End Date Time is after the Start Date Time */
 	if( $endDateTime > $startDateTime ){	
-	$connect = mysqli_connect("localhost","root","","sept_assignment_part_1") or die(mysqli_error($connect));
-	$query = "insert into booking values(null,'$username','$startDateTime','$endDateTime','$ABN','$otherDetails');";
-	$results = mysqli_query($connect,$query) or die(mysqli_error($connect));
-	header("location: ../../customerPage.php");
+		$conn = mysqli_connect("localhost","root","","sept_assignment_part_1") or die(mysqli_error($conn));
+	
+		$query = "SELECT * FROM workperiod WHERE employeeID = ".$employee.";";
+		$results = mysqli_query($conn,$query);
+		
+		
+		$workPeriodBool = 0;
+		$workIterator = 0;
+		
+		while($row = mysqli_fetch_array($results)) {	
+			
+			if($row['employeeID'] == $employee)
+			{
+				$workIterator++;		
+				$sdt = $row['startDateTime'];
+				$edt = $row['endDateTime'];
+				
+				if($startDateTime >= $sdt && $endDateTime <= $edt)
+				{
+					$workPeriodBool = 1;
+					break;
+				}
+			}
+			
+		}
+	
+		$query = "SELECT * FROM booking WHERE employee='.$employee.';";
+		$results = mysqli_query($conn,$query);
+
+		$bookingBool = 1;
+		$bookingIterator = 0;
+		while($row = mysqli_fetch_array($results)) {	
+			$bookingIterator++;
+			$sdt = $row['startDateTime'];
+			$edt = $row['endDateTime'];		
+			if( ($startDateTime 	>= $sdt && $endDateTime 	<= $edt) || 
+				($startDateTime 	>= $sdt && $startDateTime <= $edt) ||
+				($endDateTime 	>= $sdt && $endDateTime	<= $edt)
+				)
+			{
+				$bookingBool = 0;
+				break;
+			}
+		}
+	
+		if($bookingBool == 1 && $workPeriodBool == 1) 
+		{
+			$query = "insert into booking values(null,'$username','$employee','$startDateTime','$endDateTime','$ABN','$otherDetails');";
+			$results = mysqli_query($conn,$query) or die(mysqli_error($conn));
+			header("location: ../../customerPage.php");
+		}
+		else if($workPeriodBool == 1 && $bookingBool == 0) 
+		{
+			$_SESSION['bookingError'] = "There is a booking clash with this Employee.";
+			header("location: ../../customerBooking.php");
+		}
+		else
+		{
+			$_SESSION['bookingError'] = "There are no available employees for this time period.";
+			header("location: ../../customerBooking.php");
+		}
+		
 	}
 	else
 	{
