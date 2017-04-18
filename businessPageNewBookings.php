@@ -7,6 +7,8 @@
  ********************************************************************/
 $page_title='Business New Bookings';
 include('./assets/header.inc');
+/* Instantiate database connection object, called $db */
+include('./assets/databaseClass.inc');
 ?>
 <!--Body Start--> 
 <?php
@@ -18,10 +20,10 @@ include('./assets/businessBannerAndNav.inc');
 <table class='centreTable' border = '1px solid black'>
 <tr><th>Customer Name</th><th>Start Date/Time</th><th>End Date/Time</th><th>Extra Notes</th></tr>
 <?php
-$connect = mysqli_connect("localhost","root","","SEPT_Assignment_Part_1");
 /* Query to Select all bookings between todays date and next 7 days */
-$query = "select fullname, startDateTime, endDateTime, otherDetails from user as a inner join booking as b on a.username=b.username where startDateTime between now() and date_add(now(), interval 7 day) order by startDateTime asc;";
-$results = mysqli_query($connect,$query);
+$results = $db->select("select fullname, startDateTime, endDateTime, otherDetails from user as a 
+inner join booking as b on a.username=b.username where startDateTime between now() 
+and date_add(now(), interval 7 day) order by startDateTime asc;");
 
 /* If no results are found, print "No new bookings", else 
  * store the results into a array and print results out by their column names.

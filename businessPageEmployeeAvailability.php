@@ -8,6 +8,8 @@
  ********************************************************************/
 $page_title='Business Employee Availability';
 include('./assets/header.inc');
+/* Instantiate database connection object, called $db */
+include('./assets/databaseClass.inc');
 ?>
 <!--Body Start--> 
 <?php
@@ -59,19 +61,8 @@ include('./assets/businessBannerAndNav.inc');
 		},
 					
 		<?php
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            $dbname = "SEPT_Assignment_Part_1";
-            //Create connection
-            $conn = new mysqli($servername, $username, $password, $dbname);
-            //Check connection
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
-
-			$query = "SELECT employeeName, startDateTime, endDateTime FROM workperiod AS wp INNER JOIN employee AS e ON wp.employeeID=e.employeeID;";
-			$results = mysqli_query($conn,$query);
+			$results = $db->select("SELECT employeeName, startDateTime, endDateTime 
+			FROM workperiod AS wp INNER JOIN employee AS e ON wp.employeeID=e.employeeID;");
 
 			while($row = mysqli_fetch_array($results)) {							
 				print_r("{");

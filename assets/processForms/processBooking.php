@@ -11,8 +11,9 @@
  * booking into table.
  * 
  ********************************************************************/
-/* Php script to process new Bookings */
-session_start();
+/* Instantiate database */
+include('./databaseClass.inc');
+
 if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTime']))
 {
 	$username = $_SESSION['username'];
@@ -33,10 +34,14 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 	
 	/* Check whether the set End Date Time is after the Start Date Time */
 	if( $endDateTime > $startDateTime ){	
-	$connect = mysqli_connect("localhost","root","","sept_assignment_part_1") or die(mysqli_error($connect));
-	$query = "insert into booking values(null,'$username','$startDateTime','$endDateTime','$ABN','$otherDetails');";
-	$results = mysqli_query($connect,$query) or die(mysqli_error($connect));
-	header("location: ../../customerPage.php");
+		$result = $db->insert("insert into booking values(null,'$username','$startDateTime','$endDateTime','$ABN','$otherDetails');");
+		if($result != false)
+		{
+			header("location: ../../customerPage.php");
+		}
+		else{
+			header("location: ../../customerBooking.php");
+		}
 	}
 	else
 	{

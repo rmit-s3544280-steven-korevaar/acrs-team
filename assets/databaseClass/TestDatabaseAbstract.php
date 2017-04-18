@@ -3,10 +3,10 @@ require_once('./Database.php');
 
 //Database object
 $db = new Database();
-$name = "admin1";
+$name = "admin";
 $password = "admin";
 
-$result = $db->select("SELECT * FROM user where username = 'asdsa';");
+$result = $db->select("select * from user where username='$name' and password=SHA('$password');");
 //$result = $db->select("SELECT ABN FROM business;");
 if(mysqli_num_rows($result) != 0)
 {

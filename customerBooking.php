@@ -8,6 +8,8 @@
  ********************************************************************/
 $page_title='Customer New Booking';
 include('./assets/header.inc');
+/* Instantiate database connection object, called $db */
+include('./assets/databaseClass.inc');
 ?>
 <!--Body Start--> 
 <?php
@@ -87,24 +89,11 @@ if(isset($_SESSION['bookingError']) && !empty($_SESSION['bookingError'])){
 		},
 					
 		<?php
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            $dbname = "SEPT_Assignment_Part_1";
-            //Create connection
-            $conn = new mysqli($servername, $username, $password, $dbname);
-            //Check connection
-            if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-            }
-
-			$query = "SELECT * FROM booking;";
-			$results = mysqli_query($conn,$query);
-
+			$results = $db->select("SELECT * FROM booking;");
 			while($row = mysqli_fetch_array($results)) {							
 				print_r("{");
 				print_r("title: 'Booking filled',");
-	         print_r("start: '".$row['startDateTime']."',");
+				print_r("start: '".$row['startDateTime']."',");
 				print_r("end: '".$row['endDateTime']."'");
 				print_r("},");
 			}

@@ -13,9 +13,10 @@
  * and return a error message.
  * 
  ********************************************************************/
+/* Instantiate database */
+include('./databaseClass.inc');
 
 /*Check if input data exists and Initialise variables to call easier*/
-session_start();
 $checkForData = array('employeeName','jobTitle','employeeID');
 $checkFlag = true;
 foreach($checkForData as $data){
@@ -30,11 +31,10 @@ if($checkFlag == true){
 	$employeeID = $_POST['employeeID'];
 	$businessID = $_SESSION['abn'];
 	
-	$connect = mysqli_connect("localhost","root","","sept_assignment_part_1") or die(mysqli_error($connect));
-	$query = "insert into employee values('$employeeName','$jobTitle','$businessID','$employeeID');";
+	$result = $db->insert("insert into employee values('$employeeName','$jobTitle','$businessID','$employeeID');");
 
-	if(mysqli_query($connect,$query)){
-		//If successful add , send back to businessPageEmployeeAddEmployee.php with success message.
+	if($result != false){
+		//If successful add, send back to businessPageEmployeeAddEmployee.php with success message.
 		$_SESSION['returnSuccessAddEmployeeMessage'] = "Successfully added new Employee.";
 		header("location: ./../../businessPageEmployeeAddEmployee.php");
 	}

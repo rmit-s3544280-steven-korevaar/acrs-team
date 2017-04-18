@@ -13,8 +13,9 @@
  * the work period into the table and return a success message.
  * 
  ********************************************************************/
-/* Php script to process new shifts */
-session_start();
+/* Instantiate database */
+include('./databaseClass.inc');
+
 if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTime']) && !empty($_POST['employeeID']))
 {
 
@@ -33,11 +34,14 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 	
 	/* Check whether the set End Date Time is after the Start Date Time */
 	if($startDateTime < $endDateTime) {
-		$connect = mysqli_connect("localhost","root","","sept_assignment_part_1") or die(mysqli_error($connect));
-		$query = "insert into workPeriod values('$startDateTime','$endDateTime','$employeeID');";
-		$results = mysqli_query($connect,$query) or die(mysqli_error($connect));
-		$_SESSION['shiftAdded'] = "Successfully added working time.";
-		header("location: ../../businessPageEmployeeAddShift.php");
+		$result = $db->insert("insert into workPeriod values('$startDateTime','$endDateTime','$employeeID');");
+		if($result != false){
+			$_SESSION['shiftAdded'] = "Successfully added working time.";
+			header("location: ../../businessPageEmployeeAddShift.php");
+		}
+		else{
+			header("location: ../../businessPageEmployeeAddShift.php");
+		}
 	}
 	else {
 		$_SESSION['shiftError'] = "The end time must be after the start time.";

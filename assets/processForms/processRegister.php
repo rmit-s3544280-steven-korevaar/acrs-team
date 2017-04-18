@@ -11,10 +11,10 @@
  * 
  * If it is not valid it will return a error message to the user.
  ********************************************************************/
+/* Instantiate database */
+include('./databaseClass.inc');
 
- 
 /*Check if input data exists and Initialise variables to call easier*/
-
 $checkForData = array('username','password','fullname','address','phone');
 $checkFlag = true;
 foreach($checkForData as $data){
@@ -30,26 +30,18 @@ if($checkFlag == true){
 	$address = $_POST['address'];
 	$phone = $_POST['phone'];
 	
-	$connect = mysqli_connect("localhost","root","","sept_assignment_part_1") or die(mysqli_error($connect));
-	$query = "insert into user values('$username','$fullname','$address','$phone',SHA('$password'));";
-
-	if(mysqli_query($connect,$query)){
+	$result = $db->insert("insert into user values('$username','$fullname','$address','$phone',SHA('$password'));");
+	if($result != false){
 		//If successful register, send back to index.php with success message.
-		session_unset();
-		session_start();
 		$_SESSION['registerSuccess'] = "Register successful, Please login.";
 		header("location: ../../index.php");
 	}
 	else{//If username already exists, send back to index.php with a error message.
-		session_unset();
-		session_start();
 		$_SESSION['registerError'] = "! That username is unavailable, Please try another.";
 		header("location: ../../index.php");
 	}
 }
 else{
-	session_unset();
-	session_start();
 	$_SESSION['returnData'] = array($_POST['username'],$_POST['password'],$_POST['fullname'],$_POST['address'],$_POST['phone']);
 	$_SESSION['registerError'] = "! All fields are required.";
 	header("location: ../../index.php");

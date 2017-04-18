@@ -11,7 +11,7 @@
 	// Check if connection is valid
 	if(!isset(self::$connection)) {
 		/* Load config from ini file */
-		$config = parse_ini_file('./../config.ini'); 
+		$config = parse_ini_file('dataBaseConfig.ini'); 
 		//We use self to refer to a static object inside the class, where as this is for non static members.
 		self::$connection = new mysqli($config['address'],$config['username'],$config['password'],$config['dbname']);
 

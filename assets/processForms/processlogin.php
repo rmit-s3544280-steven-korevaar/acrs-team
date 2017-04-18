@@ -14,28 +14,19 @@
  * redirect appropriately.
  * 
  ********************************************************************/
-
+/* Instantiate database */
+include('./databaseClass.inc');
+ 
 $username = $_POST['username'];
 $password = $_POST['password'];
-
-$connect = mysqli_connect("localhost","root","","sept_assignment_part_1") or die(mysqli_error($connect));
-$query = "select * from user where username='$username' and password=SHA('$password');";
-$results = mysqli_query($connect,$query) or die(mysqli_error($connect));
-
-
+//Check if valid user.
+$results = $db->select("select * from user where username='$username' and password=SHA('$password');");
 if(mysqli_num_rows($results) > 0){
-	//Check to see if it is a customer or a owner
-	$queryOwner= "select * from userbusiness where username like '$username';";
-	$checkResult = mysqli_query($connect,$queryOwner) or die(mysqli_error($connect));
-	
-	
 	//Store username in the global array under the username variable, for future use.
-	session_start();
 	$_SESSION['username'] = "$username";
 	
 	//Get ABN for customer processBooking.php
-	$getABNquery = "select ABN from business;";
-	$ABNresults = mysqli_query($connect,$getABNquery) or die(mysqli_error($connect));
+	$ABNresults = $db->select("select ABN from business;");
 	if(mysqli_num_rows($ABNresults) != 0)
 	{
 		while($ABN=mysqli_fetch_array($ABNresults))
@@ -45,6 +36,8 @@ if(mysqli_num_rows($results) > 0){
 		}
 	}
 	
+	//Check to see if it is a customer or a owner
+	$checkResult = $db->select("select * from userbusiness where username like '$username';");
 	if(mysqli_num_rows($checkResult) > 0){	//If a result is found, check to see if the user is a owner.
 		header("location: ../../businessPage.php");	//If is a owner, send to owner management page
 	}
@@ -55,8 +48,6 @@ if(mysqli_num_rows($results) > 0){
 }
 else{
 	//If incorrect username or password, send back to index.php with a error message.
-	session_unset();
-	session_start();
 	$_SESSION['loginError'] = "! Incorrect username or password, Please try again.";
 	header("location: ../../index.php");
 }
