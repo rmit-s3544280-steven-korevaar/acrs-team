@@ -10,10 +10,15 @@
  * 
  * And then redirect back to login page.
  ********************************************************************/
+include('./../../datalogging/Logger.php');
+Logger::configure('./../../datalogging/xml/config.xml');
+$logger = Logger::getLogger("main");
 
 session_start();
 $_SESSION = array();
 session_destroy();
+	$logger->info("User logged out");
 header("location: ../../index.php");
+
 exit(0);
 ?>
