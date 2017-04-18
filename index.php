@@ -7,7 +7,6 @@
  ********************************************************************/
 $page_title='Login';
 include('./assets/header.inc');
-$logger->info("User visited the website");
 ?>
 <!--Body Start--> 
 <div class='centreContentBodyInDiv'>

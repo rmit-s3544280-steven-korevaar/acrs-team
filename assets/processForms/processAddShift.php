@@ -13,6 +13,13 @@
  * the work period into the table and return a success message.
  * 
  ********************************************************************/
+
+//adding datalogging config 
+include('../../datalogging/Logger.php');
+Logger::configure('../../config.xml');
+$logger = Logger::getLogger("main");
+
+
 /* Php script to process new shifts */
 session_start();
 if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTime']) && !empty($_POST['employeeID']))
@@ -33,6 +40,7 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 	
 	/* Check whether the set End Date Time is after the Start Date Time */
 	if($startDateTime < $endDateTime) {
+		$logger->info("Owner added employee shift");
 		$connect = mysqli_connect("localhost","root","","sept_assignment_part_1") or die(mysqli_error($connect));
 		$query = "insert into workPeriod values('$startDateTime','$endDateTime','$employeeID');";
 		$results = mysqli_query($connect,$query) or die(mysqli_error($connect));
@@ -40,6 +48,7 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 		header("location: ../../businessPageEmployeeAddShift.php");
 	}
 	else {
+		$logger->error("Owner entered the time slot wrong while adding employee shift");
 		$_SESSION['shiftError'] = "The end time must be after the start time.";
 		header("location: ../../businessPageEmployeeAddShift.php");
 	}
@@ -47,6 +56,7 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 }
 else
 {
+	$logger->error("Owner is missing information while adding employee shift");
 	$_SESSION['shiftError'] = "Please enter in all fields.";
 	header("location: ../../businessPageEmployeeAddShift.php");
 } 

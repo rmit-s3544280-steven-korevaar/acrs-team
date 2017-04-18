@@ -1,4 +1,2 @@
-INFO - User visited the website
-INFO - Username entered something wrong
-INFO - User visited the website
-INFO - User visited the website
+INFO - Customer registration is successful
+ERROR - Customer registration is unsuccessful, all fields are required

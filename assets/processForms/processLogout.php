@@ -10,6 +10,8 @@
  * 
  * And then redirect back to login page.
  ********************************************************************/
+
+//adding datalogging config 
 include('./../../datalogging/Logger.php');
 Logger::configure('./../../datalogging/xml/config.xml');
 $logger = Logger::getLogger("main");

@@ -21,12 +21,13 @@
  *If a user is found, it will determine whether a user is a customer
  *or a owner and forward the user to the appropriate page.
  */
- 
- 
-/*Initialise variables to able to call easier*/
+
+//adding datalogging config 
 include('../../datalogging/Logger.php');
 Logger::configure('../../config.xml');
 $logger = Logger::getLogger("main");
+
+/*Initialise variables to able to call easier*/
 
 $username = $_POST['username'];
 $password = $_POST['password'];
@@ -37,7 +38,6 @@ $results = mysqli_query($connect,$query) or die(mysqli_error($connect));
 
 
 if(mysqli_num_rows($results) > 0){
-	$logger->info("Owner logged in");
 	//Check to see if it is a customer or a owner
 	$queryOwner= "select * from userbusiness where username like '$username';";
 	$checkResult = mysqli_query($connect,$queryOwner) or die(mysqli_error($connect));
@@ -60,16 +60,18 @@ if(mysqli_num_rows($results) > 0){
 	}
 	
 	if(mysqli_num_rows($checkResult) > 0){	//If a result is found, check to see if the user is a owner.
+		$logger->info("Owner logged in");
 		header("location: ../../businessPage.php");	//If is a owner, send to owner management page
 	}
 	
 	else{	//If nothing is found in the userbusiness table, the user is not a owner, but is just a regular customer
+		$logger->info("Customer logged in");
 		header("location: ../../customerPage.php");	//If is a customer, send to customer page
 	}
 }
 else{
 	//If incorrect username or password, send back to index.php with a error message.
-	$logger->info("Username entered something wrong");
+	$logger->error("User entered something wrong while logging in");
 	session_unset();
 	session_start();
 	$_SESSION['loginError'] = "! Incorrect username or password, Please try again.";

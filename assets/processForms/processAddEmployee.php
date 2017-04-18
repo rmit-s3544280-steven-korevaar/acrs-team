@@ -17,6 +17,11 @@
  *Script will initialise variables for easier manipulation firstly,
  *then insert the new employee into table.
  */
+
+//adding datalogging config 
+include('../../datalogging/Logger.php');
+Logger::configure('../../config.xml');
+$logger = Logger::getLogger("main");
  
 /*Check if input data exists and Initialise variables to call easier*/
 session_start();
@@ -39,6 +44,7 @@ if($checkFlag == true){
 
 	if(mysqli_query($connect,$query)){
 		//If successful add , send back to businessPageEmployeeAddEmployee.php with success message.
+		$logger->info("Owner added an employee");
 		$_SESSION['returnSuccessAddEmployeeMessage'] = "Successfully added new Employee.";
 		header("location: ./../../businessPageEmployeeAddEmployee.php");
 	}
@@ -46,11 +52,13 @@ if($checkFlag == true){
 	    /* If unsuccessfull, send back to businessPageEmployeeAddEmployee.php with error message.
 		  * Employee is already in system.
 		  */
+	    $logger->error("Owner entered an existing employee");
 		$_SESSION['returnErrorAddEmployeeMessage'] = "A employee of that 'Employee Number' is already in the system.";
 		header("location: ./../../businessPageEmployeeAddEmployee.php");
 	}
 }
 else{
+	$logger->error("Owner entered something wrong while adding employee");
 	$_SESSION['returnErrorAddEmployeeMessage'] = "Please enter data in all fields.";
 	header("location: ./../../businessPageEmployeeAddEmployee.php");
 }

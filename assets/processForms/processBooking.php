@@ -11,6 +11,14 @@
  * booking into table.
  * 
  ********************************************************************/
+
+
+//adding datalogging config 
+include('../../datalogging/Logger.php');
+Logger::configure('../../config.xml');
+$logger = Logger::getLogger("main");
+
+
 /* Php script to process new Bookings */
 session_start();
 if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTime']))
@@ -33,6 +41,7 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 	
 	/* Check whether the set End Date Time is after the Start Date Time */
 	if( $endDateTime > $startDateTime ){	
+	$logger->info("Booking has been made");
 	$connect = mysqli_connect("localhost","root","","sept_assignment_part_1") or die(mysqli_error($connect));
 	$query = "insert into booking values(null,'$username','$startDateTime','$endDateTime','$ABN','$otherDetails');";
 	$results = mysqli_query($connect,$query) or die(mysqli_error($connect));
@@ -40,12 +49,14 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 	}
 	else
 	{
+		$logger->error("Time slot entered wrong while booking");
 		$_SESSION['bookingError'] = "End Time must be after Start Time.";
 		header("location: ../../customerBooking.php");
 	}
 }
 else
 {
+	$logger->error("Not all of the fields are entered for booking");
 	$_SESSION['bookingError'] = "Please enter in all fields.";
 	header("location: ../../customerBooking.php");
 } 

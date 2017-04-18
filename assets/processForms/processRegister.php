@@ -17,6 +17,11 @@
  *then insert customer into user table.
  */
  
+//adding datalogging config 
+include('../../datalogging/Logger.php');
+Logger::configure('../../config.xml');
+$logger = Logger::getLogger("main");
+
 /*Check if input data exists and Initialise variables to call easier*/
 
 $checkForData = array('username','password','fullname','address','phone');
@@ -39,12 +44,14 @@ if($checkFlag == true){
 
 	if(mysqli_query($connect,$query)){
 		//If successful register, send back to index.php with success message.
+		$logger->info("Customer registration is successful");
 		session_unset();
 		session_start();
 		$_SESSION['registerSuccess'] = "Register successful, Please login.";
 		header("location: ../../index.php");
 	}
 	else{//If username already exists, send back to index.php with a error message.
+		$logger->error("Customer registration is unsuccessful, username already exists");
 		session_unset();
 		session_start();
 		$_SESSION['registerError'] = "! That username is unavailable, Please try another.";
@@ -52,6 +59,7 @@ if($checkFlag == true){
 	}
 }
 else{
+	$logger->error("Customer registration is unsuccessful, all fields are required");
 	session_unset();
 	session_start();
 	$_SESSION['returnData'] = array($_POST['username'],$_POST['password'],$_POST['fullname'],$_POST['address'],$_POST['phone']);
