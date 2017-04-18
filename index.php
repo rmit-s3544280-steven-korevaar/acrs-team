@@ -33,8 +33,6 @@ include('./assets/header.inc');
 <th>Password: </th>
 <td><input type="password" name="password"/></td>
 </tr>
-<tr>
-<th>Re-enter Password: </th>
 </table>
 <table class="centreTable">
 <tr><td><input type="submit" value="Login"/></td></tr>
