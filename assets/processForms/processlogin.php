@@ -15,15 +15,6 @@
  * 
  ********************************************************************/
 
-/*Script to process login.
- *Script will initialise variables for easier manipulation firstly,
- *then check if the user exists in the user table.
- *If a user is found, it will determine whether a user is a customer
- *or a owner and forward the user to the appropriate page.
- */
- 
- 
-/*Initialise variables to able to call easier*/
 $username = $_POST['username'];
 $password = $_POST['password'];
 

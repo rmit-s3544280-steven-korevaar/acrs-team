@@ -11,11 +11,7 @@
  * 
  * If it is not valid it will return a error message to the user.
  ********************************************************************/
- 
-/*Script to process customer registration.
- *Script will initialise variables for easier manipulation firstly,
- *then insert customer into user table.
- */
+
  
 /*Check if input data exists and Initialise variables to call easier*/
 

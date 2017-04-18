@@ -13,11 +13,7 @@
  * and return a error message.
  * 
  ********************************************************************/
-/*Script to process adding new employee.
- *Script will initialise variables for easier manipulation firstly,
- *then insert the new employee into table.
- */
- 
+
 /*Check if input data exists and Initialise variables to call easier*/
 session_start();
 $checkForData = array('employeeName','jobTitle','employeeID');
