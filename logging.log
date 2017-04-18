@@ -1,2 +1,11 @@
 INFO - Customer registration is successful
 ERROR - Customer registration is unsuccessful, all fields are required
+INFO - Customer registration is successful
+INFO - Customer registration is successful
+ERROR - Customer registration is unsuccessful, all fields are required
+INFO - Customer registration is successful
+ERROR - Customer registration is unsuccessful, passwords do not match
+INFO - Customer registration is successful
+ERROR - Customer registration is unsuccessful, passwords do not match
+ERROR - Customer registration is unsuccessful, passwords do not match
+INFO - Customer registration is successful

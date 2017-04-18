@@ -33,6 +33,8 @@ include('./assets/header.inc');
 <th>Password: </th>
 <td><input type="password" name="password"/></td>
 </tr>
+<tr>
+<th>Re-enter Password: </th>
 </table>
 <table class="centreTable">
 <tr><td><input type="submit" value="Login"/></td></tr>
@@ -63,7 +65,10 @@ if(isset($_SESSION['loginError']) && !empty($_SESSION['loginError'])){
 </tr>
 <tr>
 <th>Password: </th>
-<td><input type="password" name="password" <?php if(isset($_SESSION['returnData'])){print "value='{$_SESSION['returnData'][1]}'";} ?>/></td>
+<td><input type="password" name="password"/></td>
+</tr>
+<th>Re-enter Password: </th>
+<td><input type="password" name="checkpassword" /></td>
 </tr>
 <tr>
 <th>Full name: </th>

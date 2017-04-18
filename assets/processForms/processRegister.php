@@ -24,7 +24,7 @@ $logger = Logger::getLogger("main");
 
 /*Check if input data exists and Initialise variables to call easier*/
 
-$checkForData = array('username','password','fullname','address','phone');
+$checkForData = array('username','password', 'checkpassword', 'fullname','address','phone');
 $checkFlag = true;
 foreach($checkForData as $data){
 	if(empty($_POST[$data])){
@@ -38,7 +38,20 @@ if($checkFlag == true){
 	$fullname = $_POST['fullname'];
 	$address = $_POST['address'];
 	$phone = $_POST['phone'];
+	$checkpassword = $_POST['checkpassword'];
 	
+	if($password != $checkpassword)
+	{
+		$logger->error("Customer registration is unsuccessful, passwords do not match");
+		session_unset();
+		session_start();
+		$_SESSION['registerError'] = "! Passwords do not match";
+		$_SESSION['returnData'] = array($_POST['username'],"",$_POST['fullname'],$_POST['address'],$_POST['phone']);
+		header("location: ../../index.php");
+		exit;
+	}
+
+
 	$connect = mysqli_connect("localhost","root","","sept_assignment_part_1") or die(mysqli_error($connect));
 	$query = "insert into user values('$username','$fullname','$address','$phone',SHA('$password'));";
 
