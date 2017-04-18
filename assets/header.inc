@@ -6,6 +6,9 @@
  *
  * 
  ********************************************************************/
+include('./datalogging/Logger.php');
+Logger::configure('./config.xml');
+$logger = Logger::getLogger("main");
 ?>
 <!DOCTYPE html>
 <html>

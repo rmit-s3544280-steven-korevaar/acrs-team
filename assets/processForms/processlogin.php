@@ -24,6 +24,10 @@
  
  
 /*Initialise variables to able to call easier*/
+include('../../datalogging/Logger.php');
+Logger::configure('../../config.xml');
+$logger = Logger::getLogger("main");
+
 $username = $_POST['username'];
 $password = $_POST['password'];
 
@@ -33,6 +37,7 @@ $results = mysqli_query($connect,$query) or die(mysqli_error($connect));
 
 
 if(mysqli_num_rows($results) > 0){
+	$logger->info("Owner logged in");
 	//Check to see if it is a customer or a owner
 	$queryOwner= "select * from userbusiness where username like '$username';";
 	$checkResult = mysqli_query($connect,$queryOwner) or die(mysqli_error($connect));
@@ -64,6 +69,7 @@ if(mysqli_num_rows($results) > 0){
 }
 else{
 	//If incorrect username or password, send back to index.php with a error message.
+	$logger->info("Username entered something wrong");
 	session_unset();
 	session_start();
 	$_SESSION['loginError'] = "! Incorrect username or password, Please try again.";
