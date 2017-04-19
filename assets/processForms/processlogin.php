@@ -22,28 +22,11 @@ $logger = Logger::getLogger("main");
  /* Instantiate database */
 include('./databaseClass.inc');
  
-<<<<<<< HEAD
-=======
-/*Initialise variables to able to call easier*/
-include('../../datalogging/Logger.php');
-Logger::configure('../../config.xml');
-$logger = Logger::getLogger("main");
-
->>>>>>> 2473263718c74883bed01b010ee05a1e0182d8d0
 $username = $_POST['username'];
 $password = $_POST['password'];
 //Check if valid user.
 $results = $db->select("select * from user where username='$username' and password=SHA('$password');");
 if(mysqli_num_rows($results) > 0){
-<<<<<<< HEAD
-=======
-	$logger->info("Owner logged in");
-	//Check to see if it is a customer or a owner
-	$queryOwner= "select * from userbusiness where username like '$username';";
-	$checkResult = mysqli_query($connect,$queryOwner) or die(mysqli_error($connect));
-	
-	
->>>>>>> 2473263718c74883bed01b010ee05a1e0182d8d0
 	//Store username in the global array under the username variable, for future use.
 	$_SESSION['username'] = "$username";
 	
@@ -72,12 +55,6 @@ if(mysqli_num_rows($results) > 0){
 }
 else{
 	//If incorrect username or password, send back to index.php with a error message.
-<<<<<<< HEAD
-=======
-	$logger->info("Username entered something wrong");
-	session_unset();
-	session_start();
->>>>>>> 2473263718c74883bed01b010ee05a1e0182d8d0
 	$_SESSION['loginError'] = "! Incorrect username or password, Please try again.";
 	$logger->info("User entered invalid login information.");
 	header("location: ../../index.php");
