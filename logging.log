@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 INFO - User logged out
 INFO - User visited the website
 INFO - User logged out
@@ -25,4 +26,8 @@ INFO - User visited the website
 INFO - User visited the website
 INFO - User visited the website
 INFO - User visited the website
+=======
+INFO - User visited the website
+INFO - Username entered something wrong
+>>>>>>> 2473263718c74883bed01b010ee05a1e0182d8d0
 INFO - User visited the website
