@@ -59,18 +59,21 @@ if(isset($_SESSION['loginError']) && !empty($_SESSION['loginError'])){
 <table class="centreTable">
 <tr>
 <th>Username: </th>
-<td><input type="text" name="username" <?php if(isset($_SESSION['returnData'])){print "value='{$_SESSION['returnData'][0]}'";} ?>/></td>
+<!--Username length between 5-10 and no numeric-->
+<td><input type="text" name="username" pattern="[a-zA-Z0-9]{5,10}" title="Letters/Digits and length between 5-10" <?php if(isset($_SESSION['returnData'])){print "value='{$_SESSION['returnData'][0]}'";} ?>/></td>
 </tr>
 <tr>
 <th>Password: </th>
-<td><input type="password" name="password"/></td>
+<td><input type="password" name="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" title="-At least 8 characters
+-Must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number
+-Can contain special characters"/></td>
 </tr>
 <th>Re-enter Password: </th>
 <td><input type="password" name="checkpassword" /></td>
 </tr>
 <tr>
 <th>Full name: </th>
-<td><input type="text" name="fullname" <?php if(isset($_SESSION['returnData'])){print "value='{$_SESSION['returnData'][2]}'";} ?>/></td>
+<td><input type="text" name="fullname" pattern="([A-Za-z]{4,10})([\D])" title="Only letters and length between 5-10" <?php if(isset($_SESSION['returnData'])){print "value='{$_SESSION['returnData'][2]}'";} ?>/></td>
 </tr>
 <tr>
 <th>Address: </th>
@@ -78,7 +81,7 @@ if(isset($_SESSION['loginError']) && !empty($_SESSION['loginError'])){
 </tr>
 <tr>
 <th>Phone Number: </th>
-<td><input type="text" name="phone" <?php if(isset($_SESSION['returnData'])){print "value='{$_SESSION['returnData'][4]}'";} ?>/></td>
+<td><input type="text" name="phone" pattern="\d{3}[-.]?\d{3}[-.]?\d{4}" title="10 digits e.g. 1231231231" <?php if(isset($_SESSION['returnData'])){print "value='{$_SESSION['returnData'][4]}'";} ?>/></td>
 </tr>
 </table>
 <table class="centreTable">
