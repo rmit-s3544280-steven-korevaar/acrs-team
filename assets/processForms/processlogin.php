@@ -14,7 +14,12 @@
  * redirect appropriately.
  * 
  ********************************************************************/
-/* Instantiate database */
+
+include('../../datalogging/Logger.php');
+Logger::configure('../../config.xml');
+$logger = Logger::getLogger("main");
+ 
+ /* Instantiate database */
 include('./databaseClass.inc');
  
 $username = $_POST['username'];
@@ -39,16 +44,19 @@ if(mysqli_num_rows($results) > 0){
 	//Check to see if it is a customer or a owner
 	$checkResult = $db->select("select * from userbusiness where username like '$username';");
 	if(mysqli_num_rows($checkResult) > 0){	//If a result is found, check to see if the user is a owner.
+		$logger->info("Owner logged in");
 		header("location: ../../businessPage.php");	//If is a owner, send to owner management page
 	}
 	
 	else{	//If nothing is found in the userbusiness table, the user is not a owner, but is just a regular customer
+		$logger->info("Customer logged in");
 		header("location: ../../customerPage.php");	//If is a customer, send to customer page
 	}
 }
 else{
 	//If incorrect username or password, send back to index.php with a error message.
 	$_SESSION['loginError'] = "! Incorrect username or password, Please try again.";
+	$logger->info("User entered invalid login information.");
 	header("location: ../../index.php");
 }
 exit(0);
