@@ -78,6 +78,42 @@
 		*/
 		return $result;
 	}
+	
+	/**
+	* UPDATE query operation
+	* Return false if failed and add other logging.
+	*/
+	public function update($query){
+		$result = $this -> query($query);
+		if($result === false) {
+			/**
+			* Put logging feature here for unsuccessful UPDATE query 
+			*/
+			return false;
+		}
+		/**
+		* Put logging feature here for successful UPDATE query 
+		*/
+		return $result;
+	}
+	
+	/**
+	* DELETE query operation
+	* Return false if failed and add other logging.
+	*/
+	public function delete($query){
+		$result = $this -> query($query);
+		if($result === false) {
+			/**
+			* Put logging feature here for unsuccessful DELETE query 
+			*/
+			return false;
+		}
+		/**
+		* Put logging feature here for successful DELETE query 
+		*/
+		return $result;
+	}
 
 	/**
 	* Fetch the last error from the database for debugging.

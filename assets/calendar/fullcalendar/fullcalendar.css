@@ -1404,7 +1404,7 @@ be a descendant of the grid when it is being dragged.
 }
 
 
-/* Custom styles */
+/* Custom style used to hide all events in the month view
 .fc-month-view .fc-event-container{
     display: none;
-}
+} */

@@ -99,7 +99,12 @@ if(isset($_SESSION['bookingError']) && !empty($_SESSION['bookingError'])){
 			}
 		?>
 		],
-		
+		//Hide all events in month view
+		eventRender: function(event, element, view) {
+		if(view.type == 'month') {
+			$(element).css("display", "none");
+		}},
+		//On Click event set date field to the selected date.
 		dayClick: function(date, jsEvent, view) {
 				var today = new Date();
 				today.setDate(today.getDate() - 1);

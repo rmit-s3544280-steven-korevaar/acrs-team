@@ -34,12 +34,13 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 	
 	/* Check whether the set End Date Time is after the Start Date Time */
 	if($startDateTime < $endDateTime) {
-		$result = $db->insert("insert into workPeriod values('$startDateTime','$endDateTime','$employeeID');");
+		$result = $db->insert("insert into workPeriod values(null,'$startDateTime','$endDateTime','$employeeID');");
 		if($result != false){
 			$_SESSION['shiftAdded'] = "Successfully added working time.";
 			header("location: ../../businessPageEmployeeAddShift.php");
 		}
 		else{
+			$_SESSION['shiftError'] = "Unable to add shift.";
 			header("location: ../../businessPageEmployeeAddShift.php");
 		}
 	}

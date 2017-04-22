@@ -14,3 +14,9 @@ function navigateEmployee(){
 	var url = menu.options[menu.selectedIndex].value;
 	location.href=url;
 }
+function changeSessionEmployeeID() {
+	var menu = document.getElementById("employeeNameOptions");
+	var selectedEmployeeID = menu.options[menu.selectedIndex].value;
+	$.post("./assets/processForms/setEmployeeIDSession.php", {"employeeID": selectedEmployeeID});
+	location.href= "businessPageEmployeeEditShift.php";
+}
