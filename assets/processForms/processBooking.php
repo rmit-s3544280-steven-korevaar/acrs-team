@@ -11,6 +11,13 @@
  * booking into table.
  * 
  ********************************************************************/
+
+/* Adding logging config path */
+include('../../datalogging/Logger.php');
+Logger::configure('../../config.xml');
+$logger = Logger::getLogger("main");
+
+
 /* Instantiate database */
 include('./databaseClass.inc');
 
@@ -37,21 +44,27 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 		$result = $db->insert("insert into booking values(null,'$username','$startDateTime','$endDateTime','$ABN','$otherDetails');");
 		if($result != false)
 		{
+			$logger->info("Booking was successful");
 			header("location: ../../customerPage.php");
 		}
 		else{
+			$logger->error("Booking was not successful");
 			header("location: ../../customerBooking.php");
 		}
 	}
 	else
 	{
 		$_SESSION['bookingError'] = "End Time must be after Start Time.";
+
+			$logger->error("Booking was successful, end time must be after start time ");
 		header("location: ../../customerBooking.php");
 	}
 }
 else
 {
 	$_SESSION['bookingError'] = "Please enter in all fields.";
+
+	$logger->error("Booking was not successful, all fields have to be filled");
 	header("location: ../../customerBooking.php");
 } 
 

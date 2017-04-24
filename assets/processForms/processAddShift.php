@@ -13,6 +13,12 @@
  * the work period into the table and return a success message.
  * 
  ********************************************************************/
+
+/* Adding logging config path */
+include('../../datalogging/Logger.php');
+Logger::configure('../../config.xml');
+$logger = Logger::getLogger("main");
+
 /* Instantiate database */
 include('./databaseClass.inc');
 
@@ -37,15 +43,18 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 		$result = $db->insert("insert into workPeriod values(null,'$startDateTime','$endDateTime','$employeeID');");
 		if($result != false){
 			$_SESSION['shiftAdded'] = "Successfully added working time.";
+			$logger->info("Working time added Successfully");
 			header("location: ../../businessPageEmployeeAddShift.php");
 		}
 		else{
 			$_SESSION['shiftError'] = "Unable to add shift.";
+			$logger->error("Error occured while trying to add shift");
 			header("location: ../../businessPageEmployeeAddShift.php");
 		}
 	}
 	else {
 		$_SESSION['shiftError'] = "The end time must be after the start time.";
+		$logger->error("Error occured while trying to add add shift, the end time must be after the start time");
 		header("location: ../../businessPageEmployeeAddShift.php");
 	}
 	
@@ -53,6 +62,7 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 else
 {
 	$_SESSION['shiftError'] = "Please enter in all fields.";
+	$logger->error("Error occured while trying to add shift, all fields have to be filled");
 	header("location: ../../businessPageEmployeeAddShift.php");
 } 
 

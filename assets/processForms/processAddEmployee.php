@@ -13,6 +13,13 @@
  * and return a error message.
  * 
  ********************************************************************/
+
+/* Adding logging config path */
+include('../../datalogging/Logger.php');
+Logger::configure('../../config.xml');
+$logger = Logger::getLogger("main");
+
+
 /* Instantiate database */
 include('./databaseClass.inc');
 
@@ -36,6 +43,7 @@ if($checkFlag == true){
 	if($result != false){
 		//If successful add, send back to businessPageEmployeeAddEmployee.php with success message.
 		$_SESSION['returnSuccessAddEmployeeMessage'] = "Successfully added new Employee.";
+		$logger->info("Owner succes added a new employee");
 		header("location: ./../../businessPageEmployeeAddEmployee.php");
 	}
 	else{
@@ -43,11 +51,13 @@ if($checkFlag == true){
 		  * Employee is already in system.
 		  */
 		$_SESSION['returnErrorAddEmployeeMessage'] = "A employee of that 'Employee Number' is already in the system.";
+		$logger->error("Error occured while owner trying to add a new employee, employee number already exists");
 		header("location: ./../../businessPageEmployeeAddEmployee.php");
 	}
 }
 else{
 	$_SESSION['returnErrorAddEmployeeMessage'] = "Please enter data in all fields.";
+	$logger->error("Error occured while owner trying to add a new employee, all fields need to be filled ");
 	header("location: ./../../businessPageEmployeeAddEmployee.php");
 }
 

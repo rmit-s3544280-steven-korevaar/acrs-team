@@ -11,6 +11,12 @@
  * 
  * If it is not valid it will return a error message to the user.
  ********************************************************************/
+
+/* Adding logging config path */
+include('../../datalogging/Logger.php');
+Logger::configure('../../config.xml');
+$logger = Logger::getLogger("main");
+
 /* Instantiate database */
 include('./databaseClass.inc');
 
@@ -34,16 +40,19 @@ if($checkFlag == true){
 	if($result != false){
 		//If successful register, send back to index.php with success message.
 		$_SESSION['registerSuccess'] = "Register successful, Please login.";
+		$logger->info("User successfully registered");
 		header("location: ../../index.php");
 	}
 	else{//If username already exists, send back to index.php with a error message.
 		$_SESSION['registerError'] = "! That username is unavailable, Please try another.";
+		$logger->error("Error occured while user was trying to register, username is unavailable");
 		header("location: ../../index.php");
 	}
 }
 else{
 	$_SESSION['returnData'] = array($_POST['username'],$_POST['password'],$_POST['fullname'],$_POST['address'],$_POST['phone']);
 	$_SESSION['registerError'] = "! All fields are required.";
+	$logger->error("Error occured while user was trying to register, all fields need to be filled");
 	header("location: ../../index.php");
 }
 

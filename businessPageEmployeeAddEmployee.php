@@ -16,7 +16,6 @@ include('./assets/businessBannerAndNav.inc');
 ?>
 <div class='contentHereDiv'>
 <h1>Add new Employee to system</h1>
-<p><span class="errorMessage">* required field.</span></p>
 <form method='post' action='./assets/processForms/processAddEmployee.php'>
 <table class="centreTable">
 <tr>

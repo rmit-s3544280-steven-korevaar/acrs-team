@@ -1,67 +1,12 @@
-INFO - User logged out
-INFO - User visited the website
-INFO - User logged out
-INFO - User visited the website
-INFO - User entered invalid login information.
-INFO - User visited the website
 INFO - Customer logged in
+ERROR - Booking was not successful, all fields have to be filled
+INFO - Booking was successful
+ERROR - Booking was successful, end time must be after start time 
 INFO - User logged out
-INFO - User visited the website
-INFO - User visited the website
-INFO - User visited the website
-INFO - User visited the website
-INFO - User visited the website
-INFO - User visited the website
-INFO - User visited the website
-INFO - User visited the website
-INFO - User visited the website
-INFO - User visited the website
-INFO - User visited the website
-INFO - User visited the website
-INFO - User visited the website
-INFO - User visited the website
-INFO - User visited the website
-INFO - User visited the website
-INFO - User visited the website
-INFO - User visited the website
-INFO - User visited the website
-INFO - User visited the website
-INFO - User visited the website
 INFO - Owner logged in
-INFO - User logged out
-INFO - User visited the website
-INFO - Owner logged in
-INFO - User logged out
-INFO - User visited the website
-INFO - Owner logged in
-INFO - User logged out
-INFO - User visited the website
-INFO - Owner logged in
-INFO - User logged out
-INFO - User visited the website
-INFO - Owner logged in
-INFO - User logged out
-INFO - User visited the website
-INFO - Customer logged in
-INFO - User logged out
-INFO - User visited the website
-INFO - Owner logged in
-INFO - User logged out
-INFO - User visited the website
-INFO - Owner logged in
-INFO - User logged out
-INFO - User visited the website
-INFO - Customer logged in
-INFO - User logged out
-INFO - User visited the website
-INFO - Owner logged in
-INFO - User logged out
-INFO - User visited the website
-INFO - User entered invalid login information.
-INFO - User visited the website
-INFO - User entered invalid login information.
-INFO - User visited the website
-INFO - Customer logged in
-INFO - User logged out
-INFO - User visited the website
-INFO - Owner logged in
+ERROR - Error occured while trying to add shift
+ERROR - Error occured while trying to add add shift, the end time must be after the start time
+ERROR - Error occured while trying to add shift
+ERROR - Error occured while trying to add shift
+ERROR - Error occured while trying to add shift
+INFO - Working time added Successfully

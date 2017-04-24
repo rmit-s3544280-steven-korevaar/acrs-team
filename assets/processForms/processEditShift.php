@@ -14,6 +14,13 @@
  * and return a message.
  * 
  ********************************************************************/
+
+/* Adding logging config path */
+include('../../datalogging/Logger.php');
+Logger::configure('../../config.xml');
+$logger = Logger::getLogger("main");
+
+
 /* Instantiate database */
 include('./databaseClass.inc');
 
@@ -43,27 +50,32 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 				$result = $db->update("UPDATE workPeriod SET startDateTime='$startDateTime', 
 				endDateTime='$endDateTime' WHERE workperiodID=$workperiodID;");
 				$_SESSION['shiftAdded'] = "Successfully Edited working time.";
+				$logger->info("Working time has been changed successfully");
 				header("location: ../../businessPageEmployeeEditShift.php");
 			}
 			else{
 				$_SESSION['shiftError'] = "Work Period cannot overlap.";
+				$logger->error("Error occured while changing the shift, work period cannot overlap");
 				header("location: ../../businessPageEmployeeEditShift.php");
 			}
 		}
 		else{
 			$_SESSION['shiftError'] = "The end time must be after the start time.";
+			$logger->error("Error occured while changing the shift, the end time must be after the start time");
 			header("location: ../../businessPageEmployeeEditShift.php");
 		}
 	}
 	elseif($action == "Delete Shift"){
 		$result = $db->delete("DELETE FROM workPeriod WHERE workperiodID=$workperiodID;");
 		$_SESSION['shiftAdded'] = "Successfully Deleted working time.";
+		$logger->info("Working time has been deleted successfully");
 		header("location: ../../businessPageEmployeeEditShift.php");
 	}
 }
 else
 {
 	$_SESSION['shiftError'] = "Please enter in all fields.";
+	$logger->error("Error occured while changing the shift, all fields have to be filled");
 	header("location: ../../businessPageEmployeeEditShift.php");
 }
 
