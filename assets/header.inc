@@ -31,6 +31,8 @@ $logger = Logger::getLogger("main");
 <script src='./assets/calendar/lib/moment.min.js'></script>
 <script src='./assets/calendar/fullcalendar/fullcalendar.js'></script>
 
+<script src="./assets/booking.js"></script>
+
 </head>
 <body>
 

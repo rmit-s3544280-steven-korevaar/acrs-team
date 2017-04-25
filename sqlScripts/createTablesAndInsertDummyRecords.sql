@@ -119,9 +119,10 @@ CONSTRAINT bookingEmployee PRIMARY KEY (bookingID,employeeID)
 --Insert record into business: business-name, owner-name, address, ph-num, openingTime, closingTime, business-abn
 insert into business values("The Dog Groomer","Chloe Jane Smith","98 Maine St VIC 3000","0398765432","09:00:00","18:00:00","56497978719");
 
---Insert record into businessActivity: business-name, owner-name, address, ph-num, openingTime, closingTime, business-abn
-insert into businessActivity values(null,"56497978719","Cut","00:20:00");
-insert into businessActivity values(null,"56497978719","Wash","00:10:00");
+--Insert record into businessActivity: activityID, businessID, activityName, duration
+insert into businessActivity values(null,"56497978719","Clip","00:20:00");
+insert into businessActivity values(null,"56497978719","Wash & Dry","00:30:00");
+insert into businessActivity values(null,"56497978719","Style","00:10:00");
 
 --Insert record into employee: (employee-name, job-title, business-abn, employee-id)
 insert into employee values("Daniel Carter","Clipper, Washer & Stylist","56497978719","001");

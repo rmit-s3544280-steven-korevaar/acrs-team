@@ -6,46 +6,70 @@
  * Uses a plugin from FullCalendar.io.
  * 
  ********************************************************************/
-$page_title='Customer New Booking';
-include('./assets/header.inc');
-/* Instantiate database connection object, called $db */
-include('./assets/databaseClass.inc');
+	$page_title='Customer New Booking';
+	include('./assets/header.inc');
+	/* Instantiate database connection object, called $db */
+	include('./assets/databaseClass.inc');
 ?>
+
 <!--Body Start--> 
 <?php
-include('./assets/customerBannerAndNav.inc');
+	include('./assets/customerBannerAndNav.inc');
 ?>
+
 <div class='CustomerBookingCalendarDiv'>
 <div id='calendar'></div>
 </div>
 <div class='CustomerBookingMakeABookingDiv'>
 <h2>Make a booking</h2>
 <ol>
-<li>Select a date in the calendar and view available slots.</li>
-<li>Enter in booking time below.</li>
-<li>Enter in extra requests.</li>
-<li>Book appointment.</li>
+	<li>Select a date in the calendar and view available slots.</li>
+	<li>Enter in booking time below.</li>
+	<li>Enter in extra requests.</li>
+	<li>Book appointment.</li>
 </ol>
-<form method='post' action='./assets/processForms/processBooking.php'>
+<form method='post' id='bookingform' action='./assets/processForms/processBooking.php'>
 <table>
-<tr><th>Date: </th></tr>
-<tr><td><input type="text" name="date" id="getDateFromCalendar" readonly/></td></tr>
-<tr><th>Start Time: </th></tr>
-<tr><td><input type="time" name="startTime"/></td></tr>
-<tr><th>End Time: </th></tr>
-<tr><td><input type="time" name="endTime"/></td></tr>
-<tr><th>Extra notes: </th></tr>
-<tr><td><textarea name="otherDetails" placeholder="Enter any other special requests..."></textarea></td></tr>
-<tr><td><input type="submit" value="Book Appointment"/></td></tr>
-<?php
-if(isset($_SESSION['bookingError']) && !empty($_SESSION['bookingError'])){
-	print("<tr><td class='errorMessage'>\n");
-	print("<p> {$_SESSION['bookingError']} </p>\n");
-	print("</td></tr>\n");
-	unset($_SESSION['bookingError']);
-}
-?>
-</table>
+		<tr><th colspan="2">Date: </th></tr>
+		<tr><td colspan="2"><input type="text" name="date" id="getDateFromCalendar"/></td></tr>
+		<tr><th>Start Time: </th><th>End Time:</th></tr>
+		<tr><td><input type="time" id="startTime" name="startTime" onchange="getStartTime()" required/></td>
+		<td><input type="time" id="endTime" name="endTime" readonly/></td></tr> <!--CH: 18/04-->
+		<tr><th colspan="2">Activity: </th></tr> <!--CH: 18/04-->
+
+		<?php
+			$activity = $db->select("select activityName, duration from businessActivity;");
+			while ($row = mysqli_fetch_array($activity)) {
+				echo "<tr><td colspan='2'><label for=".$row['activityName']." >".$row['activityName']."</label>";
+				echo "<input type='checkbox' id='activity' name=".$row['activityName']." duration=".$row['duration']." class='inlinelabel' onclick='updateEndTime()' /></td></tr>";
+			}
+		?>
+		<tr><th colspan="2">Employee: (optional)</th></tr>
+		<tr><td colspan="2"><select>
+		<?php
+			$employee = $db->select("select employeeName from employee;");
+			echo "<option value=''>- Select Employee -</option>";
+			while ($row = mysqli_fetch_array($employee)) {
+				echo "<option value=".$row['employeeName'].">".$row['employeeName']."</option>";
+			}
+		?>
+		</select></td></tr>
+
+		</td></tr> <!--Ch: 18/04-->
+		<tr><th colspan="2">Extra notes: </th></tr>
+		<tr><td colspan="2"><textarea name="otherDetails" placeholder="Enter any other special requests..."></textarea></td></tr>
+		<tr><td colspan="2"><input type="submit" value="Book Appointment"/></td></tr>
+
+
+			<?php
+			if(isset($_SESSION['bookingError']) && !empty($_SESSION['bookingError'])){
+				print("<tr><td class='errorMessage'>\n");
+				print("<p> {$_SESSION['bookingError']} </p>\n");
+				print("</td></tr>\n");
+				unset($_SESSION['bookingError']);
+			}
+			?>
+		</table>
 </form>
 </div>
 <?php
