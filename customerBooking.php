@@ -35,7 +35,7 @@
 		<tr><th>Start Time: </th><th>End Time:</th></tr>
 		<tr><td><input type="time" id="startTime" name="startTime" onchange="getStartTime()" required/></td>
 		<td><input type="time" id="endTime" name="endTime" readonly/></td></tr> <!--CH: 18/04-->
-		<tr><th colspan="2">Service: </th></tr> <!--CH: 18/04-->
+		<tr><th colspan="2">Activity: </th></tr> <!--CH: 18/04-->
 
 		<?php
 			$activity = $db->select("select activityName, duration from businessActivity;");
@@ -45,13 +45,13 @@
 			}
 		?>
 		<tr><th colspan="2">Employee: (optional)</th></tr>
-		<tr><td colspan="2"><select>
+		<tr><td colspan="2"><select name="employeeID" id="employeeID">
+		<option value="any">Any Available</option>
 		<?php
-			$employee = $db->select("select employeeName from employee;");
-			echo "<option value=''>- Select Employee -</option>";
-			while ($row = mysqli_fetch_array($employee)) {
-				echo "<option value=".$row['employeeName'].">".$row['employeeName']."</option>";
-			}
+			$results = $db->select("SELECT * FROM employee;");
+				while($row = mysqli_fetch_array($results)) {							
+					print_r("<option value= \"".$row['employeeID']."\">".$row['employeeName']."</option>");
+				}
 		?>
 		</select></td></tr>
 
@@ -107,7 +107,7 @@
 		
 			
 		events: [{
-			title: 'Meeting',
+			title: 'Test',
 			start: '2017-03-20T10:30:00',
 			end: '2017-03-20T12:30:00'
 		},
@@ -116,11 +116,23 @@
 			$results = $db->select("SELECT * FROM booking;");
 			while($row = mysqli_fetch_array($results)) {							
 				print_r("{");
-				print_r("title: 'Booking filled',");
+				print_r("title: 'Booking filled for ...... :',");
 				print_r("start: '".$row['startDateTime']."',");
 				print_r("end: '".$row['endDateTime']."'");
 				print_r("},");
 			}
+			
+			$query = "SELECT employeeName, startDateTime, endDateTime FROM workperiod AS wp INNER JOIN employee AS e ON wp.employeeID=e.employeeID;";
+			$results = $db->select($query);
+
+			while($row = mysqli_fetch_array($results)) {							
+				print_r("{");
+				print_r("title: '".$row['employeeName']."',");
+				print_r("start: '".$row['startDateTime']."',");
+				print_r("end: '".$row['endDateTime']."'");
+				print_r("},");
+			}
+			
 		?>
 		],
 		//Hide all events in month view

@@ -21,7 +21,7 @@ $logger = Logger::getLogger("main");
 /* Instantiate database */
 include('./databaseClass.inc');
 
-if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTime']))
+if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTime']) && !empty($_POST['employeeID']))
 {
 	$username = $_SESSION['username'];
 	$ABN = $_SESSION['abn'];
@@ -30,6 +30,7 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 	$startTime = $_POST['startTime'];
 	$endTime = $_POST['endTime'];
 	$otherDetails = $_POST['otherDetails'];
+	$employee = $_POST['employeeID'];
 	
 	/* Rearrange date time into format which PHP and MySQL can manipulate */
 	$datePieces = explode("/", $date);
@@ -41,14 +42,61 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 	
 	/* Check whether the set End Date Time is after the Start Date Time */
 	if( $endDateTime > $startDateTime ){	
-		$result = $db->insert("insert into booking values(null,'$username','$startDateTime','$endDateTime','$ABN','$otherDetails');");
-		if($result != false)
+		
+		if($employee == "any")
 		{
-			$logger->info("Booking was successful");
+			$query = "SELECT * FROM employee;";
+			$results = $db->select($query);
+			$found = 0;
+			$workPeriodBool = 0;
+			$bookingBool = 0;
+			
+			while($row = mysqli_fetch_array($results)) {	
+				$empID = $row['employeeID'];
+				$workPeriodBool = isEmpWorking($empID, $startDateTime, $endDateTime, $db);
+				if( $workPeriodBool == 1)
+				{
+					$bookingBool = isEmpBooked($empID, $startDateTime, $endDateTime, $db);
+					if($bookingBool == 1) 
+					{
+						$employee = $empID;
+						$found = 1;
+						break;
+					}
+				}
+			}
+			
+			if($found == 0)
+			{
+				$_SESSION['bookingError'] = "There are no available employees during this time.";
+				$logger->error("Booking was not successful, there are no available employees.");
+				header("location: ../../customerBooking.php");
+			}
+		}
+		
+		$workPeriodBool = isEmpWorking($employee, $startDateTime, $endDateTime, $db);
+		$bookingBool = isEmpBooked($employee, $startDateTime, $endDateTime, $db);
+	
+		if($bookingBool == 1 && $workPeriodBool == 1) 
+		{
+			//$query = "insert into booking values(null,".$username.",".$employee.",".$startDateTime.",".$endDateTime.",".$ABN.",".$otherDetails.");";
+			//$results = $db->select($query);
+			
+			
+
+			
 			header("location: ../../customerPage.php");
 		}
-		else{
-			$logger->error("Booking was not successful");
+		else if($workPeriodBool == 1 && $bookingBool == 0) 
+		{
+			$_SESSION['bookingError'] = "There is a booking clash with this Employee.";
+			$logger->error("Booking was not successful, There is a booking clash with this Employee.");
+			header("location: ../../customerBooking.php");
+		}
+		else
+		{
+			$_SESSION['bookingError'] = "There are no available employees for this time period.";
+			$logger->error("Booking was not successful, There are no available employees for this time period.");
 			header("location: ../../customerBooking.php");
 		}
 	}
@@ -56,7 +104,7 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 	{
 		$_SESSION['bookingError'] = "End Time must be after Start Time.";
 
-			$logger->error("Booking was successful, end time must be after start time ");
+		$logger->error("Booking was not successful, end time must be after start time ");
 		header("location: ../../customerBooking.php");
 	}
 }
@@ -68,6 +116,56 @@ else
 	header("location: ../../customerBooking.php");
 } 
 
+function isEmpWorking($emp, $startDT, $endDT, $db)
+{
+	$query = "SELECT * FROM workperiod WHERE employeeID = ".$emp.";";
+	$results = $db->select("SELECT * FROM workperiod WHERE employeeID = ".$emp.";");
 
+	$bool = 0;
+	$workIterator = 0;
+	
+	while($row = mysqli_fetch_array($results)) {	
+		
+		if($row['employeeID'] == $emp)
+		{
+			$workIterator++;		
+			$sdt = $row['startDateTime'];
+			$edt = $row['endDateTime'];
+			
+			if($startDT >= $sdt && $endDT <= $edt)
+			{
+				$bool = 1;
+				break;
+			}
+		}
+	}
+	
+	return $bool;
+}
+
+
+function isEmpBooked($emp, $startDT, $endDT, $db) 
+{
+	
+	$query = "SELECT * FROM booking WHERE employee=".$emp.";";
+	$results = $db->select($query);
+
+	$bool = 1;
+	$bookingIterator = 0;
+	while($row = mysqli_fetch_array($results)) {	
+		$bookingIterator++;
+		$sdt = $row['startDateTime'];
+		$edt = $row['endDateTime'];		
+		if( ($startDT	>= $sdt && $endDT 	<= $edt) || 
+			($startDT 	>= $sdt && $startDT <= $edt) ||
+			($endDT 	>= $sdt && $endDT	<= $edt)
+			)
+		{
+			$bool = 0;
+			break;
+		}
+	}
+	return $bool;
+}
 
 ?>
