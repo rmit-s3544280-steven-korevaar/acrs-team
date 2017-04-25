@@ -103,6 +103,11 @@ bookingID integer not null,
 CONSTRAINT bookingActivity PRIMARY KEY (activityID,bookingID)
 );
 
+create table bookingEmployee(
+bookingID integer not null,
+employeeID varchar(3) not null,
+CONSTRAINT bookingEmployee PRIMARY KEY (bookingID,employeeID)
+);
 
 /* *********************************************************************
  * 
