@@ -79,12 +79,18 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 	
 		if($bookingBool == 1 && $workPeriodBool == 1) 
 		{
-			//$query = "insert into booking values(null,".$username.",".$employee.",".$startDateTime.",".$endDateTime.",".$ABN.",".$otherDetails.");";
-			//$results = $db->select($query);
+			
+			$results = $db->insert("insert into booking values(null,\"".$username."\",\"".$startDateTime."\",\"".$endDateTime."\",\"".$ABN."\",\"".$otherDetails."\");");
+			
+			$results = $db->select("select bookingID from booking where username = \"".$username."\" order by bookingID desc limit 1;");
+			$bookingIDinit = mysqli_fetch_array($results);
+			$bookingID = $bookingIDinit["bookingID"];
+			
+			$results = $db->insert("insert into bookingEmployee values(".$bookingID.",".$employee.");");
+			
 			
 			
 
-			
 			header("location: ../../customerPage.php");
 		}
 		else if($workPeriodBool == 1 && $bookingBool == 0) 
@@ -118,7 +124,6 @@ else
 
 function isEmpWorking($emp, $startDT, $endDT, $db)
 {
-	$query = "SELECT * FROM workperiod WHERE employeeID = ".$emp.";";
 	$results = $db->select("SELECT * FROM workperiod WHERE employeeID = ".$emp.";");
 
 	$bool = 0;
@@ -146,9 +151,11 @@ function isEmpWorking($emp, $startDT, $endDT, $db)
 
 function isEmpBooked($emp, $startDT, $endDT, $db) 
 {
+	//$results = $db->select("SELECT * FROM workperiod AS wp INNER JOIN employee AS e ON wp.employeeID=e.employeeID;");
+
+	//$results = $db->select("SELECT * FROM booking WHERE employee=".$emp.";");
 	
-	$query = "SELECT * FROM booking WHERE employee=".$emp.";";
-	$results = $db->select($query);
+	$results = $db->select("SELECT * FROM booking AS b INNER JOIN bookingEmployee AS e ON b.bookingID=e.bookingID WHERE employeeID=".$emp.";");
 
 	$bool = 1;
 	$bookingIterator = 0;
