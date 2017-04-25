@@ -35,7 +35,7 @@
 		<tr><th>Start Time: </th><th>End Time:</th></tr>
 		<tr><td><input type="time" id="startTime" name="startTime" onchange="getStartTime()" required/></td>
 		<td><input type="time" id="endTime" name="endTime" readonly/></td></tr> <!--CH: 18/04-->
-		<tr><th colspan="2">Activity: </th></tr> <!--CH: 18/04-->
+		<tr><th colspan="2">Service: </th></tr> <!--CH: 18/04-->
 
 		<?php
 			$activity = $db->select("select activityName, duration from businessActivity;");

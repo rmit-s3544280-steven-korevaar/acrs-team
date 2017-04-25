@@ -1,12 +1,7 @@
-var bookingStartTime;
-
-
 function getStartTime() {
     var theForm = document.forms["bookingform"];
     var startTime =  theForm.elements["startTime"];
-    bookingStartTime = startTime.value;
-    alert(bookingStartTime);
-    updateEndTime();
+    return startTime.value;
 }
 
 
@@ -16,6 +11,7 @@ function pad(d) {
 }
 
 function updateEndTime() {
+	 var bookingStartTime = getStartTime();
     var theForm = document.forms["bookingform"];
     var timeSplit = bookingStartTime.split(":");
     var hours = timeSplit[0];
@@ -33,12 +29,19 @@ function updateEndTime() {
     }
 
     
-    alert(duration);
     mins = parseInt(mins) + parseInt(duration);
     hours = parseInt(parseInt(hours) + (mins/60));
     mins = mins % 60;
 
     var currentTime = hours + ':' + pad(mins);
-    document.getElementById('endTime').value = currentTime;
+	 if (hours <= 9)
+	 {
+		 document.getElementById('endTime').value = '0'+ currentTime;
+	 }
+	 else
+	 {
+		 document.getElementById('endTime').value = currentTime;
+	 }
+    
   
 }
