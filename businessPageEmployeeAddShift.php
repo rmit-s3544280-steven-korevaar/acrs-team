@@ -92,8 +92,13 @@ else if(isset($_SESSION['shiftError']) && !empty($_SESSION['shiftError'])){
 		
 		
 		dayOfMonthFormat: 'ddd DD/MM',
-		minTime: "09:00:00",
-      maxTime: "18:00:00",
+		<?php
+			$results = $db->select("SELECT openingTime, closingTime from business");
+			while($row = mysqli_fetch_array($results)) {
+				print "minTime: '{$row['openingTime']}',";
+				print "maxTime: '{$row['closingTime']}',";
+			}
+		?>
 		allDaySlot:false,	
 		defaultView: 'month',
 		editable: false, 
