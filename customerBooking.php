@@ -38,10 +38,10 @@
 		<tr><th colspan="2">Activity: </th></tr> <!--CH: 18/04-->
 
 		<?php
-			$activity = $db->select("select activityName, duration from businessActivity;");
+			$activity = $db->select("select activityID, activityName, duration from businessActivity;");
 			while ($row = mysqli_fetch_array($activity)) {
 				echo "<tr><td colspan='2'><label for=".$row['activityName']." >".$row['activityName']."</label>";
-				echo "<input type='checkbox' id='activity' name=".$row['activityName']." duration=".$row['duration']." class='inlinelabel' onclick='updateEndTime()' /></td></tr>";
+				echo "<input type='checkbox' id='activity' name=selectedActivities[] value=".$row['activityID']." duration=".$row['duration']." class='inlinelabel' onclick='updateEndTime()' /></td></tr>";
 			}
 		?>
 		<tr><th colspan="2">Employee: (optional)</th></tr>
@@ -113,12 +113,20 @@
 		},
 					
 		<?php
-			$results = $db->select("SELECT * FROM booking;");
+			$query = "SELECT * FROM booking AS b LEFT JOIN (SELECT bookingID, employeeName FROM bookingemployee be, employee e WHERE be.employeeID=e.employeeID) as be ON b.bookingID=be.bookingID;";
+			$results = $db->select($query);
 			while($row = mysqli_fetch_array($results)) {							
 				print_r("{");
-				print_r("title: 'Booking filled for ...... :',");
+				if($row['employeeName'] != NULL)
+				{
+					print_r("title: 'Booking time filled for: {$row['employeeName']}',");
+				}
+				else{
+					print_r("title: 'Booking time filled.',");
+				}
 				print_r("start: '".$row['startDateTime']."',");
-				print_r("end: '".$row['endDateTime']."'");
+				print_r("end: '".$row['endDateTime']."',");
+				print_r("color: 'red'");
 				print_r("},");
 			}
 			
@@ -142,18 +150,17 @@
 		}},
 		//On Click event set date field to the selected date.
 		dayClick: function(date, jsEvent, view) {
-				var today = new Date();
-				today.setDate(today.getDate() - 1);
+			var today = new Date();
+			today.setDate(today.getDate() - 1);
 
-            console.log(view.name);
-            if ( view.name === "month" && date >= today ) {
-					document.getElementById('getDateFromCalendar').value = moment(date).format("DD/MM/YYYY");
-               $('#calendar').fullCalendar('gotoDate', date);
-               $('#calendar').fullCalendar('changeView', 'agendaDay');
-            }
-				
-				
-        }})});
+			console.log(view.name);
+			if ( view.name === "month" && date >= today ) {
+				document.getElementById('getDateFromCalendar').value = moment(date).format("DD/MM/YYYY");
+				$('#calendar').fullCalendar('gotoDate', date);
+				$('#calendar').fullCalendar('changeView', 'agendaDay');
+			}
+		}
+		})});
 	</script>
 
 <!--Body End-->

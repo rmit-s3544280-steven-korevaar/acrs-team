@@ -34,3 +34,47 @@ INFO - User logged out
 INFO - Customer logged in
 INFO - Customer logged in
 INFO - Booking was successful
+INFO - Booking was successful
+INFO - Owner logged in
+INFO - User logged out
+INFO - Customer logged in
+ERROR - Booking was not successful, There are no available employees for this time period.
+ERROR - Booking was not successful, there are no available employees.
+ERROR - Booking was not successful, There are no available employees for this time period.
+ERROR - Booking was not successful, there are no available employees.
+ERROR - Booking was not successful, There are no available employees for this time period.
+ERROR - Booking was not successful, There is a booking clash with this Employee.
+INFO - User logged out
+INFO - Owner logged in
+INFO - Customer logged in
+ERROR - Booking was not successful, there are no available employees.
+ERROR - Booking was not successful, There are no available employees for this time period.
+ERROR - Booking was not successful, there are no available employees.
+ERROR - Booking was not successful, There are no available employees for this time period.
+ERROR - Booking was not successful, there are no available employees.
+ERROR - Booking was not successful, There are no available employees for this time period.
+ERROR - Booking was not successful, there are no available employees.
+ERROR - Booking was not successful, There are no available employees for this time period.
+ERROR - Booking was not successful, there are no available employees.
+ERROR - Booking was not successful, There are no available employees for this time period.
+ERROR - Booking was not successful, there are no available employees.
+ERROR - Booking was not successful, There are no available employees for this time period.
+ERROR - Booking was not successful, There is a booking clash with this Employee.
+INFO - User logged out
+INFO - Owner logged in
+INFO - Owner succes added a new employee
+INFO - Working time added Successfully
+INFO - User logged out
+INFO - Customer logged in
+ERROR - Booking was not successful, there are no available employees.
+ERROR - Booking was not successful, There are no available employees for this time period.
+ERROR - Booking was not successful, there are no available employees.
+ERROR - Booking was not successful, There are no available employees for this time period.
+ERROR - Booking was not successful, there are no available employees.
+ERROR - Booking was not successful, There are no available employees for this time period.
+ERROR - Booking was not successful, there are no available employees.
+ERROR - Booking was not successful, There are no available employees for this time period.
+INFO - User logged out
+INFO - Owner logged in
+INFO - User logged out
+INFO - Customer logged in

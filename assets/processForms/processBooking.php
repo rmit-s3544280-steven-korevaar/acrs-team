@@ -31,6 +31,8 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 	$endTime = $_POST['endTime'];
 	$otherDetails = $_POST['otherDetails'];
 	$employee = $_POST['employeeID'];
+	$activities = $_POST['selectedActivities'];
+
 	
 	/* Rearrange date time into format which PHP and MySQL can manipulate */
 	$datePieces = explode("/", $date);
@@ -86,9 +88,12 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 			$bookingIDinit = mysqli_fetch_array($results);
 			$bookingID = $bookingIDinit["bookingID"];
 			
-			$results = $db->insert("insert into bookingEmployee values(".$bookingID.",".$employee.");");
+			$results = $db->insert("insert into bookingEmployee values('$bookingID','$employee');");
 			
-			
+			foreach($activities as $id => $activity)
+			{
+				$db->insert("INSERT into bookingactivity VALUES('$activity',".$bookingID.");");
+			}
 			
 
 			header("location: ../../customerPage.php");
