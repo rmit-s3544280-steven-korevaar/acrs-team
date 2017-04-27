@@ -18,6 +18,7 @@
 <option class='noDisplay'>Bookings</option>
 <option class='businessNavigationDropDown' value='businessPage.php'>Booking Summaries</option>
 <option class='businessNavigationDropDown' value='businessPageNewBookings.php'>New Bookings</option>
+<option class='businessNavigationDropDown' value='businessPageCreateBooking.php'>Create Booking</option>
 </select>
 
 <select id='businessNavigationEmployee' onchange='navigateEmployee();'>
