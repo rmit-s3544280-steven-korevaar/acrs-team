@@ -19,20 +19,33 @@ include('./assets/customerBannerAndNav.inc');
 <div class='contentHereDiv'>
 <h1>Your Booking Summaries</h1>
 <table class='centreTable' border = '1px solid black'>
-<tr><th>Start Date/Time</th><th>End Date/Time</th><th>Extra Notes</th></tr>
+<tr><th>Date</th><th>Start Time</th><th>End Time</th><th>Services</th><th>Extra Notes</th></tr>
 <?php
-	$results = $db->select("SELECT startDateTime, endDateTime, otherDetails, username FROM 
+	$results = $db->select("SELECT bookingID, startDateTime, endDateTime, otherDetails, username FROM 
 	booking WHERE username = '".$_SESSION['username']."' order by startDateTime desc;");
 	if(mysqli_num_rows($results) != 0)
 	{
 		while($row=mysqli_fetch_array($results))
 		{
 			$retrievedStartDate = strtotime($row['startDateTime']);
-			$startConverted = date('g:iA j-F-Y',$retrievedStartDate);
+			$date = date('j-F-Y',$retrievedStartDate);
+			$startConverted = date('g:iA',$retrievedStartDate);
 			$retrievedEndDate = strtotime($row['endDateTime']);
-			$endConverted = date('g:iA j-F-Y',$retrievedEndDate);
+			$endConverted = date('g:iA',$retrievedEndDate);
+			$bookingID = $row['bookingID'];
 			print "<tr>\n";
-			print "<td class='tableStyle'>$startConverted</td><td class='tableStyle'>$endConverted</td><td class='tableStyle'>{$row['otherDetails']}</td>\n";
+			print "<td class='tableStyle'>$date</td>
+			<td class='tableStyle'>$startConverted</td>
+			<td class='tableStyle'>$endConverted</td>
+			<td><table>";
+			//Get activies for the particular booking
+			$activityResults = $db->select("select activityName from businessactivity where activityID in (select activityID from bookingactivity where bookingID = '$bookingID');"); 
+			while($activityRow=mysqli_fetch_array($activityResults))
+			{
+				print "<tr><td>{$activityRow['activityName']}</tr></td>";
+			}
+			print "</table></td>
+			<td class='tableStyle'>{$row['otherDetails']}</td>\n";
 			print "</tr>\n";
 		}
 	}

@@ -21,20 +21,34 @@
 <div class='contentHereDiv'>
 <h1>Booking Summaries</h1>
 <table class='centreTable' border = '1'>
-<tr><th>Customer Name</th><th>Start Date/Time</th><th>End Date/Time</th><th>Extra Notes</th></tr>
+<tr><th>Date</th><th>Start Time</th><th>End Time</th><th>Customer Name</th><th>Service</th><th>Extra Notes</th></tr>
 <?php
-	$results = $db->select("select fullname, startDateTime, endDateTime, otherDetails from user as a 
+	$results = $db->select("select bookingID,fullname, startDateTime, endDateTime, otherDetails from user as a 
 	inner join booking as b on a.username=b.username order by startDateTime asc;");
 	if(mysqli_num_rows($results) != 0)
 	{
 		while($row=mysqli_fetch_array($results))
 		{
 			$retrievedStartDate = strtotime($row['startDateTime']);
-			$startConverted = date('g:iA j-F-Y',$retrievedStartDate);
+			$date = date('j-F-Y',$retrievedStartDate);
+			$startConverted = date('g:iA',$retrievedStartDate);
 			$retrievedEndDate = strtotime($row['endDateTime']);
-			$endConverted = date('g:iA j-F-Y',$retrievedEndDate);
+			$endConverted = date('g:iA',$retrievedEndDate);
+			$bookingID = $row['bookingID'];
 			print "<tr>\n";
-			print "<td class='tableStyle'>{$row['fullname']}</td><td class='tableStyle'>$startConverted</td><td class='tableStyle'>$endConverted</td><td class='tableStyle'>{$row['otherDetails']}</td>\n";
+			print "<td class='tableStyle'>$date</td>
+			<td class='tableStyle'>$startConverted</td>
+			<td class='tableStyle'>$endConverted</td>
+			<td class='tableStyle'>{$row['fullname']}</td>
+			<td><table>";
+			//Get activies for the particular booking
+			$activityResults = $db->select("select activityName from businessactivity where activityID in (select activityID from bookingactivity where bookingID = '$bookingID');"); 
+			while($activityRow=mysqli_fetch_array($activityResults))
+			{
+				print "<tr><td>{$activityRow['activityName']}</tr></td>";
+			}
+			print "</table></td>
+			<td class='tableStyle'>{$row['otherDetails']}</td>\n";
 			print "</tr>\n";
 		}
 	}

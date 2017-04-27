@@ -110,3 +110,6 @@ INFO - User logged out
 INFO - Customer logged in
 INFO - User logged out
 INFO - Owner logged in
+ERROR - Booking was not successful, There are no available employees for this time period.
+INFO - User logged out
+INFO - Customer logged in
