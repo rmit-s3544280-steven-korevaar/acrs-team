@@ -24,7 +24,9 @@
 <h2>Make a booking</h2>
 <ol>
 	<li>Select a date in the calendar and view available slots.</li>
-	<li>Enter in booking time below.</li>
+	<li>Enter in starting time below.</li>
+	<li>Click the checkboxes for what tasks you would like done.</li>
+	<li>Choose an employee if you have a preference.</li>
 	<li>Enter in extra requests.</li>
 	<li>Book appointment.</li>
 </ol>
