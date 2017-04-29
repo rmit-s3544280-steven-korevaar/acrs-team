@@ -21,7 +21,7 @@ $logger = Logger::getLogger("main");
 /* Instantiate database */
 include('./databaseClass.inc');
 
-if (!empty($_POST['selectedCustomer']) && !empty($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTime']) && !empty($_POST['employeeID']))
+if (!empty($_POST['selectedCustomer']) && $_POST['selectedCustomer'] != 'Select Customer' && !empty($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTime']) && !empty($_POST['employeeID']))
 {
 
 	$username = $_POST['selectedCustomer'];

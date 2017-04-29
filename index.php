@@ -73,7 +73,7 @@ if(isset($_SESSION['loginError']) && !empty($_SESSION['loginError'])){
 </tr>
 <tr>
 <th>Full name: </th>
-<td><input type="text" name="fullname" pattern="([A-Za-z]{4,10})([\D])" title="Only letters and length between 5-10" <?php if(isset($_SESSION['returnData'])){print "value='{$_SESSION['returnData'][2]}'";} ?>/></td>
+<td><input type="text" name="fullname" title="Only letters and length between 5-10" <?php if(isset($_SESSION['returnData'])){print "value='{$_SESSION['returnData'][2]}'";} ?>/></td>
 </tr>
 <tr>
 <th>Address: </th>
@@ -81,7 +81,7 @@ if(isset($_SESSION['loginError']) && !empty($_SESSION['loginError'])){
 </tr>
 <tr>
 <th>Phone Number: </th>
-<td><input type="text" name="phone" pattern="\d{3}[-.]?\d{3}[-.]?\d{4}" title="10 digits e.g. 1231231231" <?php if(isset($_SESSION['returnData'])){print "value='{$_SESSION['returnData'][4]}'";} ?>/></td>
+<td><input type="text" name="phone" pattern="\d{3}[-.]?\d{3}[-.]?\d{4}" title="10 digits e.g. 0400123456" <?php if(isset($_SESSION['returnData'])){print "value='{$_SESSION['returnData'][4]}'";} ?>/></td>
 </tr>
 </table>
 <table class="centreTable">

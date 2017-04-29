@@ -120,9 +120,9 @@ CONSTRAINT bookingEmployee PRIMARY KEY (bookingID,employeeID)
 insert into business values("The Dog Groomer","Chloe Jane Smith","98 Maine St VIC 3000","0398765432","09:00:00","18:00:00","56497978719");
 
 --Insert record into businessActivity: activityID, businessID, activityName, duration
-insert into businessActivity values(null,"56497978719","Clip","00:20:00");
-insert into businessActivity values(null,"56497978719","Wash & Dry","00:30:00");
-insert into businessActivity values(null,"56497978719","Style","00:10:00");
+insert into businessActivity values(null,"56497978719","Clip","00:19:00");
+insert into businessActivity values(null,"56497978719","Wash & Dry","00:29:00");
+insert into businessActivity values(null,"56497978719","Style","00:09:00");
 
 --Insert record into employee: (employee-name, job-title, business-abn, employee-id)
 insert into employee values("Daniel Carter","Clipper, Washer & Stylist","56497978719","001");
@@ -137,6 +137,30 @@ insert into workPeriod values(null,"2017-04-27 12:00:00","2017-04-27 18:00:00","
 insert into workPeriod values(null,"2017-04-28 09:00:00","2017-04-28 18:00:00","001"); --(emp-001, fri 28/04, 9am-6pm)
 insert into workPeriod values(null,"2017-04-28 11:00:00","2017-04-28 15:00:00","002"); --(emp-002, fri 28/04, 11am-3pm)
 insert into workPeriod values(null,"2017-04-28 11:00:00","2017-04-28 18:00:00","003"); --(emp-003, fri 28/04, 11am-6pm)
+
+insert into workPeriod values(null,"2017-05-01 09:00:00","2017-05-01 18:00:00","001"); --(emp-001, mon 01/05, 9am-6pm)
+insert into workPeriod values(null,"2017-05-02 09:00:00","2017-05-02 18:00:00","001"); --(emp-001, tue 02/05, 9am-6pm)
+insert into workPeriod values(null,"2017-05-03 09:00:00","2017-05-03 18:00:00","002"); --(emp-002, wed 03/05, 9am-3pm)
+insert into workPeriod values(null,"2017-05-04 09:00:00","2017-05-04 18:00:00","002"); --(emp-002, thur 04/05, 12pm-6pm)
+insert into workPeriod values(null,"2017-05-05 09:00:00","2017-05-05 18:00:00","001"); --(emp-001, fri 05/05, 9am-6pm)
+insert into workPeriod values(null,"2017-05-05 11:00:00","2017-05-05 15:00:00","002"); --(emp-002, fri 05/05, 11am-3pm)
+insert into workPeriod values(null,"2017-05-05 11:00:00","2017-05-05 18:00:00","003"); --(emp-003, fri 05/05, 11am-6pm)
+
+insert into workPeriod values(null,"2017-05-08 09:00:00","2017-05-08 18:00:00","001"); --(emp-001, mon 08/05, 9am-6pm)
+insert into workPeriod values(null,"2017-05-09 09:00:00","2017-05-09 18:00:00","001"); --(emp-001, tue 09/05, 9am-6pm)
+insert into workPeriod values(null,"2017-05-10 09:00:00","2017-05-10 18:00:00","002"); --(emp-002, wed 10/05, 9am-3pm)
+insert into workPeriod values(null,"2017-05-11 09:00:00","2017-05-11 18:00:00","002"); --(emp-002, thur 11/05, 12pm-6pm)
+insert into workPeriod values(null,"2017-05-12 09:00:00","2017-05-12 18:00:00","001"); --(emp-001, fri 12/05, 9am-6pm)
+insert into workPeriod values(null,"2017-05-12 11:00:00","2017-05-12 15:00:00","002"); --(emp-002, fri 12/05, 11am-3pm)
+insert into workPeriod values(null,"2017-05-12 11:00:00","2017-05-12 18:00:00","003"); --(emp-003, fri 12/05, 11am-6pm)
+
+insert into workPeriod values(null,"2017-05-15 09:00:00","2017-05-15 18:00:00","001"); --(emp-001, mon 15/05, 9am-6pm)
+insert into workPeriod values(null,"2017-05-16 09:00:00","2017-05-16 18:00:00","001"); --(emp-001, tue 16/05, 9am-6pm)
+insert into workPeriod values(null,"2017-05-17 09:00:00","2017-05-17 18:00:00","002"); --(emp-002, wed 17/05, 9am-3pm)
+insert into workPeriod values(null,"2017-05-18 09:00:00","2017-05-18 18:00:00","002"); --(emp-002, thur 18/05, 12pm-6pm)
+insert into workPeriod values(null,"2017-05-19 09:00:00","2017-05-19 18:00:00","001"); --(emp-001, fri 19/05, 9am-6pm)
+insert into workPeriod values(null,"2017-05-19 11:00:00","2017-05-19 15:00:00","002"); --(emp-002, fri 19/05, 11am-3pm)
+insert into workPeriod values(null,"2017-05-19 11:00:00","2017-05-19 18:00:00","003"); --(emp-003, fri 19/05, 11am-6pm)
 
 --Insert record into user: (username, full-name, address, ph-num, password)
 --Business Owner
@@ -153,20 +177,9 @@ insert into user values("customer5","Horton Andersen","16 Leeroy Rd, VIC 3458","
 insert into user values("customer6","Isabelle Barkley","12 Jones Crt, VIC 3902","0398765433",SHA("customer6"));
 
 --Insert record into booking: (booking-id, username, start-time, end-time, business-id, details)
-insert into booking values(null,"customer3","2017-04-17 09:00:00","2017-04-17 10:00:00","56497978719","Wash & Dry"); --(cust3, mon 04/17)
-insert into booking values(null,"customer4","2017-04-17 11:00:00","2017-04-17 12:00:00","56497978719","Clip, Wash & Dry"); --(cust4, mon 04/17)
-insert into booking values(null,"customer5","2017-04-18 11:30:00","2017-04-18 12:30:00","56497978719","Clip & Style"); --(cust5, tue 04/18)
-insert into booking values(null,"customer2","2017-04-19 13:00:00","2017-04-19 14:00:00","56497978719","Clip, Wash & Dry"); --(cust2, wed 04/19)
-insert into booking values(null,"customer6","2017-04-21 10:45:00","2017-04-21 11:45:00","56497978719","Wash & Dry"); --(cust6, fri 04/21)
-insert into booking values(null,"customer","2017-04-21 13:30:00","2017-04-21 14:30:00","56497978719","Clip"); --(cust, fri 04/21)
-
-insert into booking values(null,"customer3","2017-04-24 09:00:00","2017-04-24 10:00:00","56497978719","Wash & Dry"); --(cust3, mon 04/24)
-insert into booking values(null,"customer4","2017-04-24 11:00:00","2017-04-24 12:00:00","56497978719","Clip, Wash & Dry"); --(cust4, mon 04/24)
-insert into booking values(null,"customer5","2017-04-25 11:30:00","2017-04-25 12:30:00","56497978719","Clip & Style"); --(cust5, tue 04/25)
-insert into booking values(null,"customer2","2017-04-26 13:00:00","2017-04-26 14:00:00","56497978719","Clip, Wash & Dry"); --(cust2, wed 04/26)
-insert into booking values(null,"customer6","2017-04-28 10:45:00","2017-04-28 11:45:00","56497978719","Wash & Dry"); --(cust6, fri 04/28)
-insert into booking values(null,"customer","2017-04-28 13:30:00","2017-04-28 14:30:00","56497978719","Clip"); --(cust, fri 04/28)
 
 --Insert record into userBusiness: (username, business-abn)
 insert into userBusiness values("admin","56497978719");
+
+--Insert record into bookingActivity: (activityID, bookingID)
 

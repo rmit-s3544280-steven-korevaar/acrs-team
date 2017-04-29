@@ -1,6 +1,6 @@
 # acrs-team
 Hello and welcome to our Software Engineering: Process and Tools
-Assignment - Part 1 - 
+Assignment - Part B - 
 
 Group Members:
 -----------------------------------------------------------------------
@@ -19,12 +19,12 @@ Tuesday 9:30am - 11:30am
 
 Installation of web server stack
 -----------------------------------------------------------------------
-Document located in Part_A_submission\06-SEPT-PartA-UserDocumentation.pdf
+Document located in Part_B_submission\06-SEPT-PartB-UserDocumentation.pdf
 under Installation and Setup Guide of XAMPP and Database.
 
-Directory - Part_1_submission
+Directory - Part_B_submission
 -----------------------------------------------------------------------
-Contains individual document files for Assignment part 1 submission.
+Contains individual document files for Assignment part B submission.
 
 Tools
 -----------------------------------------------------------------------

@@ -113,3 +113,39 @@ INFO - Owner logged in
 ERROR - Booking was not successful, There are no available employees for this time period.
 INFO - User logged out
 INFO - Customer logged in
+INFO - Customer logged in
+ERROR - Booking was not successful, there are no available employees.
+ERROR - Booking was not successful, There are no available employees for this time period.
+INFO - Owner logged in
+INFO - Working time added Successfully
+ERROR - Booking was not successful, all fields have to be filled
+ERROR - Booking was not successful, There are no available employees for this time period.
+ERROR - Booking was not successful, all fields have to be filled
+INFO - Working time added Successfully
+ERROR - Booking was not successful, all fields have to be filled
+ERROR - Booking was not successful, all fields have to be filled
+ERROR - Booking was not successful, There are no available employees for this time period.
+INFO - User logged out
+INFO - Owner logged in
+INFO - User logged out
+INFO - Owner logged in
+INFO - User logged out
+INFO - Owner logged in
+INFO - User logged out
+INFO - Customer logged in
+ERROR - Booking was not successful, There are no available employees for this time period.
+INFO - User logged out
+INFO - Owner logged in
+INFO - User logged out
+INFO - Customer logged in
+INFO - User logged out
+INFO - Owner logged in
+INFO - User logged out
+INFO - Customer logged in
+INFO - User logged out
+ERROR - Error occured while user was trying to register, all fields need to be filled
+INFO - User successfully registered
+INFO - Customer logged in
+INFO - User logged out
+INFO - Owner logged in
+INFO - User logged out
