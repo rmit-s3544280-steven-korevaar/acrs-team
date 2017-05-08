@@ -21,7 +21,7 @@ $logger = Logger::getLogger("main");
 /* Instantiate database */
 include('./databaseClass.inc');
 
-if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTime']) && !empty($_POST['employeeID']))
+if (checkExistingFields() == true)
 {
 	$username = $_SESSION['username'];
 	$ABN = $_SESSION['abn'];
@@ -33,17 +33,12 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 	$employee = $_POST['employeeID'];
 	$activities = $_POST['selectedActivities'];
 
-	
 	/* Rearrange date time into format which PHP and MySQL can manipulate */
-	$datePieces = explode("/", $date);
-	$combinestartDateTime = "$datePieces[2]-$datePieces[1]-$datePieces[0] $startTime:00";
-	$combineendDateTime = "$datePieces[2]-$datePieces[1]-$datePieces[0] $endTime:00";
-
-	$startDateTime = date("Y-m-d H:i:s", strtotime($combinestartDateTime));
-	$endDateTime = date("Y-m-d H:i:s", strtotime($combineendDateTime));
+	$startDateTime = dateFormatter($date, $startTime);
+	$endDateTime = dateFormatter($date, $endTime);
 	
 	/* Check whether the set End Date Time is after the Start Date Time */
-	if( $endDateTime > $startDateTime ){	
+	if( timeCheck($startDateTime,$endDateTime) == true ){	
 		
 		if($employee == "any")
 		{
@@ -179,5 +174,36 @@ function isEmpBooked($emp, $startDT, $endDT, $db)
 	}
 	return $bool;
 }
+// Check whether all fields are not empty.
+function checkExistingFields(){
+	$checkSessionData = array('username','abn');
+	$checkPOSTData = array('selectedActivities','date','startTime','endTime','employeeID');
+	foreach($checkSessionData as $data){
+		if(empty($_SESSION[$data])){
+			return false;
+		}
+	}
+	foreach($checkPOSTData as $data){
+		if(empty($_POST[$data])){
+			return false;
+		}
+	}
+	return true;
+}
+// Rearrange date time into format php and mysql can manipulate.
+function dateFormatter($date, $time)
+{
+	$datePieces = explode("/", $date);
+	$combineDateTime = "$datePieces[2]-$datePieces[1]-$datePieces[0] $time:00";
+	return date("Y-m-d H:i:s", strtotime($combineDateTime));
+}
 
+// Check Valid time
+function timeCheck($start, $end)
+{
+	if($end < $start){
+		return false;
+	}
+	return true;
+}
 ?>
