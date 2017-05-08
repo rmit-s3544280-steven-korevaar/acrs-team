@@ -24,8 +24,7 @@ $logger = Logger::getLogger("main");
 /* Instantiate database */
 include('./databaseClass.inc');
 
-if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTime']) 
-	&& !empty($_POST['workperiodID']))
+if (checkExistingFields() == true)
 {
 	$date = $_POST['date'];
 	$startTime = $_POST['startTime'];
@@ -34,17 +33,12 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 	$employeeID = $_POST['employeeID'];
 	$action = $_POST['action'];
 	
-	/* Rearrange date time into format which PHP and MySQL can manipulate */
-	$datePieces = explode("/", $date);
-	$combinestartDateTime = "$datePieces[2]-$datePieces[1]-$datePieces[0] $startTime:00";
-	$combineendDateTime = "$datePieces[2]-$datePieces[1]-$datePieces[0] $endTime:00";
-
-	$startDateTime = date("Y-m-d H:i:s", strtotime($combinestartDateTime));
-	$endDateTime = date("Y-m-d H:i:s", strtotime($combineendDateTime));
+	$startDateTime = dateFormatter($date, $startTime);
+	$endDateTime = dateFormatter($date, $endTime);
 	
 	/* Check whether the set End Date Time is after the Start Date Time */
 	if($action == "Edit Shift"){
-		if($startDateTime < $endDateTime){
+		if( timeCheck($startDateTime,$endDateTime) == true ){
 			if( checkOverlap($startDateTime, $endDateTime, $employeeID, $workperiodID) == true )
 			{
 				$result = $db->update("UPDATE workPeriod SET startDateTime='$startDateTime', 
@@ -104,6 +98,29 @@ function checkOverlap($startDateTime, $endDateTime, $employeeID, $workperiodID){
 		return false;
 	}
 } 
-
-
+// Check whether all fields are not empty.
+function checkExistingFields(){
+	$checkPOSTData = array('date','startTime','endTime','workperiodID','employeeID','action');
+	foreach($checkPOSTData as $data){
+		if(empty($_POST[$data])){
+			return false;
+		}
+	}
+	return true;
+}
+// Rearrange date time into format php and mysql can manipulate.
+function dateFormatter($date, $time)
+{
+	$datePieces = explode("/", $date);
+	$combineDateTime = "$datePieces[2]-$datePieces[1]-$datePieces[0] $time:00";
+	return date("Y-m-d H:i:s", strtotime($combineDateTime));
+}
+// Check Valid time
+function timeCheck($start, $end)
+{
+	if($end < $start){
+		return false;
+	}
+	return true;
+}
 ?>
