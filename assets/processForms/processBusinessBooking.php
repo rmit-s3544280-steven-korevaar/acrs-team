@@ -36,44 +36,26 @@ if (!empty($_POST['selectedCustomer']) && $_POST['selectedCustomer'] != 'Select 
 
 	
 	/* Rearrange date time into format which PHP and MySQL can manipulate */
-	$datePieces = explode("/", $date);
-	$combinestartDateTime = "$datePieces[2]-$datePieces[1]-$datePieces[0] $startTime:00";
-	$combineendDateTime = "$datePieces[2]-$datePieces[1]-$datePieces[0] $endTime:00";
-
-	$startDateTime = date("Y-m-d H:i:s", strtotime($combinestartDateTime));
-	$endDateTime = date("Y-m-d H:i:s", strtotime($combineendDateTime));
+	$startDateTime = dateFormatter($date, $startTime);
+	$endDateTime = dateFormatter($date, $endTime);
 	
 	/* Check whether the set End Date Time is after the Start Date Time */
 	if( $endDateTime > $startDateTime ){	
 		
 		if($employee == "any")
 		{
-			$query = "SELECT * FROM employee;";
-			$results = $db->select($query);
-			$found = 0;
-			$workPeriodBool = 0;
-			$bookingBool = 0;
 			
-			while($row = mysqli_fetch_array($results)) {	
-				$empID = $row['employeeID'];
-				$workPeriodBool = isEmpWorking($empID, $startDateTime, $endDateTime, $db);
-				if( $workPeriodBool == 1)
-				{
-					$bookingBool = isEmpBooked($empID, $startDateTime, $endDateTime, $db);
-					if($bookingBool == 1) 
-					{
-						$employee = $empID;
-						$found = 1;
-						break;
-					}
-				}
-			}
+			$found = findAvailableEmp($startDateTime, $endDateTime, $db);
 			
-			if($found == 0)
+			if($found == -1)
 			{
 				$_SESSION['bookingError'] = "There are no available employees during this time.";
 				$logger->error("Booking was not successful, there are no available employees.");
 				header("location: ../../businessPageCreateBooking.php");
+			}
+			else
+			{
+				$employee = $found;
 			}
 		}
 		
@@ -128,6 +110,30 @@ else
 	header("location: ../../businessPageCreateBooking.php");
 } 
 
+function findAvailableEmp($startDT, $endDT, $db)
+{
+	$query = "SELECT * FROM employee;";
+	$results = $db->select($query);
+	$found = 0;
+	$workPeriodBool = 0;
+	$bookingBool = 0;
+	
+	while($row = mysqli_fetch_array($results)) {	
+		$empID = $row['employeeID'];
+		$workPeriodBool = isEmpWorking($empID, $startDT, $endDT, $db);
+		if( $workPeriodBool == 1)
+		{
+			$bookingBool = isEmpBooked($empID, $startDT, $endDT, $db);
+			if($bookingBool == 1) 
+			{
+				return $empID;
+			}
+		}
+	}
+	
+	return -1;
+}
+
 function isEmpWorking($emp, $startDT, $endDT, $db)
 {
 	$results = $db->select("SELECT * FROM workperiod WHERE employeeID = ".$emp.";");
@@ -179,6 +185,13 @@ function isEmpBooked($emp, $startDT, $endDT, $db)
 		}
 	}
 	return $bool;
+}
+
+function dateFormatter($date, $time)
+{
+	$datePieces = explode("/", $date);
+	$combineDateTime = "$datePieces[2]-$datePieces[1]-$datePieces[0] $time:00";
+	return date("Y-m-d H:i:s", strtotime($combineDateTime));
 }
 
 ?>
