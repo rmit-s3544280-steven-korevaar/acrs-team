@@ -22,12 +22,11 @@
 </select>
 
 <select id='businessNavigationEmployee' onchange='navigateEmployee();'>
-<option class='noDisplay'>Employees</option>
+<option class='noDisplay'>Business</option>
 <option class='businessNavigationDropDown' value='businessPageEmployeeAvailability.php'>Availability</option>
 <option class='businessNavigationDropDown' value='businessPageEmployeeAddShift.php'>Add Shift</option>
 <option class='businessNavigationDropDown' value='businessPageEmployeeEditShift.php'>Edit Shift</option>
 <option class='businessNavigationDropDown' value='businessPageEmployeeAddEmployee.php'>Add New Employee</option>
-<option class='businessNavigationDropDown' value='businessPageEmployeeAddServices.php'>Add Services</option>
 <option class='businessNavigationDropDown' value='businessPageEmployeeEditServices.php'>Edit Services</option>
 </select>
 
