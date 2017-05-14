@@ -15,9 +15,9 @@ include('./assets/ownerChecker.inc');
 include('./assets/businessBannerAndNav.inc');
 ?>
 <div class='contentHereDiv'>
-<h1>Edit Services</h1>
+<h1>Existing Services</h1>
 <table class='centreTable' border = '1'>
-<tr><th>Business ID</th><th>Service Name</th><th>Duration</th></tr>
+<tr><th>Business ID</th><th>Service Name</th><th>Duration</th><th></th></tr>
 <?php
 	$query = "SELECT * FROM BusinessActivity; ";
 	$results = $db->select($query);
@@ -27,8 +27,9 @@ include('./assets/businessBannerAndNav.inc');
 		echo "<td>".$row['businessID']."</td>";
         echo "<td>".$row['activityName']."</td>";
         echo "<td>".$row['duration']."</td>";
-		echo "</tr>";
+        echo "<td><a href=businessPage.php>Edit</a></td>";
 	}
+
 ?>
 </table>
 
