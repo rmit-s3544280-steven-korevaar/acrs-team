@@ -31,13 +31,6 @@ $results = $db->select($query);
 	}
 
 
-/* $activity = $db->select("select activityID, activityName, duration from businessActivity;");
-while ($row = mysqli_fetch_array($activity)) {
-		echo "<tr><td colspan='2'><label for=".$row['activityName']." >".$row['activityName']."</label>";
-		echo "<input type='checkbox' id='activity' name=selectedActivities[] value=".$row['activityID']." duration=".$row['duration']." class='inlinelabel' onclick='updateEndTime()' /></td></tr>";
-			}
-*/
-
 
 
 
@@ -58,6 +51,8 @@ if($checkFlag == true){
 	$serviceName = $_POST['serviceName'];
 	$duration = $_POST['duration'];
 	
+	$businessID = $_SESSION['abn'];
+
 	$result = $db->insert("insert into BusinessActivity values(null, '$businessID','$serviceName','$duration');");
 
 	if($result != false){

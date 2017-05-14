@@ -16,9 +16,22 @@ include('./assets/businessBannerAndNav.inc');
 ?>
 <div class='contentHereDiv'>
 <h1>Edit Services</h1>
-service 1			<input type="submit" value="Edit"/> <input type="submit" value="Delete"/><br/>
-service 2			<input type="submit" value="Edit"/> <input type="submit" value="Delete"/><br/>
-service 3			<input type="submit" value="Edit"/> <input type="submit" value="Delete"/>
+<table class='centreTable' border = '1'>
+<tr><th>Business ID</th><th>Service Name</th><th>Duration</th></tr>
+<?php
+	$query = "SELECT * FROM BusinessActivity; ";
+	$results = $db->select($query);
+
+	while($row = mysqli_fetch_array($results)) {
+		echo "<tr>";
+		echo "<td>".$row['businessID']."</td>";
+        echo "<td>".$row['activityName']."</td>";
+        echo "<td>".$row['duration']."</td>";
+		echo "</tr>";
+	}
+?>
+</table>
+
 
 
 
@@ -40,6 +53,7 @@ service 3			<input type="submit" value="Edit"/> <input type="submit" value="Dele
 </tr>
 </table>
 <input type="submit" value="Add"/>
+
 
 
 
