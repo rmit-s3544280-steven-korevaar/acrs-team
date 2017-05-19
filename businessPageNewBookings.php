@@ -22,7 +22,7 @@ include('./assets/businessBannerAndNav.inc');
 <?php
 /* Query to Select all bookings between todays date and next 7 days */
 $results = $db->select("select bookingID, fullname, startDateTime, endDateTime, otherDetails from user as a 
-inner join booking as b on a.username=b.username where startDateTime between date(now()) 
+inner join booking as b on a.username=b.username WHERE businessID = '{$_SESSION['abn']}' AND startDateTime between date(now()) 
 and date_add(date(now()), interval 7 day) order by startDateTime asc;");
 
 /* If no results are found, print "No new bookings", else 

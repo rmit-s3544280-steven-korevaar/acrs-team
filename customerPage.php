@@ -22,7 +22,7 @@ include('./assets/customerBannerAndNav.inc');
 <tr><th>Date</th><th>Start Time</th><th>End Time</th><th>Services</th><th>Extra Notes</th></tr>
 <?php
 	$results = $db->select("SELECT bookingID, startDateTime, endDateTime, otherDetails, username FROM 
-	booking WHERE username = '".$_SESSION['username']."' order by startDateTime desc;");
+	booking WHERE businessID = '{$_SESSION['abn']}' AND username = '".$_SESSION['username']."' order by startDateTime desc;");
 	if(mysqli_num_rows($results) != 0)
 	{
 		while($row=mysqli_fetch_array($results))

@@ -47,7 +47,7 @@ include('./assets/businessBannerAndNav.inc');
 		
 		dayOfMonthFormat: 'ddd DD/MM',
 		<?php
-			$results = $db->select("SELECT openingTime, closingTime from business");
+			$results = $db->select("SELECT openingTime, closingTime from business WHERE ABN = '{$_SESSION['abn']}'");
 			while($row = mysqli_fetch_array($results)) {
 				print "minTime: '{$row['openingTime']}',";
 				print "maxTime: '{$row['closingTime']}',";
@@ -67,7 +67,7 @@ include('./assets/businessBannerAndNav.inc');
 					
 		<?php
 			$results = $db->select("SELECT employeeName, startDateTime, endDateTime 
-			FROM workperiod AS wp INNER JOIN employee AS e ON wp.employeeID=e.employeeID;");
+			FROM workperiod AS wp INNER JOIN employee AS e ON wp.employeeID=e.employeeID WHERE businessID = '{$_SESSION['abn']}';");
 
 			while($row = mysqli_fetch_array($results)) {							
 				print_r("{");

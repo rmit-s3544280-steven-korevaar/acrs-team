@@ -149,3 +149,66 @@ INFO - Customer logged in
 INFO - User logged out
 INFO - Owner logged in
 INFO - User logged out
+INFO - Owner logged in
+INFO - Owner logged in
+INFO - User logged out
+INFO - Owner logged in
+INFO - User logged out
+INFO - Owner logged in
+INFO - User logged out
+INFO - Owner logged in
+INFO - User logged out
+INFO - Owner logged in
+INFO - User logged out
+INFO - Owner logged in
+INFO - User logged out
+INFO - Customer logged in
+INFO - User logged out
+INFO - Customer logged in
+INFO - User logged out
+INFO - Owner logged in
+INFO - User logged out
+INFO - Customer logged in
+INFO - User logged out
+INFO - Customer logged in
+INFO - User logged out
+INFO - Owner logged in
+INFO - User logged out
+INFO - Owner logged in
+INFO - User logged out
+INFO - Owner logged in
+INFO - User logged out
+INFO - Customer logged in
+INFO - User logged out
+INFO - Owner logged in
+ERROR - Booking was not successful, all fields have to be filled
+INFO - Working time added Successfully
+INFO - Working time has been changed successfully
+ERROR - Error occured while changing the shift, the end time must be after the start time
+INFO - Working time has been changed successfully
+ERROR - Error occured while changing the shift, the end time must be after the start time
+INFO - Working time has been changed successfully
+INFO - Working time has been changed successfully
+INFO - Working time has been deleted successfully
+INFO - Owner succes added a new employee
+INFO - Working time added Successfully
+INFO - User logged out
+INFO - Customer logged in
+INFO - User logged out
+INFO - Customer logged in
+ERROR - Booking was not successful, there are no available employees.
+ERROR - Booking was not successful, There are no available employees for this time period.
+INFO - User logged out
+INFO - Owner logged in
+INFO - Owner succes added a new employee
+INFO - Working time added Successfully
+INFO - Working time has been changed successfully
+INFO - Working time has been deleted successfully
+INFO - User logged out
+INFO - User entered invalid login information.
+INFO - User entered invalid login information.
+INFO - User successfully registered
+ERROR - Error occured while user was trying to register, all fields need to be filled
+ERROR - Error occured while user was trying to register, all fields need to be filled
+INFO - Owner logged in
+INFO - User logged out

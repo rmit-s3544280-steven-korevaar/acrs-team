@@ -48,7 +48,7 @@ if (!empty($_POST['selectedCustomer']) && $_POST['selectedCustomer'] != 'Select 
 		
 		if($employee == "any")
 		{
-			$query = "SELECT * FROM employee;";
+			$query = "SELECT * FROM employee WHERE businessID = '{$_SESSION['abn']}';";
 			$results = $db->select($query);
 			$found = 0;
 			$workPeriodBool = 0;
@@ -85,7 +85,7 @@ if (!empty($_POST['selectedCustomer']) && $_POST['selectedCustomer'] != 'Select 
 			
 			$results = $db->insert("insert into booking values(null,\"".$username."\",\"".$startDateTime."\",\"".$endDateTime."\",\"".$ABN."\",\"".$otherDetails."\");");
 			
-			$results = $db->select("select bookingID from booking where username = \"".$username."\" order by bookingID desc limit 1;");
+			$results = $db->select("select bookingID from booking where businessID = '{$_SESSION['abn']}' and username = \"".$username."\" order by bookingID desc limit 1;");
 			$bookingIDinit = mysqli_fetch_array($results);
 			$bookingID = $bookingIDinit["bookingID"];
 			
@@ -161,7 +161,7 @@ function isEmpBooked($emp, $startDT, $endDT, $db)
 
 	//$results = $db->select("SELECT * FROM booking WHERE employee=".$emp.";");
 	
-	$results = $db->select("SELECT * FROM booking AS b INNER JOIN bookingEmployee AS e ON b.bookingID=e.bookingID WHERE employeeID=".$emp.";");
+	$results = $db->select("SELECT * FROM booking AS b INNER JOIN bookingEmployee AS e ON b.bookingID=e.bookingID WHERE businessID = '{$_SESSION['abn']}' AND employeeID=".$emp.";");
 
 	$bool = 1;
 	$bookingIterator = 0;

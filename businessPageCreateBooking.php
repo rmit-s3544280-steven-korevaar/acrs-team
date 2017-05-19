@@ -51,7 +51,7 @@ include('./assets/businessBannerAndNav.inc');
 		<tr><th colspan="2">Services: </th></tr> <!--CH: 18/04-->
 
 		<?php
-			$activity = $db->select("select activityID, activityName, duration from businessActivity;");
+			$activity = $db->select("select activityID, activityName, duration from businessActivity WHERE businessID = '{$_SESSION['abn']}';");
 			while ($row = mysqli_fetch_array($activity)) {
 				echo "<tr><td colspan='2'><label for=".$row['activityName']." >".$row['activityName']."</label>";
 				echo "<input type='checkbox' id='activity' name=selectedActivities[] value=".$row['activityID']." duration=".$row['duration']." class='inlinelabel' onclick='updateEndTime()' /></td></tr>";
@@ -61,7 +61,7 @@ include('./assets/businessBannerAndNav.inc');
 		<tr><td colspan="2"><select name="employeeID" id="employeeID">
 		<option value="any">Any Available</option>
 		<?php
-			$results = $db->select("SELECT * FROM employee;");
+			$results = $db->select("SELECT * FROM employee WHERE businessID = '{$_SESSION['abn']}';");
 				while($row = mysqli_fetch_array($results)) {							
 					print_r("<option value= \"".$row['employeeID']."\">".$row['employeeName']."</option>");
 				}
@@ -118,7 +118,7 @@ include('./assets/businessBannerAndNav.inc');
 		
 		dayOfMonthFormat: 'ddd DD/MM',
 		<?php
-			$results = $db->select("SELECT openingTime, closingTime from business");
+			$results = $db->select("SELECT openingTime, closingTime from business WHERE ABN = '{$_SESSION['abn']}';");
 			while($row = mysqli_fetch_array($results)) {
 				print "minTime: '{$row['openingTime']}',";
 				print "maxTime: '{$row['closingTime']}',";
@@ -137,7 +137,7 @@ include('./assets/businessBannerAndNav.inc');
 		},
 					
 		<?php
-			$query = "SELECT * FROM booking AS b LEFT JOIN (SELECT bookingID, employeeName FROM bookingemployee be, employee e WHERE be.employeeID=e.employeeID) as be ON b.bookingID=be.bookingID;";
+			$query = "SELECT * FROM booking AS b LEFT JOIN (SELECT bookingID, employeeName FROM bookingemployee be, employee e WHERE businessID = '{$_SESSION['abn']}' AND be.employeeID=e.employeeID) as be ON b.bookingID=be.bookingID WHERE businessID = '{$_SESSION['abn']}';";
 			$results = $db->select($query);
 			while($row = mysqli_fetch_array($results)) {							
 				print_r("{");
@@ -154,7 +154,7 @@ include('./assets/businessBannerAndNav.inc');
 				print_r("},");
 			}
 			
-			$query = "SELECT employeeName, startDateTime, endDateTime FROM workperiod AS wp INNER JOIN employee AS e ON wp.employeeID=e.employeeID;";
+			$query = "SELECT employeeName, startDateTime, endDateTime FROM workperiod AS wp INNER JOIN employee AS e ON wp.employeeID=e.employeeID WHERE businessID = '{$_SESSION['abn']}';";
 			$results = $db->select($query);
 
 			while($row = mysqli_fetch_array($results)) {							
