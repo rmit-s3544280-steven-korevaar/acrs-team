@@ -22,7 +22,8 @@
 </select>
 
 <select id='businessNavigationEmployee' onchange='navigateEmployee();'>
-<option class='noDisplay'>Employees</option>
+<option class='noDisplay'>Business Administration</option>
+<option class='businessNavigationDropDown' value='businessPageEmployeeAddServices.php'>Add New Service</option>
 <option class='businessNavigationDropDown' value='businessPageEmployeeAvailability.php'>Availability</option>
 <option class='businessNavigationDropDown' value='businessPageEmployeeAddShift.php'>Add Shift</option>
 <option class='businessNavigationDropDown' value='businessPageEmployeeEditShift.php'>Edit Shift</option>

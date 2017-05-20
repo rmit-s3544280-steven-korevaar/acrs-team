@@ -17,20 +17,22 @@ function updateEndTime() {
     var hours = timeSplit[0];
     var mins = timeSplit[1];
     var i;
-    var duration = 0;
+	 var durationH = 0;
+    var durationM = 0;
 
     var checkbox = theForm.getElementsByClassName('inlinelabel');
     
 
     for (i = 0; i < checkbox.length; i++) {
         if (checkbox[i].checked) {
-            duration += parseInt(checkbox[i].getAttribute('duration').split(":")[1]);
+				durationH += parseInt(checkbox[i].getAttribute('duration').split(":")[0]);
+            durationM += parseInt(checkbox[i].getAttribute('duration').split(":")[1]);
         } 
     }
 
     
-    mins = parseInt(mins) + parseInt(duration);
-    hours = parseInt(parseInt(hours) + (mins/60));
+    mins = parseInt(mins) + parseInt(durationM);
+    hours = parseInt(parseInt(hours) + (mins/60) + durationH);
     mins = mins % 60;
 
     var currentTime = hours + ':' + pad(mins);
