@@ -108,7 +108,7 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 		{
 			$_SESSION['bookingError'] = "There are no available employees for this time period.";
 			$logger->error("Booking was not successful, There are no available employees for this time period.");
-			header("location: ../../customerBooking.php");
+			//header("location: ../../customerBooking.php");
 		}
 	}
 	else
@@ -129,7 +129,7 @@ else
 
 function isEmpWorking($emp, $startDT, $endDT, $db)
 {
-	$results = $db->select("SELECT * FROM workperiod WHERE employeeID = ".$emp.";");
+	$results = $db->select("SELECT * FROM workperiod WHERE employeeID = '$emp';");
 
 	$bool = 0;
 	$workIterator = 0;
@@ -179,5 +179,4 @@ function isEmpBooked($emp, $startDT, $endDT, $db)
 	}
 	return $bool;
 }
-
 ?>

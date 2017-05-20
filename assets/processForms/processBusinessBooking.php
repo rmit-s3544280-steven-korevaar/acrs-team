@@ -20,7 +20,6 @@ $logger = Logger::getLogger("main");
 
 /* Instantiate database */
 include('./databaseClass.inc');
-
 if (!empty($_POST['selectedCustomer']) && $_POST['selectedCustomer'] != 'Select Customer' && !empty($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTime']) && !empty($_POST['employeeID']))
 {
 
@@ -130,7 +129,7 @@ else
 
 function isEmpWorking($emp, $startDT, $endDT, $db)
 {
-	$results = $db->select("SELECT * FROM workperiod WHERE employeeID = ".$emp.";");
+	$results = $db->select("SELECT * FROM workperiod WHERE employeeID = '$emp';");
 
 	$bool = 0;
 	$workIterator = 0;
@@ -157,6 +156,7 @@ function isEmpWorking($emp, $startDT, $endDT, $db)
 
 function isEmpBooked($emp, $startDT, $endDT, $db) 
 {
+	session_start();
 	//$results = $db->select("SELECT * FROM workperiod AS wp INNER JOIN employee AS e ON wp.employeeID=e.employeeID;");
 
 	//$results = $db->select("SELECT * FROM booking WHERE employee=".$emp.";");
@@ -180,5 +180,4 @@ function isEmpBooked($emp, $startDT, $endDT, $db)
 	}
 	return $bool;
 }
-
 ?>

@@ -36,7 +36,7 @@ include('./assets/businessBannerAndNav.inc');
 		<tr><th><select name="selectedCustomer" id="customerNameOptions" >
 		<option class='noDisplay'>Select Customer</option>
 		<?php
-			$query="select * from user where username <> (select username from userbusiness) order by fullname asc;";
+			$query="select * from user where username <> (select username from userbusiness WHERE ABN = '{$_SESSION['abn']}' ) order by fullname asc;";
 			$results = $db->select($query);
 			while($row = mysqli_fetch_array($results)) {							
 				print "<option value= {$row['username']}>{$row['fullname']}</option>";
