@@ -14,7 +14,6 @@
  * redirect appropriately.
  * 
  ********************************************************************/
-
 include('../../datalogging/Logger.php');
 Logger::configure('../../config.xml');
 $logger = Logger::getLogger("main");
@@ -29,20 +28,8 @@ $results = $db->select("select * from user where username='$username' and passwo
 if(mysqli_num_rows($results) > 0){
 	//Store username in the global array under the username variable, for future use.
 	$_SESSION['username'] = "$username";
-	
-	//Get ABN for customer processBooking.php
-	$ABNresults = $db->select("select ABN from business;");
-	if(mysqli_num_rows($ABNresults) != 0)
-	{
-		while($ABN=mysqli_fetch_array($ABNresults))
-		{
-			
-			$_SESSION['abn'] = "{$ABN['ABN']}";
-		}
-	}
-	
 	//Check to see if it is a customer or a owner
-	$checkResult = $db->select("select * from userbusiness where username like '$username';");
+	$checkResult = $db->select("select * from userbusiness where username like '$username' AND ABN = '{$_SESSION['abn']}';");
 	if(mysqli_num_rows($checkResult) > 0){	//If a result is found, check to see if the user is a owner.
 		$logger->info("Owner logged in");
 		header("location: ../../businessPage.php");	//If is a owner, send to owner management page
@@ -57,7 +44,7 @@ else{
 	//If incorrect username or password, send back to index.php with a error message.
 	$_SESSION['loginError'] = "! Incorrect username or password, Please try again.";
 	$logger->info("User entered invalid login information.");
-	header("location: ../../index.php");
+	header("location: ../../login.php");
 }
 exit(0);
 ?>

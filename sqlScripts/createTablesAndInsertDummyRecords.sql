@@ -30,7 +30,8 @@ address text not null,
 phoneNo varchar(11) not null,
 openingTime time,
 closingTime time,
-ABN varchar(11) primary key
+ABN varchar(11) primary key,
+image text
 );
 
 create table businessActivity(
@@ -117,7 +118,7 @@ CONSTRAINT bookingEmployee PRIMARY KEY (bookingID,employeeID)
 /* Script used to insert dummy records for testing purposes.
  */
 --Insert record into business: business-name, owner-name, address, ph-num, openingTime, closingTime, business-abn
-insert into business values("The Dog Groomer","Chloe Jane Smith","98 Maine St VIC 3000","0398765432","09:00:00","18:00:00","56497978719");
+insert into business values("The Dog Groomer","Chloe Jane Smith","98 Maine St VIC 3000","0398765432","09:00:00","18:00:00","56497978719","dogGroomer.png");
 
 --Insert record into businessActivity: activityID, businessID, activityName, duration
 insert into businessActivity values(null,"56497978719","Clip","00:19:00");

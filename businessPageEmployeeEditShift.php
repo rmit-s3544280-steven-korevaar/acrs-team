@@ -36,7 +36,7 @@ include('./assets/businessBannerAndNav.inc');
 <select name="employeeID" id="employeeNameOptions" onchange='changeSessionEmployeeID();'>
 <option class='noDisplay'>Select Employee</option>
   <?php
-		$results = $db->select("SELECT * FROM employee;");
+		$results = $db->select("SELECT * FROM employee WHERE businessID = '{$_SESSION['abn']}';");
 		if(isset($_SESSION['employeeID']) && !empty($_SESSION['employeeID'])){
 			$employeeID = $_SESSION['employeeID'];
 			while($row = mysqli_fetch_array($results)) {
@@ -115,7 +115,7 @@ else if(isset($_SESSION['shiftError']) && !empty($_SESSION['shiftError'])){
 		
 		dayOfMonthFormat: 'ddd DD/MM',
 		<?php
-			$results = $db->select("SELECT openingTime, closingTime from business");
+			$results = $db->select("SELECT openingTime, closingTime from business WHERE ABN = '{$_SESSION['abn']}';");
 			while($row = mysqli_fetch_array($results)) {
 				print "minTime: '{$row['openingTime']}',";
 				print "maxTime: '{$row['closingTime']}',";
@@ -142,7 +142,7 @@ else if(isset($_SESSION['shiftError']) && !empty($_SESSION['shiftError'])){
 				$employeeID = $_SESSION['employeeID'];
 				$results = $db->select("SELECT wp.employeeID, workperiodID, employeeName, startDateTime, endDateTime 
 				FROM workperiod AS wp INNER JOIN employee AS e ON wp.employeeID=e.employeeID 
-				where wp.employeeID = '$employeeID';");
+				WHERE wp.employeeID = '$employeeID' AND businessID = '{$_SESSION['abn']}';");
 
 				unset($_SESSION['employeeID']);
 			}
@@ -153,7 +153,7 @@ else if(isset($_SESSION['shiftError']) && !empty($_SESSION['shiftError'])){
 			else
 			{
 				$results = $db->select("SELECT wp.employeeID, workperiodID, employeeName, startDateTime, endDateTime 
-				FROM workperiod AS wp INNER JOIN employee AS e ON wp.employeeID=e.employeeID;");
+				FROM workperiod AS wp INNER JOIN employee AS e ON wp.employeeID=e.employeeID WHERE businessID = '{$_SESSION['abn']}';");
 			}
 			while($row = mysqli_fetch_array($results)) {							
 				print_r("{");

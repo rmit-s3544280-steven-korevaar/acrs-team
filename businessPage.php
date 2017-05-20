@@ -24,7 +24,7 @@
 <tr><th>Date</th><th>Start Time</th><th>End Time</th><th>Customer Name</th><th>Service</th><th>Extra Notes</th></tr>
 <?php
 	$results = $db->select("select bookingID,fullname, startDateTime, endDateTime, otherDetails from user as a 
-	inner join booking as b on a.username=b.username order by startDateTime asc;");
+	inner join booking as b on a.username=b.username WHERE businessID = '{$_SESSION['abn']}' order by startDateTime asc;");
 	if(mysqli_num_rows($results) != 0)
 	{
 		while($row=mysqli_fetch_array($results))

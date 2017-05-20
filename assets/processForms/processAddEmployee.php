@@ -63,7 +63,7 @@ function checkInputData(){
 	return true;
 }
 function searchExistingEmployeeID($db,$employeeID){
-	$result = $db->select("SELECT * FROM employee where employeeID = '$employeeID';");
+	$result = $db->select("SELECT * FROM employee where employeeID = '$employeeID' and businessID = '{$_SESSION['abn']}';");
 	if( mysqli_fetch_array($result) == null ){
 		return false;
 	}

@@ -7,7 +7,7 @@
  ********************************************************************/
 ?>
 <div class='headingBannerDiv'>
-<h1>Booking Website</h1>
+<h1><?php print "{$_SESSION['businessName']}"; ?> Booking Website</h1>
 </div>
 <!--Navigation Bar for Customer-->
 <div class='customerNavigationDiv'>
