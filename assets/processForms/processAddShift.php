@@ -21,6 +21,7 @@ $logger = Logger::getLogger("main");
 
 /* Instantiate database */
 include('./databaseClass.inc');
+require_once('processes.php');
 
 if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTime']) && !empty($_POST['employeeID']))
 {
@@ -30,30 +31,7 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 	$endTime = $_POST['endTime'];
 	$employeeID = $_POST['employeeID'];
 	
-	/* Rearrange date time into format which PHP and MySQL can manipulate */
-	$startDateTime = dateFormatter($date, $startTime);
-	$endDateTime = dateFormatter($date, $endTime);
-	
-	/* Check whether the set End Date Time is after the Start Date Time */
-	if($startDateTime < $endDateTime) {
-		$result = $db->insert("insert into workPeriod values(null,'$startDateTime','$endDateTime','$employeeID');");
-		if($result != false){
-			$_SESSION['shiftAdded'] = "Successfully added working time.";
-			$logger->info("Working time added Successfully");
-			header("location: ../../businessPageEmployeeAddShift.php");
-		}
-		else{
-			$_SESSION['shiftError'] = "Unable to add shift.";
-			$logger->error("Error occured while trying to add shift");
-			header("location: ../../businessPageEmployeeAddShift.php");
-		}
-	}
-	else {
-		$_SESSION['shiftError'] = "The end time must be after the start time.";
-		$logger->error("Error occured while trying to add add shift, the end time must be after the start time");
-		header("location: ../../businessPageEmployeeAddShift.php");
-	}
-	
+	processes::addShift($date, $startTime, $endTime, $employeeID, $db, $logger);
 }
 else
 {
@@ -61,12 +39,5 @@ else
 	$logger->error("Error occured while trying to add shift, all fields have to be filled");
 	header("location: ../../businessPageEmployeeAddShift.php");
 } 
-
-function dateFormatter($date, $time)
-{
-	$datePieces = explode("/", $date);
-	$combineDateTime = "$datePieces[2]-$datePieces[1]-$datePieces[0] $time:00";
-	return date("Y-m-d H:i:s", strtotime($combineDateTime));
-}
 
 ?>

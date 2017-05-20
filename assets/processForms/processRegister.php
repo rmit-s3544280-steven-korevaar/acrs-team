@@ -19,6 +19,7 @@ $logger = Logger::getLogger("main");
 
 /* Instantiate database */
 include('./databaseClass.inc');
+require_once('processes.php');
 
 /*Check if input data exists and Initialise variables to call easier*/
 $checkForData = array('username','password','fullname','address','phone');
@@ -36,18 +37,7 @@ if($checkFlag == true){
 	$address = $_POST['address'];
 	$phone = $_POST['phone'];
 	
-	$result = $db->insert("insert into user values('$username','$fullname','$address','$phone',SHA('$password'));");
-	if($result != false){
-		//If successful register, send back to index.php with success message.
-		$_SESSION['registerSuccess'] = "Register successful, Please login.";
-		$logger->info("User successfully registered");
-		header("location: ../../login.php");
-	}
-	else{//If username already exists, send back to index.php with a error message.
-		$_SESSION['registerError'] = "! That username is unavailable, Please try another.";
-		$logger->error("Error occured while user was trying to register, username is unavailable");
-		header("location: ../../login.php");
-	}
+	processes::register($username, $fullname, $address, $phone, $password, $db, $logger);
 }
 else{
 	$_SESSION['returnData'] = array($_POST['username'],$_POST['password'],$_POST['fullname'],$_POST['address'],$_POST['phone']);

@@ -21,6 +21,7 @@ $logger = Logger::getLogger("main");
 
 /* Instantiate database */
 include('./databaseClass.inc');
+require_once("processes.php");
 
 /* ADD SERVICES PART */
 /*If all data exists, continue with the adding employee process*/
@@ -29,22 +30,8 @@ if( checkExistingFields() == true ){
 	$serviceName = $_POST['serviceName'];
 	$durationM = $_POST['durationM'];
 	
-	$duration = dateFormatter($durationM);
-	if ( checkValidTime($duration) == true ){
-		$result = $db->insert("insert into BusinessActivity values(null, '$businessID','$serviceName','$duration');");
-
-		if($result != false){
-			//If successful add, refresh the page businessPageEmployeeEditServices.php with success message.
-			$_SESSION['returnSuccess'] = "Successfully added new Service.";
-			$logger->info("Owner successfully added a new service");
-			header("location: ./../../businessPageEmployeeAddServices.php");
-		}
-	}
-	else{
-		$_SESSION['returnError'] = "Duration needs to be within 1 and 60 mins.";
-		$logger->error("Error occured while owner trying to add a new service, Invalid duration. ");
-		header("location: ./../../businessPageEmployeeAddServices.php");
-	}
+	processes::addServices($durationM, $businessID, $serviceName, $db, $logger);
+	
 }
 else{
 	$_SESSION['returnError'] = "Please enter data in all fields.";
@@ -67,17 +54,5 @@ function checkExistingFields(){
 	}
 	return true;
 }
-function dateFormatter($durationM)
-{
-	$hours = (int)($durationM / 60);
-	$minutes = (int)($durationM % 60);
-	$duration = date("H:i:s",strtotime("0$hours:$minutes:00"));
-	return $duration;
-}
-function checkValidTime($time){
-	if( $time >= date("H:i:s",strtotime("00:01:00")) && $time <= date("H:i:s",strtotime("01:00:00")) ){
-		return true;
-	}
-	return false;
-}
+
 ?>
