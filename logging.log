@@ -430,3 +430,56 @@ INFO - User logged out
 INFO - Owner logged in
 INFO - User logged out
 INFO - Owner logged in
+INFO - User logged out
+INFO - Owner logged in
+INFO - User logged out
+INFO - User successfully registered
+ERROR - Error occured while user was trying to register, Passwords do not match
+INFO - User successfully registered
+ERROR - Error occured while user was trying to register, username is unavailable
+ERROR - Error occured while user was trying to register, Passwords do not match
+INFO - User successfully registered
+ERROR - Error occured while user was trying to register, Passwords do not match
+INFO - User successfully registered
+INFO - User entered invalid login information.
+INFO - Customer logged in
+INFO - User logged out
+INFO - Owner logged in
+INFO - Owner succes added a new employee
+INFO - Owner successfully added a new service
+ERROR - Error occured while owner trying to add a new service, Invalid duration. 
+ERROR - Error occured while owner trying to add a new service, Invalid duration. 
+INFO - Owner successfully added a new service
+ERROR - Error occured while changing the shift, work period outside business hours
+ERROR - Error occured while changing the shift, all fields have to be filled
+ERROR - Error occured while changing the shift, all fields have to be filled
+ERROR - Error occured while changing the shift, work period outside business hours
+ERROR - Error occured while changing the shift, work period outside business hours
+ERROR - Error occured while changing the shift, work period outside business hours
+INFO - Working time added Successfully
+ERROR - Error occured while changing the shift, work period outside business hours
+INFO - Working time has been changed successfully
+INFO - Working time has been changed successfully
+ERROR - Error occured while changing the shift, work period outside business hours
+INFO - Working time has been changed successfully
+INFO - Working time has been changed successfully
+INFO - Working time has been deleted successfully
+INFO - Working time added Successfully
+ERROR - Error occured while changing the shift, work period outside business hours
+ERROR - Error occured while changing the shift, work period outside business hours
+INFO - Working time has been changed successfully
+INFO - Working time has been changed successfully
+INFO - Working time has been changed successfully
+INFO - Working time has been changed successfully
+ERROR - Error occured while changing the shift, work period outside business hours
+ERROR - Error occured while changing the shift, Booking period outside business hours
+ERROR - Booking was not successful, all fields have to be filled
+ERROR - Error occured while changing the shift, Booking period outside business hours
+INFO - A new booking has been made!
+INFO - User logged out
+INFO - Customer logged in
+ERROR - Error occured while changing the shift, Booking period outside business hours
+ERROR - Error occured while changing the shift, Booking period outside business hours
+INFO - A new booking has been made!
+INFO - User logged out
+INFO - Owner logged in

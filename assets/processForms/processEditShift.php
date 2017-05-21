@@ -34,6 +34,14 @@ if (checkExistingFields() == true)
 	$employeeID = $_POST['employeeID'];
 	$action = $_POST['action'];
 	
+	$abn = $_SESSION['abn'];
+	
+	if( helpers::insideBusinessHours($startTime,$endTime,$abn,$db) == 0 ){
+		$_SESSION['shiftError'] = "Work Period is outside of business hours.";
+		$logger->error("Error occured while changing the shift, work period outside business hours");
+		header("location: ../../businessPageEmployeeEditShift.php");
+		exit(0);
+	}
 	$results = processes::editShift($date, $startTime, $endTime, $workPeriodID, $employeeID, $action, $db);
 	echo $results;
 

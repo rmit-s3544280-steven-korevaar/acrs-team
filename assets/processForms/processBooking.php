@@ -38,6 +38,13 @@ if (checkExistingFields() == true)
 	$locF = "location: ../../customerBooking.php";
 	$locS = "location: ../../customerPage.php";
 
+	if( helpers::insideBusinessHours($startTime,$endTime,$abn,$db) == 0 ){
+		$_SESSION['bookingError'] = "Booking Period is outside of business hours.";
+		$logger->error("Error occured while changing the shift, Booking period outside business hours");
+		header($locF);
+		exit(0);
+	}
+	
 	/* Rearrange date time into format which PHP and MySQL can manipulate */
 	$results = processes::booking($username, $abn, $date, $startTime, $endTime, $employee, $otherDetails, $activities, $db);
 

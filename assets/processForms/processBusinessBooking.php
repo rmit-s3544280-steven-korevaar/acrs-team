@@ -36,13 +36,20 @@ if (!empty($_POST['selectedCustomer']) && $_POST['selectedCustomer'] != 'Select 
 	$activities = $_POST['selectedActivities'];
 	
 	$locF = "location: ../../businessPageCreateBooking.php";
-	$locS = "location: ../../businessPage.php";
+	$locS = "location: ../../businessPageCreateBooking.php";
 
+	if( helpers::insideBusinessHours($startTime,$endTime,$abn,$db) == 0 ){
+		$_SESSION['bookingError'] = "Booking Period is outside of business hours.";
+		$logger->error("Error occured while changing the shift, Booking period outside business hours");
+		header($locF);
+		exit(0);
+	}
 
 	$results = processes::booking($username, $abn, $date, $startTime, $endTime, $employee, $otherDetails, $activities, $db);
 
 	if($results == 1)
 	{
+		$_SESSION['bookingSuccess'] = "Successfully booked.";
 		$logger->info("A new booking has been made!");
 		header($locS);
 	}

@@ -33,12 +33,19 @@ foreach($checkForData as $data){
 if($checkFlag == true){
 	$username = $_POST['username'];
 	$password = $_POST['password'];
+	$checkpassword = $_POST['checkpassword'];
 	$fullname = $_POST['fullname'];
 	$address = $_POST['address'];
 	$phone = $_POST['phone'];
 	
+	if ( helpers::checkPassword($password,$checkpassword) == false){
+		$_SESSION['registerError'] = "! Passwords do not match.";
+		$logger->error("Error occured while user was trying to register, Passwords do not match");
+		header("location: ../../login.php");
+		exit(0);
+	}
 	$results = processes::register($username, $fullname, $address, $phone, $password, $db, $logger);
-
+	
 	if($results == 1)
 	{
 		$_SESSION['registerSuccess'] = "Register successful, Please login.";

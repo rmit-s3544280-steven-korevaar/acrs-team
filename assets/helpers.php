@@ -227,7 +227,26 @@ class helpers
             return 0;
         }
     }
-	
+	public static function insideBusinessHours($startDateTime,$endDateTime,$abn,$db)
+	{
+		$open;
+		$close;
+		$results = $db->select("select openingTime, closingTime from business where abn = '$abn';");
+		while($row = mysqli_fetch_array($results)){
+		$open = $row['openingTime'];
+		$close = $row['closingTime'];	
+		}
+
+		if( (date("H:i:s",strtotime($startDateTime)) >= date("H:i:s",strtotime($open))) && 
+		(date("H:i:s",strtotime($startDateTime)) <= date("H:i:s",strtotime($close))) &&
+		(date("H:i:s",strtotime($endDateTime)) >= date("H:i:s",strtotime($open))) && 
+		(date("H:i:s",strtotime($endDateTime)) <= date("H:i:s",strtotime($close)))){
+			return 1;
+		}
+		else{
+			return 0;
+		}
+	}
 }
 
 ?>
