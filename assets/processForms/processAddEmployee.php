@@ -32,8 +32,25 @@ if( checkInputData() == true ){
 	$employeeID = $_POST['employeeID'];
 	$businessID = $_SESSION['abn'];
 	
-	processes::addEmployee($employeeName, $jobTitle, $employeeID, $businessID, $db, $logger);
+	$results = processes::addEmployee($employeeName, $jobTitle, $employeeID, $businessID, $db);
 	
+	if($results == 1)
+	{
+		//If successful add, send back to businessPageEmployeeAddEmployee.php with success message.
+		$_SESSION['returnSuccessAddEmployeeMessage'] = "Successfully added new Employee.";
+		$logger->info("Owner succes added a new employee");
+		header("location: ./../../businessPageEmployeeAddEmployee.php");
+	}
+	else
+	{
+		/* If unsuccessfull, send back to businessPageEmployeeAddEmployee.php with error message.
+		 * EmployeeID is already in system.
+		 */
+		$_SESSION['returnErrorAddEmployeeMessage'] = "A employee of that 'Employee Number' is already in the system.";
+		$logger->error("Error occured while owner trying to add a new employee, employee number already exists");
+		header("location: ./../../businessPageEmployeeAddEmployee.php");
+	}
+
 }
 else{
 	$_SESSION['returnErrorAddEmployeeMessage'] = "Please enter data in all fields.";

@@ -23,6 +23,7 @@ class helpers
 	public static function timeCheck($start, $end)
 	{
 		if($end < $start){
+			header("location: ./../../businessPageEmployeeAddEmployee.php");
 			return false;
 		}
 		return true;
@@ -131,6 +132,7 @@ class helpers
 			");
 		if(mysqli_num_rows($check) == 0)
 		{
+			
 			return true;
 		}
 		else

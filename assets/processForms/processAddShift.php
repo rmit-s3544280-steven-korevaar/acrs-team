@@ -31,7 +31,27 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 	$endTime = $_POST['endTime'];
 	$employeeID = $_POST['employeeID'];
 	
-	processes::addShift($date, $startTime, $endTime, $employeeID, $db, $logger);
+	$results = processes::addShift($date, $startTime, $endTime, $employeeID, $db);
+
+	if($results == 1)
+	{
+		$_SESSION['shiftAdded'] = "Successfully added working time.";
+		$logger->info("Working time added Successfully");
+		header("location: ../../businessPageEmployeeAddShift.php");
+	}
+	elseif($results == -1)
+	{
+		$_SESSION['shiftError'] = "Unable to add shift.";
+		$logger->error("Error occured while trying to add shift");
+		header("location: ../../businessPageEmployeeAddShift.php");
+	}
+	elseif($results == -2)
+	{
+		$_SESSION['shiftError'] = "The end time must be after the start time.";
+		$logger->error("Error occured while trying to add add shift, the end time must be after the start time");
+		header("location: ../../businessPageEmployeeAddShift.php");
+	}
+
 }
 else
 {

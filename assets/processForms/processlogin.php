@@ -25,7 +25,24 @@ require_once('processes.php');
 $username = $_POST['username'];
 $password = $_POST['password'];
 		
-processes::login($username, $password, $db, $logger);
+$results = processes::login($username, $password, $db);
+
+if($results == 1)
+{
+	$logger->info("Owner logged in");
+	header("location: ../../businessPage.php");	//If is a owner, send to owner management page
+}
+elseif($results == 2)
+{
+	$logger->info("Customer logged in");
+	header("location: ../../customerPage.php");	//If is a customer, send to customer page
+}
+else
+{
+	$_SESSION['loginError'] = "! Incorrect username or password, Please try again.";
+	$logger->info("User entered invalid login information.");
+	header("location: ../../login.php");
+}
  
 exit(0);
 ?>

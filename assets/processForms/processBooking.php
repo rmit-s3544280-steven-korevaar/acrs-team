@@ -39,7 +39,33 @@ if (checkExistingFields() == true)
 	$locS = "location: ../../customerPage.php";
 
 	/* Rearrange date time into format which PHP and MySQL can manipulate */
-	processes::booking($username, $abn, $date, $startTime, $endTime, $employee, $otherDetails, $activities, $db, $logger, $locS, $locF);
+	$results = processes::booking($username, $abn, $date, $startTime, $endTime, $employee, $otherDetails, $activities, $db);
+
+	if($results == 1)
+	{
+		$logger->info("A new booking has been made!");
+		header($locS);
+	}
+	elseif($results == -1)
+	{
+		$_SESSION['bookingError'] = "There is a booking clash with this Employee.";
+		$logger->error("Booking was not successful, There is a booking clash with this Employee.");
+		header($locF);
+	}
+	elseif($results == -2)
+	{
+		$_SESSION['bookingError'] = "There are no available employees for this time period.";
+		$logger->error("Booking was not successful, There are no available employees for this time period.");
+		header($locF);
+	}
+	elseif($results == -3)
+	{
+		$_SESSION['bookingError'] = "End Time must be after Start Time.";
+		$logger->error("Booking was not successful, end time must be after start time ");
+		header($locF);
+	}
+
+
 }
 else
 {

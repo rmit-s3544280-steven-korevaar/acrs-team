@@ -37,7 +37,20 @@ if($checkFlag == true){
 	$address = $_POST['address'];
 	$phone = $_POST['phone'];
 	
-	processes::register($username, $fullname, $address, $phone, $password, $db, $logger);
+	$results = processes::register($username, $fullname, $address, $phone, $password, $db, $logger);
+
+	if($results == 1)
+	{
+		$_SESSION['registerSuccess'] = "Register successful, Please login.";
+		$logger->info("User successfully registered");
+		header("location: ../../login.php");
+	}
+	else
+	{
+		$_SESSION['registerError'] = "! That username is unavailable, Please try another.";
+		$logger->error("Error occured while user was trying to register, username is unavailable");
+		header("location: ../../login.php");
+	}
 }
 else{
 	$_SESSION['returnData'] = array($_POST['username'],$_POST['password'],$_POST['fullname'],$_POST['address'],$_POST['phone']);

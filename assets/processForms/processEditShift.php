@@ -34,7 +34,33 @@ if (checkExistingFields() == true)
 	$employeeID = $_POST['employeeID'];
 	$action = $_POST['action'];
 	
-	processes::editShift($date, $startTime, $endTime, $workPeriodID, $employeeID, $action, $db, $logger);
+	$results = processes::editShift($date, $startTime, $endTime, $workPeriodID, $employeeID, $action, $db);
+
+	if($results == 1)
+	{
+		$_SESSION['shiftAdded'] = "Successfully Edited working time.";
+		$logger->info("Working time has been changed successfully");
+		header("location: ../../businessPageEmployeeEditShift.php");
+	}
+	elseif($results == 2)
+	{
+		$_SESSION['shiftAdded'] = "Successfully Deleted working time.";
+		$logger->info("Working time has been deleted successfully");
+		header("location: ../../businessPageEmployeeEditShift.php");
+	}
+	elseif($results == -1)
+	{
+		$_SESSION['shiftError'] = "Work Period cannot overlap.";
+		$logger->error("Error occured while changing the shift, work period cannot overlap");
+		header("location: ../../businessPageEmployeeEditShift.php");
+	}
+	elseif($results == -2)
+	{
+		$_SESSION['shiftError'] = "The end time must be after the start time.";
+		$logger->error("Error occured while changing the shift, the end time must be after the start time");
+		header("location: ../../businessPageEmployeeEditShift.php");
+	}
+
 }
 else
 {

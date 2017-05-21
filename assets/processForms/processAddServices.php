@@ -30,7 +30,21 @@ if( checkExistingFields() == true ){
 	$serviceName = $_POST['serviceName'];
 	$durationM = $_POST['durationM'];
 	
-	processes::addServices($durationM, $businessID, $serviceName, $db, $logger);
+	$results = processes::addServices($durationM, $businessID, $serviceName, $db);
+
+	if($results == 1)
+	{
+		//If successful add, refresh the page businessPageEmployeeEditServices.php with success message.
+		$_SESSION['returnSuccess'] = "Successfully added new Service.";
+		$logger->info("Owner successfully added a new service");
+		header("location: ./../../businessPageEmployeeAddServices.php");
+	}
+	else
+	{
+		$_SESSION['returnError'] = "Duration needs to be within 1 and 60 mins.";
+		$logger->error("Error occured while owner trying to add a new service, Invalid duration. ");
+		header("location: ./../../businessPageEmployeeAddServices.php");
+	}
 	
 }
 else{

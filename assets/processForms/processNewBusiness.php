@@ -35,7 +35,31 @@ if(checkExistingFields() == true){
 	$ABN = $_POST['ABN'];
 	$username = $_POST['username'];
 	
-	processes::newBusiness($password, $checkpassword, $openingTime, $closingTime, $name, $ownerName, $address, $phoneNo, $ABN, $username, $db, $logger);
+	$results = processes::newBusiness($password, $checkpassword, $openingTime, $closingTime, $name, $ownerName, $address, $phoneNo, $ABN, $username, $db);
+
+	if($results == 1)
+	{
+		$_SESSION['registerSuccess'] = "Business successfully registered.";
+		$logger->info("Business successfully registered");
+		header("location: ../../createANewBusiness.php");
+	}
+	elseif($results == -1)
+	{
+		$_SESSION['returnData'] = array($_POST['name'],$_POST['ownerName'],$_POST['address'],$_POST['phoneNo'],
+		$_POST['openingTime'],$_POST['closingTime'],$_POST['ABN'],$_POST['username']);
+		$_SESSION['registerError'] = "! Closing time must be after the Opening time.";
+		$logger->error("Error occured while user was trying to register, Invalid closing/opening time.");
+		header("location: ../../createANewBusiness.php");
+	}
+	else
+	{
+		$_SESSION['returnData'] = array($_POST['name'],$_POST['ownerName'],$_POST['address'],$_POST['phoneNo'],
+		$_POST['openingTime'],$_POST['closingTime'],$_POST['ABN'],$_POST['username']);
+		$_SESSION['registerError'] = "! Passwords must match.";
+		$logger->error("Error occured while user was trying to register, Passwords do not match.");
+		header("location: ../../createANewBusiness.php");
+	}
+
 }
 else{
 	$_SESSION['returnData'] = array($_POST['name'],$_POST['ownerName'],$_POST['address'],$_POST['phoneNo'],
