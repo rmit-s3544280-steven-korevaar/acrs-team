@@ -35,6 +35,7 @@ if (checkExistingFields() == true)
 	$action = $_POST['action'];
 	
 	$results = processes::editShift($date, $startTime, $endTime, $workPeriodID, $employeeID, $action, $db);
+	echo $results;
 
 	if($results == 1)
 	{
@@ -58,6 +59,12 @@ if (checkExistingFields() == true)
 	{
 		$_SESSION['shiftError'] = "The end time must be after the start time.";
 		$logger->error("Error occured while changing the shift, the end time must be after the start time");
+		header("location: ../../businessPageEmployeeEditShift.php");
+	}
+	else
+	{
+		$_SESSION['shiftError'] = "An unknown error has occured.";
+		$logger->error("Error occured while changing the shift");
 		header("location: ../../businessPageEmployeeEditShift.php");
 	}
 

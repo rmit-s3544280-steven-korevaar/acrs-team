@@ -51,6 +51,12 @@ if (isset($_POST['date']) && !empty($_POST['startTime']) && !empty($_POST['endTi
 		$logger->error("Error occured while trying to add add shift, the end time must be after the start time");
 		header("location: ../../businessPageEmployeeAddShift.php");
 	}
+	else
+	{
+		$_SESSION['shiftError'] = "An unknown error has occured.";
+		$logger->error("Error occured while changing the shift");
+		header("location: ../../businessPageEmployeeAddShift.php");
+	}
 
 }
 else

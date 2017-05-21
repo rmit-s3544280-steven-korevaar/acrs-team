@@ -64,6 +64,12 @@ if (checkExistingFields() == true)
 		$logger->error("Booking was not successful, end time must be after start time ");
 		header($locF);
 	}
+	else
+	{
+		$_SESSION['bookingError'] = "An unknown error has occured.";
+		$logger->error("Error occured while changing the shift");
+		header($locF);
+	}
 
 
 }

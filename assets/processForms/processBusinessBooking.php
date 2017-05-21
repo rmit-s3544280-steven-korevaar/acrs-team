@@ -64,6 +64,12 @@ if (!empty($_POST['selectedCustomer']) && $_POST['selectedCustomer'] != 'Select 
 		$logger->error("Booking was not successful, end time must be after start time ");
 		header($locF);
 	}
+	else
+	{
+		$_SESSION['bookingError'] = "Unknown error.";
+		$logger->error("Booking was not successful");
+		header($locF);
+	}
 	
 }
 else

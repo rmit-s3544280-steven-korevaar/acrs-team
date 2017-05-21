@@ -77,7 +77,7 @@ class processes
 	public static function booking($username, $abn, $date, $startTime, $endTime, $employee, $otherDetails, $activities, $db)
 	{
 		if( !helpers::validTime($startTime) || !helpers::validTime($endTime)) { return 0;} 
-		if( !preg_match('/^[0-9][0-9][0-9][0-9]\/[0-9][0-9]\/[0-9][0-9]$/', $date)) {return 0;}
+		if( !preg_match('/^[0-9][0-9]\/[0-9][0-9]\/[0-9][0-9][0-9][0-9]$/', $date)) {return 0;}
 		
 		$startDateTime = helpers::dateFormatter($date, $startTime);
 		$endDateTime = helpers::dateFormatter($date, $endTime);
@@ -169,8 +169,9 @@ class processes
 	
 	public static function editShift($date, $startTime, $endTime, $workPeriodID, $employeeID, $action, $db)
 	{
-		if( !helpers::validTime($startTime) || !helpers::validTime($endTime)) { return 0;}
-		if( !preg_match('/^[0-9][0-9][0-9][0-9]\/[0-9][0-9]\/[0-9][0-9]$/', $date)) {return 0;}
+		echo $date;
+		if( !helpers::validTime($startTime) || !helpers::validTime($endTime)) { return -3;}
+		if( !preg_match('/^[0-9][0-9]\/[0-9][0-9]\/[0-9][0-9][0-9][0-9]$/', $date)) {return -3;}
 		$startDateTime = helpers::dateFormatter($date, $startTime);
 		$endDateTime = helpers::dateFormatter($date, $endTime);
 		
