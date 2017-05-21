@@ -25,7 +25,8 @@ class helpersTest extends PHPUnit_Framework_TestCase
 		);
 	}
   
-	public function testDateFormatter() {
+	public function testDateFormatter() 
+	{
 		$this->assertEquals(
 			"2017-05-15 12:00:00",
 			helpers::dateFormatter("15/05/2017", "12:00")
@@ -37,7 +38,8 @@ class helpersTest extends PHPUnit_Framework_TestCase
 		);
 	}
 	
-	public function testValidDuration() {
+	public function testValidDuration() 
+	{
 		$this->assertTrue(
 			helpers::checkValidDuration('00:60:00')
 		);
@@ -56,7 +58,8 @@ class helpersTest extends PHPUnit_Framework_TestCase
 		
 	}
 	
-	public function testDurationFormatter() {
+	public function testDurationFormatter() 
+	{
 		$this->assertEquals(
 			"01:00:00",
 			helpers::serviceDurationFormatter('60.0')
@@ -73,8 +76,9 @@ class helpersTest extends PHPUnit_Framework_TestCase
 		);
 	}
 	
-	/*
-	public function testSearchExistingEmployeeID() {
+	
+	public function testSearchExistingEmployeeID()
+	{
 		include("databaseClass.inc");
 		
 		$this->assertFalse(
@@ -84,44 +88,84 @@ class helpersTest extends PHPUnit_Framework_TestCase
 		$this->assertTrue(
 			helpers::searchExistingEmployeeID($db, "001")
 		);
+	}
+	
+	
+	// isEmpWorking($emp, $startDT, $endDT, $db)
+	public function testIsEmpWorking() 
+	{
+		include("databaseClass.inc");
+
+		// Full inside bounds
+
+		// Full out of bounds
+
+		// Half out of bounds forward
+
+		// Half out of bounds backwards
 		
 	}
-	*/
 	
-	/*
-	public function testIsEmpWorking() {
+	// isEmpBooked($emp, $startDT, $endDT, $db) 
+	public function testIsEmpBooked() 
+	{
+		include("databaseClass.inc");
+
+		// Full inside bounds
+
+		// Full out of bounds
+
+		// Half out of bounds forward
+
+		// Half out of bounds backwards
+		
+	}
+	
+	// findAvailableEmp($startDT, $endDT, $db)
+	public function testFindAvailableEmp() 
+	{
+		include("databaseClass.inc");
+
+		// Full success
+
+		// Full out of bounds
+
+		// Half out of bounds forward
+
+		// Half out of bounds backwards
+		
+	}
+	
+	// checkOverlap($startDateTime, $endDateTime, $employeeID, $workperiodID, $db)
+	public function testCheckOverlap() 
+	{
 		include("databaseClass.inc");
 		
+		// Check no overlap
+
+		// Check total overlap
+
+		// Check half overlap forward
+
+		// Check half overlap backwards
+
 	}
-	*/
-	
-	/*
-	public function testIsEmpBooked() {
+		
+	// checkPassword($password, $checkpassword)
+	public function testCheckPassword() 
+	{
 		include("databaseClass.inc");
 		
+		// Test that two passwords are the same
+		$this->assertTrue(checkPassword('apple', 'apple'));
+
+		// Test first is different
+		$this->assertFalse(checkPassword('pear', 'apple'));
+
+		// Test second is different
+		$this->assertFalse(checkPassword('apple', 'pear'));
 	}
-	*/
-	
-	/*
-	public function testFindAvailableEmp() {
-		include("databaseClass.inc");
-		
-	}
-	*/
-	
-	/*
-	public function testCheckOverlap() {
-		include("databaseClass.inc");
-		
-	}
-	*/
-	
-	/*
-	public function testCheckPassword() {
-		include("databaseClass.inc");
-		
-	}
-	*/
+
   
 }
 

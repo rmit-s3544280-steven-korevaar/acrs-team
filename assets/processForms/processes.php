@@ -8,8 +8,14 @@ class processes
 		// Search existing employeeID, employeeID must not be existing in system.
 		if( helpers::searchExistingEmployeeID($db,$employeeID) == false ){
 			$result = $db->insert("insert into employee values('$employeeName','$jobTitle','$businessID','$employeeID');");
-			// added successfully
-			return 1;
+			if($result != false){
+				// inserted correctly
+				return 1;
+			}
+			else{
+				// failed to insert
+				return -1;
+			}
 		}
 		else{
 			// no existing employee
@@ -159,7 +165,7 @@ class processes
 					return 1;
 				}
 				else{
-					// there is already a booking made for that time
+					// there is already a shift for that employee at that time
 					return -1;
 				}
 			}
@@ -170,8 +176,14 @@ class processes
 		}
 		elseif($action == "Delete Shift"){
 			$result = $db->delete("DELETE FROM workPeriod WHERE workperiodID=$workPeriodID;");
-			// deleted shift correctly
-			return 2;
+
+			if($result == true)
+			{
+				// deleted shift correctly
+				return 2;
+			}
+			// shift was not deleted 
+			return -3;
 		}
 	}
 	
@@ -214,13 +226,22 @@ class processes
 				move_uploaded_file($location, "./../images/businessImage/$filename");
 				
 				//Insert into Database
-				$db->insert("INSERT INTO business VALUES('$name','$ownerName','$address','$phoneNo','$openingTime','$closingTime','$ABN','$filename');");
+				if($db->insert("INSERT INTO business VALUES('$name','$ownerName','$address','$phoneNo','$openingTime','$closingTime','$ABN','$filename');") == false)
+				{
+					return -1;
+				}
 				
 				//Insert Business Admin account
-				$db->insert("INSERT INTO user VALUES('$username','$ownerName','$address','$phoneNo',SHA('$password'));");
+				if($db->insert("INSERT INTO user VALUES('$username','$ownerName','$address','$phoneNo',SHA('$password'));") == false)
+
+					return -1;
+				}
 				
 				//Insert into UserBusiness middle table
-				$db->insert("INSERT INTO userbusiness VALUES('$username','$ABN');");
+				if($db->insert("INSERT INTO userbusiness VALUES('$username','$ABN');") == false)
+				{
+					return -1;
+				}
 
 				// successful creation of business
 				return 1;
