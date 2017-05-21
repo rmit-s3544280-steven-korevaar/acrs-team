@@ -6,7 +6,6 @@ Group Members:
 - Steven Korevaar	s3544280
 - Asli Yoruk	s3503519
 - Ryan Tran	s3201690
-- Christine Huynh	s3438653
 
 Tutor:
 -----------------------------------------------------------------------
