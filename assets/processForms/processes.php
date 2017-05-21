@@ -1,5 +1,6 @@
 <?php
 require_once('../helpers.php');
+
 class processes
 {
 	
@@ -27,6 +28,7 @@ class processes
 	
 	public static function addShift($date, $startTime, $endTime, $employeeID, $db)
 	{
+		if( !helpers::validTime($startTime) || !helpers::validTime($endTime)) { return 0;} 
 		/* Rearrange date time into format which PHP and MySQL can manipulate */
 		$startDateTime = helpers::dateFormatter($date, $startTime);
 		$endDateTime = helpers::dateFormatter($date, $endTime);
@@ -53,6 +55,8 @@ class processes
 
 	public static function addServices($durationM, $businessID, $serviceName, $db)
 	{
+		if($durationM <= 0 || $durationM >= (60*24)) {return 0;}
+		
 		$duration = helpers::serviceDurationFormatter($durationM);
 		if ( helpers::checkValidDuration($duration) == true ){
 			$result = $db->insert("insert into BusinessActivity values(null, '$businessID','$serviceName','$duration');");
@@ -72,6 +76,9 @@ class processes
 	
 	public static function booking($username, $abn, $date, $startTime, $endTime, $employee, $otherDetails, $activities, $db)
 	{
+		if( !helpers::validTime($startTime) || !helpers::validTime($endTime)) { return 0;} 
+		if( !preg_match('/^[0-9][0-9][0-9][0-9]\/[0-9][0-9]\/[0-9][0-9]$/', $date)) {return 0;}
+		
 		$startDateTime = helpers::dateFormatter($date, $startTime);
 		$endDateTime = helpers::dateFormatter($date, $endTime);
 		
@@ -80,11 +87,16 @@ class processes
 			
 			if($employee == "any")
 			{
-				$query = "SELECT * FROM employee WHERE businessID = '{$_SESSION['abn']}';";
+				$query = "SELECT * FROM employee WHERE businessID = '$abn';";
 				$results = $db->select($query);
 				$found = 0;
 				$workPeriodBool = 0;
 				$bookingBool = 0;
+				
+				if($results == false)
+				{
+					return 0;
+				}
 				
 				while($row = mysqli_fetch_array($results)) {	
 					$empID = $row['employeeID'];
@@ -109,7 +121,7 @@ class processes
 			}
 			
 			$workPeriodBool = helpers::isEmpWorking($employee, $startDateTime, $endDateTime, $db);
-			$bookingBool = helpers::isEmpBooked($employee, $startDateTime, $endDateTime, $db);
+			$bookingBool = helpers::isEmpBookedset($employee, $startDateTime, $endDateTime, $db, $abn);
 		
 			if($bookingBool == 1 && $workPeriodBool == 1) 
 			{
@@ -117,6 +129,12 @@ class processes
 				$results = $db->insert("insert into booking values(null,\"".$username."\",\"".$startDateTime."\",\"".$endDateTime."\",\"".$abn."\",\"".$otherDetails."\");");
 				
 				$results = $db->select("select bookingID from booking where businessID = '{$_SESSION['abn']}' and username = \"".$username."\" order by bookingID desc limit 1;");
+				
+				if($results == false)
+				{
+					return 0;
+				}
+				
 				$bookingIDinit = mysqli_fetch_array($results);
 				$bookingID = $bookingIDinit["bookingID"];
 				
@@ -151,7 +169,8 @@ class processes
 	
 	public static function editShift($date, $startTime, $endTime, $workPeriodID, $employeeID, $action, $db)
 	{
-		
+		if( !helpers::validTime($startTime) || !helpers::validTime($endTime)) { return 0;}
+		if( !preg_match('/^[0-9][0-9][0-9][0-9]\/[0-9][0-9]\/[0-9][0-9]$/', $date)) {return 0;}
 		$startDateTime = helpers::dateFormatter($date, $startTime);
 		$endDateTime = helpers::dateFormatter($date, $endTime);
 		
@@ -187,7 +206,7 @@ class processes
 		}
 	}
 	
-	public static function login($username, $password, $db)
+	public static function login($username, $password, $db, $abn)
 	{
 		//Check if valid user.
 		$results = $db->select("select * from user where username='$username' and password=SHA('$password');");
@@ -195,7 +214,7 @@ class processes
 			//Store username in the global array under the username variable, for future use.
 			$_SESSION['username'] = "$username";
 			//Check to see if it is a customer or a owner
-			$checkResult = $db->select("select * from userbusiness where username like '$username' AND ABN = '{$_SESSION['abn']}';");
+			$checkResult = $db->select("select * from userbusiness where username like '$username' AND ABN = '$abn';");
 			if(mysqli_num_rows($checkResult) > 0){	//If a result is found, check to see if the user is a owner.
 				// owner is logged in
 				return 1;
@@ -215,6 +234,9 @@ class processes
 	
 	public static function newBusiness($password, $checkpassword, $openingTime, $closingTime, $name, $ownerName, $address, $phoneNo, $ABN, $username, $db)
 	{
+		if( !helpers::validTime($openingTime) || !helpers::validTime($closingTime)) 
+		{ return 0;} 
+	
 		if(helpers::checkPassword($password,$checkpassword) == true){
 
 			if(helpers::timeCheck($openingTime,$closingTime) ){
@@ -228,19 +250,19 @@ class processes
 				//Insert into Database
 				if($db->insert("INSERT INTO business VALUES('$name','$ownerName','$address','$phoneNo','$openingTime','$closingTime','$ABN','$filename');") == false)
 				{
-					return -1;
+					return -3;
 				}
 				
 				//Insert Business Admin account
 				if($db->insert("INSERT INTO user VALUES('$username','$ownerName','$address','$phoneNo',SHA('$password'));") == false)
-
-					return -1;
+				{
+					return -4;
 				}
 				
 				//Insert into UserBusiness middle table
 				if($db->insert("INSERT INTO userbusiness VALUES('$username','$ABN');") == false)
 				{
-					return -1;
+					return -5;
 				}
 
 				// successful creation of business

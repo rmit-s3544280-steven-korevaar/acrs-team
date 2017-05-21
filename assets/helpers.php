@@ -23,13 +23,13 @@ class helpers
 	public static function timeCheck($start, $end)
 	{
 		if($end < $start){
-			header("location: ./../../businessPageEmployeeAddEmployee.php");
 			return false;
 		}
 		return true;
 	}
 	
-	public static function checkValidDuration($time){
+	public static function checkValidDuration($time)
+	{
 		if( $time >= date("H:i:s",strtotime("00:01:00")) && $time <= date("H:i:s",strtotime("01:00:00")) ){
 			return true;
 		}
@@ -45,12 +45,26 @@ class helpers
 		return true;
 	}
 	
+	public static function searchExistingEmployeeIDset($db,$employeeID, $abn)
+	{
+		$result = $db->select("SELECT * FROM employee where employeeID = '$employeeID' and businessID = '$abn';");
+		if( mysqli_fetch_array($result) == null ){
+			return false;
+		}
+		return true;
+	}
+	
 	public static function isEmpWorking($emp, $startDT, $endDT, $db)
 	{
-		$results = $db->select("SELECT * FROM workperiod WHERE employeeID = ".$emp.";");
+		$results = $db->select("SELECT * FROM workperiod WHERE employeeID = '$emp';");
 
 		$bool = 0;
 		$workIterator = 0;
+		
+		if($results == false)
+		{
+			return 0;
+		}
 		
 		while($row = mysqli_fetch_array($results)) {	
 			
@@ -71,13 +85,40 @@ class helpers
 		return $bool;
 	}
 
-
 	public static function isEmpBooked($emp, $startDT, $endDT, $db) 
 	{
-		$results = $db->select("SELECT * FROM booking AS b INNER JOIN bookingEmployee AS e ON b.bookingID=e.bookingID WHERE employeeID=".$emp." AND businessID = '{$_SESSION['abn']}';");
+		$results = $db->select("SELECT * FROM booking AS b INNER JOIN bookingEmployee AS e ON b.bookingID=e.bookingID WHERE employeeID='$emp' AND businessID = '{$_SESSION['abn']}';");
 
 		$bool = 1;
 		$bookingIterator = 0;
+		while($row = mysqli_fetch_array($results)) {	
+			$bookingIterator++;
+			$sdt = $row['startDateTime'];
+			$edt = $row['endDateTime'];		
+			if( ($startDT	>= $sdt && $endDT 	<= $edt) || 
+				($startDT 	>= $sdt && $startDT <= $edt) ||
+				($endDT 	>= $sdt && $endDT	<= $edt)
+				)
+			{
+				$bool = 0;
+				break;
+			}
+		}
+		return $bool;
+	}
+	
+	public static function isEmpBookedset($emp, $startDT, $endDT, $db, $abn) 
+	{
+		$results = $db->select("SELECT * FROM booking AS b INNER JOIN bookingEmployee AS e ON b.bookingID=e.bookingID WHERE employeeID='$emp' AND businessID = '$abn';");
+
+		$bool = 1;
+		$bookingIterator = 0;
+		
+		if($results == false)
+		{
+			return 0;
+		}
+		
 		while($row = mysqli_fetch_array($results)) {	
 			$bookingIterator++;
 			$sdt = $row['startDateTime'];
@@ -98,6 +139,29 @@ class helpers
 	public static function findAvailableEmp($startDT, $endDT, $db)
 	{
 		$query = "SELECT * FROM employee WHERE businessID = '{$_SESSION['abn']}';";
+		$results = $db->select($query);
+		$found = 0;
+		$workPeriodBool = 0;
+		$bookingBool = 0;
+		
+		while($row = mysqli_fetch_array($results)) {	
+			$empID = $row['employeeID'];
+			$workPeriodBool = helpers::isEmpWorking($empID, $startDT, $endDT, $db);
+			if( $workPeriodBool == 1)
+			{
+				$bookingBool = helpers::isEmpBooked($empID, $startDT, $endDT, $db);
+				if($bookingBool == 1) 
+				{
+					return $empID;
+				}
+			}
+		}
+		
+		return -1;
+	}
+	public static function findAvailableEmpset($startDT, $endDT, $db, $abn)
+	{
+		$query = "SELECT * FROM employee WHERE businessID = '$abn';";
 		$results = $db->select($query);
 		$found = 0;
 		$workPeriodBool = 0;
@@ -132,7 +196,6 @@ class helpers
 			");
 		if(mysqli_num_rows($check) == 0)
 		{
-			
 			return true;
 		}
 		else
@@ -148,6 +211,22 @@ class helpers
 		}
 		return false;
 	}
+	
+	public static function validTime($value)
+	{
+        if (preg_match('/^([0-1][0-9])|(2[0-3]):[0-5][0-9]$/', $value))
+		{
+            return 1;
+        }
+		else if(preg_match('/^([0-1][0-9])|(2[0-3]):[0-5][0-9]:[0-5][0-9]$/', $value))
+		{
+			return 1;
+		}
+        else
+		{
+            return 0;
+        }
+    }
 	
 }
 

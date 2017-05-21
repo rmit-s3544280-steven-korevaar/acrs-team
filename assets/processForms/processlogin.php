@@ -25,7 +25,7 @@ require_once('processes.php');
 $username = $_POST['username'];
 $password = $_POST['password'];
 		
-$results = processes::login($username, $password, $db);
+$results = processes::login($username, $password, $db, $_SESSION['abn']);
 
 if($results == 1)
 {
