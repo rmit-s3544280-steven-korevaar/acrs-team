@@ -483,3 +483,43 @@ ERROR - Error occured while changing the shift, Booking period outside business 
 INFO - A new booking has been made!
 INFO - User logged out
 INFO - Owner logged in
+INFO - Owner succes added a new employee
+ERROR - Error occured while changing the shift, work period outside business hours
+INFO - Working time added Successfully
+INFO - Working time added Successfully
+INFO - Working time has been deleted successfully
+INFO - Working time has been deleted successfully
+ERROR - Error occured while changing the shift, work period outside business hours
+ERROR - Error occured while changing the shift, work period outside business hours
+INFO - Working time has been changed successfully
+ERROR - Booking was not successful, There are no available employees for this time period.
+ERROR - Booking was not successful, all fields have to be filled
+INFO - A new booking has been made!
+INFO - User logged out
+INFO - Customer logged in
+ERROR - Error occured while changing the shift, Booking period outside business hours
+ERROR - Booking was not successful, There are no available employees for this time period.
+INFO - A new booking has been made!
+INFO - User logged out
+ERROR - Error occured while user was trying to register, Passwords do not match.
+INFO - Business successfully registered
+ERROR - Error occured while user was trying to register, Passwords do not match.
+INFO - Business successfully registered
+ERROR - Error occured while user was trying to register, Passwords do not match.
+ERROR - Error occured while user was trying to register, Passwords do not match.
+ERROR - Error occured while user was trying to register, Passwords do not match.
+INFO - Business successfully registered
+INFO - Owner logged in
+INFO - Owner successfully added a new service
+INFO - Owner succes added a new employee
+ERROR - Error occured while changing the shift, work period outside business hours
+ERROR - Error occured while changing the shift, work period outside business hours
+INFO - Working time added Successfully
+ERROR - Error occured while changing the shift, Booking period outside business hours
+ERROR - Booking was not successful, all fields have to be filled
+INFO - A new booking has been made!
+INFO - User logged out
+INFO - Customer logged in
+ERROR - Booking was not successful, There are no available employees for this time period.
+INFO - A new booking has been made!
+INFO - User logged out

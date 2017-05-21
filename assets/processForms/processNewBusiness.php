@@ -39,6 +39,11 @@ if(checkExistingFields() == true){
 
 	if($results == 1)
 	{
+		$filename = $_FILES['image']['name'];
+		$location = $_FILES['image']['tmp_name'];
+		$db->insert("UPDATE business SET image = '$filename' WHERE ABN = '$ABN';");
+		//Move file into businessImage folder.
+		move_uploaded_file($location, "./../images/businessImage/$filename");
 		$_SESSION['registerSuccess'] = "Business successfully registered.";
 		$logger->info("Business successfully registered");
 		header("location: ../../createANewBusiness.php");
