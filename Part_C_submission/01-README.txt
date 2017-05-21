@@ -6,6 +6,7 @@ Group Members:
 - Steven Korevaar	s3544280
 - Asli Yoruk	s3503519
 - Ryan Tran	s3201690
+- Christine Huynh	s3438653
 
 Tutor:
 -----------------------------------------------------------------------
@@ -17,7 +18,7 @@ Tuesday 9:30am - 11:30am
 
 Installation of web server stack
 -----------------------------------------------------------------------
-Document located in Part_C_submission\06-SEPT-PartA-UserDocumentation.pdf
+Document located in Part_C_submission\06-SEPT-PartB-UserDocumentation.pdf
 Under Installation and Setup Guide of XAMPP and Database.
 
 Directory - Part_C_submission
