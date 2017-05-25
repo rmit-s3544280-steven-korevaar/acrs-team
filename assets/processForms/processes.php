@@ -169,7 +169,6 @@ class processes
 	
 	public static function editShift($date, $startTime, $endTime, $workPeriodID, $employeeID, $action, $db)
 	{
-		echo $date;
 		if( !helpers::validTime($startTime) || !helpers::validTime($endTime)) { return -3;}
 		if( !preg_match('/^[0-9][0-9]\/[0-9][0-9]\/[0-9][0-9][0-9][0-9]$/', $date)) {return -3;}
 		$startDateTime = helpers::dateFormatter($date, $startTime);

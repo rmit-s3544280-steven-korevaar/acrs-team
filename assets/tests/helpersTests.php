@@ -142,7 +142,7 @@ class helpersTest extends PHPUnit_Framework_TestCase
 		$_SESSION['abn'] = '56497978719';
 		include("databaseClass.inc");
 		
-		processes::booking('customer', '56497978719', '2017/05/19', '11:00', '11:19', '003', 'apple', ['Clip'], $db);
+		processes::booking('customer', '56497978719', '19/05/2017', '11:00', '11:19', '003', 'apple', ['Clip'], $db);
 		
 		// Full inside bounds
 		$this->assertNotEquals(
@@ -176,10 +176,10 @@ class helpersTest extends PHPUnit_Framework_TestCase
 		include("databaseClass.inc");
 		$_SESSION['abn'] = '56497978719';
 		
-		processes::booking('customer', '56497978719', '2017/05/19', '11:00', '11:19', '003', 'apple', ['Clip'], $db);
+		processes::booking('customer', '56497978719', '19/05/2017', '11:00', '11:19', '003', 'apple', ['Clip'], $db);
 		
-		processes::booking('customer', '56497978719', '2017/05/19', '11:00', '11:19', '001', 'apple', ['Clip'], $db);
-		processes::booking('customer', '56497978719', '2017/05/19', '11:00', '11:19', '002', 'apple', ['Clip'], $db);
+		processes::booking('customer', '56497978719', '19/05/2017', '11:00', '11:19', '001', 'apple', ['Clip'], $db);
+		processes::booking('customer', '56497978719', '19/05/2017', '11:00', '11:19', '002', 'apple', ['Clip'], $db);
 		
 		// Full success
 		$this->assertNotEquals(
@@ -329,6 +329,41 @@ class helpersTest extends PHPUnit_Framework_TestCase
 			1,
 			helpers::validTime('apple')
 		);
+	}
+	
+	// insideBusinessHours($startDateTime,$endDateTime,$abn,$db)
+	public function testBusinessHoursOverlap()
+	{
+		include("databaseClass.inc");
+		
+		// Check inside bounds
+		$this->assertEquals(
+			1,
+			helpers::insideBusinessHours('2017-05-19 12:00:00', '2017-05-19 15:00:00', 
+			'56497978719', $db)
+		);
+		
+		// Check fully outside
+		$this->assertEquals(
+			0,
+			helpers::insideBusinessHours('2017-05-19 00:00:00', '2017-05-19 01:00:00', 
+			'56497978719', $db)
+		);
+		
+		// half in forwards
+		$this->assertEquals(
+			0,
+			helpers::insideBusinessHours('2017-05-19 12:00:00', '2017-05-19 23:00:00', 
+			'56497978719', $db)
+		);
+		
+		// half in backwards
+		$this->assertEquals(
+			0,
+			helpers::insideBusinessHours('2017-05-19 00:00:00', '2017-05-19 12:00:00', 
+			'56497978719', $db)
+		);
+		
 	}
   
 }

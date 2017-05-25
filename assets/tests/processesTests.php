@@ -99,61 +99,61 @@ class processesTest extends PHPUnit_Framework_TestCase
 		// Test successs
 		$this->assertEquals(
 			1,
-			processes::booking('customer', '56497978719', '2017/05/19', '11:00', '11:19', '003', 'apple', ['Clip'], $db)
+			processes::booking('customer', '56497978719', '19/05/2017', '11:00', '11:19', '003', 'apple', ['Clip'], $db)
 		);
 
 		// Test invalid employee
 		$this->assertEquals(
 			-2,
-			processes::booking('customer', '56497978719', '2017/05/19', '11:00', '11:19', 'apple', 'apple', ['Clip'], $db)
+			processes::booking('customer', '56497978719', '19/05/2017', '11:00', '11:19', 'apple', 'apple', ['Clip'], $db)
 		);
 
 		// Test employee is not working
 		$this->assertEquals(
 			-2,
-			processes::booking('customer', '56497978719', '2017/05/19', '09:00', '09:19', '003', 'apple', ['Clip'], $db)
+			processes::booking('customer', '56497978719', '19/05/2017', '09:00', '09:19', '003', 'apple', ['Clip'], $db)
 		);
 
 		// Test employee is booked
 		$this->assertEquals(
 			-1,
-			processes::booking('customer', '56497978719', '2017/05/19', '11:00', '11:19', '003', 'apple', ['Clip'], $db)
+			processes::booking('customer', '56497978719', '19/05/2017', '11:00', '11:19', '003', 'apple', ['Clip'], $db)
 		);
 
 		// Test "any" employee Succeeds
 		$this->assertEquals(
 			1,
-			processes::booking('customer', '56497978719', '2017/05/19', '11:00', '11:19', 'any', 'apple', ['Clip'], $db)
+			processes::booking('customer', '56497978719', '19/05/2017', '11:00', '11:19', 'any', 'apple', ['Clip'], $db)
 		);
 
 		// Test "any" employee Succeeds
 		$this->assertEquals(
 			1,
-			processes::booking('customer', '56497978719', '2017/05/19', '11:00', '11:19', 'any', 'apple', ['Clip'], $db)
+			processes::booking('customer', '56497978719', '19/05/2017', '11:00', '11:19', 'any', 'apple', ['Clip'], $db)
 		);
 
 		// Test "any" employee, no one is working
 		$this->assertEquals(
 			-2,
-			processes::booking('customer', '56497978719', '2017/05/19', '22:00', '22:19', 'any', 'apple', ['Clip'], $db)
+			processes::booking('customer', '56497978719', '19/05/2017', '22:00', '22:19', 'any', 'apple', ['Clip'], $db)
 		);
 
 		// Test "any" employee, employee is booked
 		$this->assertEquals(
 			-2,
-			processes::booking('customer', '56497978719', '2017/05/19', '11:00', '11:19', 'any', 'apple', ['Clip'], $db)
+			processes::booking('customer', '56497978719', '19/05/2017', '11:00', '11:19', 'any', 'apple', ['Clip'], $db)
 		);
 
 		// Test invalid abn
 		$this->assertNotEquals(
 			1,
-			processes::booking('customer', 'apple', '2017/04/24', '11:00', '11:19', 'any', 'apple', ['Clip'], $db)
+			processes::booking('customer', 'apple', '24/04/2017', '11:00', '11:19', 'any', 'apple', ['Clip'], $db)
 		);
 
 		// Test end time is before start time
 		$this->assertNotEquals(
 			1,
-			processes::booking('customer', '56497978719', '2017/04/24', '12:00', '11:19', 'any', 'apple', ['Clip'], $db)
+			processes::booking('customer', '56497978719', '24/04/2017', '12:00', '11:19', 'any', 'apple', ['Clip'], $db)
 		);
 
 		// Test invalid date
@@ -165,13 +165,13 @@ class processesTest extends PHPUnit_Framework_TestCase
 		// test invalid start time
 		$this->assertNotEquals(
 			1,
-			processes::booking('customer', '56497978719', '2017/04/24', 'apple', '12:19', 'any', 'apple', ['Clip'], $db)
+			processes::booking('customer', '56497978719', '24/04/2017', 'apple', '12:19', 'any', 'apple', ['Clip'], $db)
 		);
 
 		// test invalid end time
 		$this->assertNotEquals(
 			1,
-			processes::booking('customer', '56497978719', '2017/04/24', '12:00', 'apple', 'any', 'apple', ['Clip'], $db)
+			processes::booking('customer', '56497978719', '24/04/2017', '12:00', 'apple', 'any', 'apple', ['Clip'], $db)
 		);
 
 	}
@@ -185,43 +185,43 @@ class processesTest extends PHPUnit_Framework_TestCase
 		// Test Edit Success
 		$this->assertEquals(
 			1,
-			processes::editShift('2017/04/25', '09:00', '10:00', '2', '001', 'Edit Shift', $db)
+			processes::editShift('25/04/2017', '09:00', '10:00', '2', '001', 'Edit Shift', $db)
 		);
 
 		// Test workPeriodID doesnt exist
 		$this->assertNotEquals(
 			1,
-			processes::editShift('2017/04/25', '09:00', '10:00', 'apple', '001', 'Edit Shift', $db)
+			processes::editShift('25/04/2017', '09:00', '10:00', 'apple', '001', 'Edit Shift', $db)
 		);
 
 		// Test Edit start time before end time
 		$this->assertEquals(
 			-2,
-			processes::editShift('2017/04/25', '11:00', '10:00', '1', '001', 'Edit Shift', $db)
+			processes::editShift('25/04/2017', '11:00', '10:00', '1', '001', 'Edit Shift', $db)
 		);
 
 		// Test Edit invalid start time
 		$this->assertNotEquals(
 			1,
-			processes::editShift('2017/04/25', 'apple', '10:00', '1', '001', 'Edit Shift', $db)
+			processes::editShift('25/04/2017', 'apple', '10:00', '1', '001', 'Edit Shift', $db)
 		);
 
 		// Test Edit invalid end time
 		$this->assertNotEquals(
 			1,
-			processes::editShift('2017/04/25', '09:00', 'apple', '1', '001', 'Edit Shift', $db)
+			processes::editShift('25/04/2017', '09:00', 'apple', '1', '001', 'Edit Shift', $db)
 		);
 
 		// Test delete success
 		$this->assertEquals(
 			2,
-			processes::editShift('2017/04/25', '09:00', '10:00', '1', '001', 'Delete Shift', $db)
+			processes::editShift('25/04/2017', '09:00', '10:00', '1', '001', 'Delete Shift', $db)
 		);
 
 		// Test delete invalid id
 		$this->assertNotEquals(
 			2,
-			processes::editShift('2017/04/25', '09:00', '10:00', 'apple', '001', 'Delete Shift', $db)
+			processes::editShift('25/04/2017', '09:00', '10:00', 'apple', '001', 'Delete Shift', $db)
 		);
 
 	}
